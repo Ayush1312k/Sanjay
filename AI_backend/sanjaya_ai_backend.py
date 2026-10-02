@@ -151,7 +151,6 @@ def generate_claude_answer(prompt, system_instruction):
         response = claude_client.messages.create(
             model=CLAUDE_MODEL,
             max_tokens=2048,
-            temperature=0.3,
             system=system_instruction,
             messages=[
                 {"role": "user", "content": prompt}
