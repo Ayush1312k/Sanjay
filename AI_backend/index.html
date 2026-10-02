@@ -3,350 +3,408 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanjay AI Guru</title>
+    <title>Sanjaya AI</title>
+    
+    <!-- Minimalist Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        /* Custom Scrollbar */
-        #chat-window::-webkit-scrollbar { width: 6px; }
-        #chat-window::-webkit-scrollbar-thumb { background-color: #ff9933; border-radius: 3px; }
-        #chat-window::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-
-        /* Glassmorphism Base */
-        .glass-panel {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        :root {
+            --bg-main: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --text-primary: #f4f4f5;
+            --text-secondary: #a1a1aa;
+            --accent-orange: #f97316;
+            --accent-amber: #f59e0b;
         }
 
-        /* Chat Bubbles - ChatGPT Style */
-        .bubble-user {
-            background-color: #2A2A2A;
-            color: #E5E5E5;
-            border-radius: 1.5rem;
-            border-bottom-right-radius: 0.2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        * {
+            box-sizing: border-box;
         }
 
-        .bubble-ai {
-            background-color: transparent;
-            color: #F3F4F6;
-            border-radius: 1.5rem;
-            border-top-left-radius: 0.2rem;
-            border-left: 3px solid #FF9933; /* Saffron accent */
-            padding-left: 1.5rem !important;
-        }
-
-        /* Background */
         body {
-            /* === MINOR CHANGE: center the main panel without touching any JS or HTML === */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background-color: #000000;
-            background-image: 
-                radial-gradient(circle at 50% 0%, #331a00 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, #1a0f00 0%, transparent 30%);
-            color: white;
-            /* allow scrolling; avoid overflow hidden which causes compositing issues */
-            min-height: 100vh;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* Intro Animation: **Flicker fixes applied below** */
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+
+        /* ================= LOGO STARTUP ANIMATION ================= */
         #intro-screen {
             position: fixed;
             inset: 0;
-            background: #050505;
-            z-index: 50;
+            background: var(--bg-main);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-container-intro {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.7s ease, visibility 0s linear 0.7s;
-            will-change: opacity;
-            /* force composite layer to avoid repaint flicker */
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            animation: logoIntroAnim 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        #sanjay-title {
-            font-size: 5rem;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            color: transparent;
-            background: linear-gradient(180deg, #FFFFFF 20%, #FF9933 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
+        .logo-img-intro {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.6)) contrast(1.15) brightness(1.05);
+        }
+
+        .logo-glow-ring {
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.35), inset 0 0 15px rgba(245, 158, 11, 0.2);
+            animation: ringPulse 2.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoIntroAnim {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-15deg);
+                filter: blur(10px);
+            }
+            65% {
+                opacity: 1;
+                transform: scale(1.08) rotate(3deg);
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(0.96); opacity: 0.6; }
+            100% { transform: scale(1.06); opacity: 1; }
+        }
+
+        .intro-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.25em;
             opacity: 0;
-            transform: scale(0.98);
-            transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-shadow: 0 0 20px rgba(255, 153, 51, 0.3);
-            z-index: 10;
-            will-change: opacity, transform;
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            transform: translateY(12px);
+            animation: textFadeIn 0.8s ease-out 0.6s forwards;
         }
 
-        /* Divine Arrow Design */
-        .divine-arrow {
-            position: absolute;
-            top: 50%;
-            right: -300px;
-            width: 250px;
-            height: 6px;
+        .intro-subtext {
+            letter-spacing: 0.2em;
+            opacity: 0;
+            transform: translateY(8px);
+            animation: textFadeIn 0.8s ease-out 0.9s forwards;
+        }
+
+        @keyframes textFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= MAIN INTERFACE ================= */
+        #main-interface {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none;
+            height: 100vh;
             display: flex;
-            align-items: center;
-            transform: translateY(-50%);
-            filter: drop-shadow(0 0 15px #FF9933);
+            flex-direction: column;
+        }
+
+        #main-interface.active {
             opacity: 1;
-            will-change: transform, opacity;
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            pointer-events: auto;
         }
 
-        .arrow-head {
-            width: 0;
-            height: 0;
-            border-left: 40px solid #FFE5CC;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            position: relative;
-            z-index: 2;
+        .message-anim {
+            animation: fadeIn 0.25s ease-out forwards;
         }
 
-        .arrow-shaft {
-            flex-grow: 1;
-            height: 4px;
-            background: linear-gradient(90deg, rgba(255,153,51,0) 0%, #FF9933 40%, #FFFFFF 100%);
-            position: relative;
-            margin-right: -2px;
-        }
-
-        .arrow-feather {
-            position: absolute;
-            right: 0;
-            width: 40px;
-            height: 20px;
-            background: linear-gradient(to right, transparent, #FF5500);
-            clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
-        }
-        .feather-top { top: -18px; transform: skewX(-30deg); }
-        .feather-bottom { bottom: -18px; transform: skewX(30deg); }
-
-        /* Keyframes */
-        @keyframes divineShot {
-            0% { right: -300px; opacity: 1; }
-            40% { right: 50%; opacity: 1; }
-            50% { right: 55%; opacity: 0; filter: blur(10px); }
-            100% { right: 150%; opacity: 0; }
-        }
-
-        .animate-divine-shot {
-            animation: divineShot 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Typewriter Cursor */
-        .cursor::after {
-            content: '▋';
+        .cursor-pen::after {
+            content: ' ';
             display: inline-block;
-            margin-left: 4px;
-            color: #FF9933;
-            animation: blink 1s infinite;
+            width: 6px;
+            height: 16px;
+            background-color: var(--accent-orange);
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 0.7s infinite;
         }
+
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        
-        /* Fade In for messages */
-        @keyframes messageFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .msg-animate { animation: messageFadeIn 0.3s ease-out forwards; }
 
-        /* Prevent main UI from rendering (visible) until intro finishes to avoid overlap flicker */
-        #main-interface {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.45s ease, visibility 0s linear 0.45s;
-            will-change: opacity, visibility;
-            transform: translateZ(0);
+        .response-text p {
+            margin-bottom: 0.85rem;
+            line-height: 1.75;
+            font-size: 0.95rem;
+            color: #e4e4e7;
+        }
+        .response-text p:last-child {
+            margin-bottom: 0;
         }
 
-        #main-interface.show {
-            opacity: 1;
-            visibility: visible;
-            transition-delay: 0s;
+        .brand-logo-header {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
         }
-
-        /* Responsive tweaks */
-        @media (max-width:640px){
-            #sanjay-title{ font-size: clamp(22px,12vw,56px); }
-            .divine-arrow{ width:42vw; right:-6vw; }
-        }
-
     </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { saffron: '#FF9933', darkgrey: '#1E1E1E' }
-                }
-            }
-        }
-    </script>
 </head>
-<body>
+<body class="antialiased selection:bg-orange-500/30 selection:text-orange-200">
 
-    <!-- Intro Animation -->
-    <div id="intro-screen" aria-hidden="false">
-        <div id="sanjay-title">SANJAY</div>
-        <div id="arrow-element" class="divine-arrow">
-            <div class="arrow-shaft">
-                <div class="arrow-feather feather-top"></div>
-                <div class="arrow-feather feather-bottom"></div>
+    <!-- ================= 1. BRAND LOGO STARTUP ANIMATION ================= -->
+    <div id="intro-screen">
+        <div class="flex flex-col items-center gap-5 z-10">
+            <!-- Animated Sacred Tree & Book Logo -->
+            <div class="logo-container-intro">
+                <div class="logo-glow-ring"></div>
+                <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo" class="logo-img-intro">
             </div>
-            <div class="arrow-head"></div>
+
+            <div class="text-center">
+                <h1 class="intro-title text-3xl font-extrabold tracking-widest text-amber-400 uppercase mb-1">
+                    SANJAYA
+                </h1>
+                <p class="intro-subtext text-xs text-zinc-400 font-medium uppercase">
+                    Divine Scriptural Vision AI
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- Main Interface -->
-    <div id="main-interface" class="w-full max-w-5xl h-[95vh] glass-panel rounded-2xl flex flex-col overflow-hidden relative opacity-0 transition-opacity duration-1000">
+    <!-- ================= 2. MINIMAL CHAT INTERFACE ================= -->
+    <div id="main-interface" class="w-full h-screen">
         
-        <!-- Header -->
-        <header class="p-4 border-b border-white/10 flex justify-between items-center bg-black/20 backdrop-blur-md">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-orange-600 to-saffron flex items-center justify-center shadow-lg shadow-orange-500/20">
-                    <span class="text-xl text-white">🕉️</span>
+        <!-- MINIMAL TOP HEADER -->
+        <header class="w-full px-4 sm:px-8 py-3 border-b border-zinc-800/60 flex items-center justify-between shrink-0 bg-zinc-950/80 backdrop-blur-md">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-zinc-900 border border-amber-500/30 flex items-center justify-center p-0.5 shadow-sm shadow-amber-500/10">
+                    <img src="./sanjaya_logo.jpg" alt="Logo" class="brand-logo-header">
                 </div>
-                <div>
-                    <h1 class="text-xl font-bold text-white tracking-wide">Sanjay</h1>
-                    <div class="flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                        <p class="text-xs text-gray-400 uppercase tracking-widest">Online • </p>
-                    </div>
-                </div>
+                <span class="font-['Cinzel'] font-bold text-base text-zinc-100 tracking-wide">Sanjaya</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-amber-400 font-mono">v2.5 AI</span>
+            </div>
+
+            <div class="flex items-center gap-1">
+                <button onclick="toggleAudioSpeech()" id="audio-toggle-btn" class="p-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 transition" title="Toggle Speech Readout">
+                    <i class="fa-solid fa-volume-high text-xs"></i>
+                </button>
+                <button onclick="clearChat()" class="p-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1.5 text-xs font-medium" title="New Chat">
+                    <i class="fa-solid fa-pen-to-square text-xs"></i>
+                    <span class="hidden sm:inline">New Chat</span>
+                </button>
             </div>
         </header>
 
-        <!-- Chat Area -->
-        <div id="chat-window" class="flex-grow p-6 overflow-y-auto flex flex-col gap-6 scroll-smooth">
-            <!-- Welcome Message -->
-            <div class="flex gap-4 msg-animate">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-600 to-saffron flex-shrink-0 flex items-center justify-center text-xs text-white shadow-md mt-1">
-                    AI
-                </div>
-                <div class="bubble-ai p-4 max-w-2xl">
-                    <p class="text-gray-200 leading-relaxed">
-                        Namaste. I am <span class="text-saffron font-bold">Sanjay</span>. <br><br>
-                        I have been granted the divine vision to see the truths within the 
-                        <b>Gita</b>, <b>Ramayana</b>, and <b>Mahabharata</b>. 
-                        Ask me a question, and I shall search the scriptures to guide you.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Input Area -->
-        <div class="p-6 bg-black/30 backdrop-blur-xl border-t border-white/5">
-            <div class="relative max-w-4xl mx-auto">
-                <input type="text" id="user-input" 
-                    placeholder="Ask about Dharma, Karma, or the Epics..." 
-                    class="w-full bg-[#2A2A2A] text-white p-4 pr-16 rounded-xl border border-white/10 focus:border-saffron/50 focus:ring-1 focus:ring-saffron/50 focus:bg-[#333] transition-all duration-200 outline-none placeholder-gray-500"
-                    onkeydown="if(event.key === 'Enter') sendMessage()">
+        <!-- CHAT FEED CONTAINER -->
+        <main class="flex-1 w-full max-w-3xl mx-auto flex flex-col overflow-hidden px-4 sm:px-6">
+            
+            <div id="chat-window" class="flex-1 overflow-y-auto py-6 space-y-6">
                 
-                <button onclick="sendMessage()" id="send-btn" 
-                    class="absolute right-2 top-2 bottom-2 bg-saffron hover:bg-orange-500 text-white px-4 rounded-lg transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-orange-500/20 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 group-hover:translate-x-0.5 transition-transform">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                    </svg>
-                </button>
+                <!-- EMPTY CHAT WELCOME HERO WITH LOGO -->
+                <div id="welcome-card" class="h-full flex flex-col items-center justify-center text-center px-4 message-anim">
+                    <div class="w-20 h-20 rounded-full bg-zinc-900 border border-amber-500/30 p-2 flex items-center justify-center mb-4 shadow-xl shadow-amber-500/10">
+                        <img src="./sanjaya_logo.jpg" alt="Logo" class="w-full h-full object-cover rounded-full mix-blend-screen filter drop-shadow(0 0 10px rgba(245, 158, 11, 0.5))">
+                    </div>
+                    <h2 class="font-['Cinzel'] text-xl sm:text-2xl font-bold text-zinc-100 mb-2">What scriptural wisdom do you seek?</h2>
+                    <p class="text-xs sm:text-sm text-zinc-400 max-w-md mb-6 leading-relaxed">
+                        Ask any question from the Bhagavad Gita, Ramayana, or Mahabharata.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-2 max-w-lg text-xs">
+                        <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
+                                class="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition">
+                            Where was the Bhagavad Gita imparted?
+                        </button>
+                        <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
+                                class="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition">
+                            Essence of Karma Yoga
+                        </button>
+                    </div>
+                </div>
+
             </div>
-            <div class="text-center mt-3">
-                <p class="text-[10px] text-gray-500">AI can make mistakes. Verify with scriptures.</p>
+
+            <!-- FLOATING INPUT BAR -->
+            <div class="py-3 sm:py-4 shrink-0">
+                <div class="relative flex items-center bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-2 focus-within:border-zinc-700 focus-within:ring-1 focus-within:ring-zinc-700 transition shadow-lg">
+                    <input type="text" id="user-input" 
+                           placeholder="Message Sanjaya..." 
+                           class="w-full bg-transparent text-sm text-zinc-100 placeholder-zinc-500 outline-none py-1.5"
+                           onkeydown="if(event.key === 'Enter') sendMessage()">
+                    
+                    <button onclick="sendMessage()" 
+                            class="p-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold transition shrink-0 ml-2 shadow-sm shadow-amber-500/20">
+                        <i class="fa-solid fa-arrow-up text-xs"></i>
+                    </button>
+                </div>
+                <div class="text-[11px] text-zinc-500 text-center mt-2 font-normal">
+                    Sanjaya AI recites knowledge from ancient sacred scriptures.
+                </div>
             </div>
-        </div>
+
+        </main>
+
     </div>
 
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
-        // --- ANIMATION LOGIC ---
+        const API_URL = (window.SANJAYA_CONFIG && window.SANJAYA_CONFIG.API_URL) 
+            || (window.location.protocol === 'file:' 
+                ? 'http://localhost:5000/api/query' 
+                : '/api/query');
+        let autoSpeechEnabled = false;
+
+        // Startup animation Sequence (2.0s)
         document.addEventListener('DOMContentLoaded', () => {
             const introScreen = document.getElementById('intro-screen');
-            const arrow = document.getElementById('arrow-element');
-            const title = document.getElementById('sanjay-title');
             const mainInterface = document.getElementById('main-interface');
 
-            // Start Arrow Animation on next frame to ensure browser picks up initial styles
-            requestAnimationFrame(() => {
-                arrow.classList.add('animate-divine-shot');
-            });
-
-            // Reveal Title when arrow passes center (approx 1000ms)
             setTimeout(() => {
-                title.style.opacity = '1';
-                title.style.transform = 'scale(1)';
-            }, 1000);
-
-            // Transition to Main App: fade intro smoothly then show main interface
-            setTimeout(() => {
-                // fade intro out smoothly (use CSS transition)
                 introScreen.style.opacity = '0';
-                // after fade completes (listen once)
-                const onEnd = (e) => {
-                    if (e.propertyName === 'opacity') {
-                        introScreen.removeEventListener('transitionend', onEnd);
-                        introScreen.style.display = 'none';
-                        // reveal main interface without abrupt paint
-                        mainInterface.classList.add('show');
-                    }
-                };
-                introScreen.addEventListener('transitionend', onEnd);
-
-            }, 3000);
+                introScreen.style.transform = 'scale(1.02)';
+                
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                    mainInterface.classList.add('active');
+                }, 700);
+            }, 2000);
         });
 
-        // --- CHAT LOGIC ---
-        const API_URL = "http://localhost:5000/api/query";
+        function usePreset(queryText) {
+            const input = document.getElementById('user-input');
+            input.value = queryText;
+            input.focus();
+        }
 
-        // Typewriter effect function
-        async function typeWriter(element, text, speed = 15) {
-            // Regex to match simple HTML tags like <b>, </b>, <br>
+        function toggleAudioSpeech() {
+            autoSpeechEnabled = !autoSpeechEnabled;
+            const btn = document.getElementById('audio-toggle-btn');
+            if (autoSpeechEnabled) {
+                btn.classList.add('bg-zinc-800', 'text-amber-400');
+                speakText("Voice response enabled.");
+            } else {
+                btn.classList.remove('bg-zinc-800', 'text-amber-400');
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const cleanText = text.replace(/<[^>]*>/g, '');
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.rate = 1.0;
+            utterance.pitch = 0.95;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function copyToClipboard(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const icon = btnElement.querySelector('i');
+                icon.className = 'fa-solid fa-check text-emerald-400 text-xs';
+                setTimeout(() => {
+                    icon.className = 'fa-solid fa-copy text-xs';
+                }, 2000);
+            });
+        }
+
+        function clearChat() {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.innerHTML = `
+                <div id="welcome-card" class="h-full flex flex-col items-center justify-center text-center px-4 message-anim">
+                    <div class="w-20 h-20 rounded-full bg-zinc-900 border border-amber-500/30 p-2 flex items-center justify-center mb-4 shadow-xl shadow-amber-500/10">
+                        <img src="./sanjaya_logo.jpg" alt="Logo" class="w-full h-full object-cover rounded-full mix-blend-screen filter drop-shadow(0 0 10px rgba(245, 158, 11, 0.5))">
+                    </div>
+                    <h2 class="font-['Cinzel'] text-xl sm:text-2xl font-bold text-zinc-100 mb-2">What scriptural wisdom do you seek?</h2>
+                    <p class="text-xs sm:text-sm text-zinc-400 max-w-md mb-6 leading-relaxed">
+                        Ask any question from the Bhagavad Gita, Ramayana, or Mahabharata.
+                    </p>
+                </div>
+            `;
+        }
+
+        function formatMarkdown(text) {
+            if (!text) return '';
+            let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-amber-400 font-semibold">$1</strong>');
+            const paragraphs = formatted.split(/\n\s*\n/);
+            return paragraphs
+                .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                .join('');
+        }
+
+        async function typeWriter(element, text, speed = 8) {
             let i = 0;
-            element.classList.add('cursor'); // Add blinking cursor
+            element.classList.add('cursor-pen');
+            const formattedHTML = formatMarkdown(text);
             
             return new Promise(resolve => {
                 function type() {
-                    if (i >= text.length) {
-                        element.classList.remove('cursor'); // Remove cursor when done
+                    if (i >= formattedHTML.length) {
+                        element.classList.remove('cursor-pen');
                         resolve();
                         return;
                     }
 
-                    // Check if current char is start of a tag
-                    if (text[i] === '<') {
-                        // Find the end of the tag
-                        let tagEnd = text.indexOf('>', i);
+                    if (formattedHTML[i] === '<') {
+                        let tagEnd = formattedHTML.indexOf('>', i);
                         if (tagEnd !== -1) {
-                            // Append the whole tag immediately
-                            element.innerHTML += text.substring(i, tagEnd + 1);
+                            element.innerHTML += formattedHTML.substring(i, tagEnd + 1);
                             i = tagEnd + 1;
-                            // Continue typing immediately without delay for tags
                             type();
                             return;
                         }
                     }
 
-                    // Append single character
-                    element.innerHTML += text.charAt(i);
+                    element.innerHTML += formattedHTML.charAt(i);
                     i++;
                     
-                    // Auto-scroll
                     const chatWindow = document.getElementById('chat-window');
                     chatWindow.scrollTop = chatWindow.scrollHeight;
 
@@ -358,34 +416,32 @@
 
         async function sendMessage() {
             const input = document.getElementById('user-input');
-            const btn = document.getElementById('send-btn');
             const chat = document.getElementById('chat-window');
             const text = input.value.trim();
             
             if (!text) return;
 
-            // 1. Append User Message (Right Aligned, Modern Dark Grey)
+            const welcomeCard = document.getElementById('welcome-card');
+            if (welcomeCard) welcomeCard.remove();
+
+            // 1. User Message
             chat.innerHTML += `
-                <div class="flex justify-end msg-animate">
-                    <div class="bubble-user p-4 max-w-2xl text-sm md:text-base leading-relaxed">
+                <div class="flex justify-end message-anim">
+                    <div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm px-4 py-3 bg-zinc-800 border border-zinc-700/60 text-zinc-100 text-sm leading-relaxed">
                         ${text}
                     </div>
                 </div>
             `;
-            
             input.value = '';
-            btn.disabled = true;
             chat.scrollTop = chat.scrollHeight;
 
-            // 2. Add Loading Placeholder
+            // 2. Loading State
             const loadingId = 'loading-' + Date.now();
             chat.innerHTML += `
-                <div id="${loadingId}" class="flex gap-4 msg-animate">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-600 to-saffron flex-shrink-0 flex items-center justify-center text-xs text-white shadow-md mt-1">AI</div>
-                    <div class="bubble-ai p-4 flex items-center gap-2">
-                         <div class="w-2 h-2 bg-saffron rounded-full animate-bounce" style="animation-delay: 0s"></div>
-                         <div class="w-2 h-2 bg-saffron rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                         <div class="w-2 h-2 bg-saffron rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                <div id="${loadingId}" class="flex justify-start message-anim">
+                    <div class="flex items-center gap-2.5 text-xs text-zinc-400 py-2">
+                        <i class="fa-solid fa-circle-notch animate-spin text-amber-500"></i>
+                        <span>Sanjaya is inspecting sacred scriptures...</span>
                     </div>
                 </div>
             `;
@@ -399,44 +455,53 @@
                 });
                 
                 const data = await response.json();
-                document.getElementById(loadingId).remove(); // Remove loader
+                document.getElementById(loadingId)?.remove();
 
-                const aiText = data.answer || "I'm sorry, I encountered an error accessing my knowledge.";
-                
-                // Pre-format text (bolding etc) but keep it as string for typewriter
-                const formattedText = aiText
-                    .replace(/\*\*(.*?)\*\*/g, '<span class="text-saffron font-bold">$1</span>')
-                    .replace(/\n/g, '<br>');
-
-                // Create AI Message Container (Empty initially)
+                const aiText = data.answer || "I could not retrieve scriptural answers at this moment.";
                 const msgId = 'msg-' + Date.now();
+
+                // 3. AI Message with Logo Avatar
                 chat.innerHTML += `
-                    <div class="flex gap-4 msg-animate">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-600 to-saffron flex-shrink-0 flex items-center justify-center text-xs text-white shadow-md mt-1">AI</div>
-                        <div class="bubble-ai p-4 max-w-2xl text-sm md:text-base leading-relaxed text-gray-200">
-                            <span id="${msgId}"></span>
+                    <div class="flex items-start gap-3 message-anim">
+                        <div class="w-7 h-7 rounded-full bg-zinc-900 border border-amber-500/30 p-0.5 shrink-0 mt-1 flex items-center justify-center overflow-hidden">
+                            <img src="./sanjaya_logo.jpg" alt="Logo" class="w-full h-full object-cover rounded-full mix-blend-screen filter drop-shadow(0 0 4px rgba(245, 158, 11, 0.6))">
+                        </div>
+                        <div class="flex-1 space-y-2 overflow-hidden">
+                            <div class="flex items-center justify-between text-xs text-zinc-400 pb-1">
+                                <span class="font-semibold text-amber-400">Sanjaya</span>
+                                <div class="flex items-center gap-1 opacity-80 hover:opacity-100 transition">
+                                    <button onclick="copyToClipboard(document.getElementById('${msgId}').innerText, this)" class="p-1 hover:text-zinc-200 transition" title="Copy">
+                                        <i class="fa-solid fa-copy text-xs"></i>
+                                    </button>
+                                    <button onclick="speakText(document.getElementById('${msgId}').innerText)" class="p-1 hover:text-zinc-200 transition" title="Read Aloud">
+                                        <i class="fa-solid fa-volume-high text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="${msgId}" class="response-text"></div>
                         </div>
                     </div>
                 `;
 
-                // 3. Trigger Typewriter Effect
                 const contentElement = document.getElementById(msgId);
-                await typeWriter(contentElement, formattedText, 10); // 10ms speed = very fast
+                await typeWriter(contentElement, aiText, 8);
+
+                if (autoSpeechEnabled) {
+                    speakText(aiText);
+                }
 
             } catch (e) {
                 document.getElementById(loadingId)?.remove();
                 chat.innerHTML += `
-                    <div class="flex gap-4 msg-animate">
-                         <div class="w-8 h-8 rounded-full bg-red-600 flex-shrink-0 flex items-center justify-center text-xs text-white shadow-md mt-1">!</div>
-                         <div class="p-4 max-w-2xl text-red-300 bg-red-900/20 border border-red-500/30 rounded-2xl">
-                            Connection Error: Ensure server is running.
+                    <div class="flex justify-start message-anim">
+                        <div class="rounded-xl p-3 bg-red-950/40 border border-red-800/40 text-red-300 text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                            <span>Connection error with backend server.</span>
                         </div>
                     </div>
                 `;
+                chat.scrollTop = chat.scrollHeight;
             }
-            
-            btn.disabled = false;
-            setTimeout(() => input.focus(), 100);
         }
     </script>
 </body>

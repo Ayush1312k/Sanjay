@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/AI_backend/index.html"
+    },
+    {
+      "source": "/sanjaya_logo.jpg",
+      "destination": "/AI_backend/sanjaya_logo.jpg"
+    },
+    {
+      "source": "/ancient_parchment.jpg",
+      "destination": "/AI_backend/ancient_parchment.jpg"
+    },
+    {
+      "source": "/lord_ram_archer.jpg",
+      "destination": "/AI_backend/lord_ram_archer.jpg"
+    }
+  ]
+}
