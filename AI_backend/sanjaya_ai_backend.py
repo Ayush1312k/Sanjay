@@ -290,11 +290,21 @@ def run_standalone_server(port=5000):
                 else:
                     self.send_response(404)
                     self.end_headers()
-            elif parsed in ["/sanjaya_logo.jpg", "/ancient_parchment.jpg", "/lord_ram_archer.jpg"]:
+            elif parsed in ["/theme.css", "/canvas.js", "/sanjaya_logo.jpg", "/ancient_parchment.jpg", "/lord_ram_archer.jpg"]:
                 asset_file = os.path.join(script_dir, parsed.lstrip("/"))
                 if os.path.exists(asset_file):
+                    ext = os.path.splitext(asset_file)[1].lower()
+                    mime_types = {
+                        ".css": "text/css; charset=utf-8",
+                        ".js": "application/javascript; charset=utf-8",
+                        ".jpg": "image/jpeg",
+                        ".jpeg": "image/jpeg",
+                        ".png": "image/png",
+                        ".svg": "image/svg+xml"
+                    }
+                    content_type = mime_types.get(ext, "application/octet-stream")
                     self.send_response(200)
-                    self.send_header("Content-Type", "image/jpeg")
+                    self.send_header("Content-Type", content_type)
                     self.end_headers()
                     with open(asset_file, "rb") as f:
                         self.wfile.write(f.read())
