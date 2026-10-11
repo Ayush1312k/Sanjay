@@ -11,10 +11,6 @@
       "destination": "/AI_backend/theme.css"
     },
     {
-      "source": "/canvas.js",
-      "destination": "/AI_backend/canvas.js"
-    },
-    {
       "source": "/sanjaya_logo.jpg",
       "destination": "/AI_backend/sanjaya_logo.jpg"
     },

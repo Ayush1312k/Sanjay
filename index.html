@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sanjaya AI — Sacred Scriptural Vision</title>
+    
+    <!-- Classical & Swiss Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Retro Swiss Design System -->
+    <link rel="stylesheet" href="./theme.css">
+</head>
+<body>
+
+    <!-- Main Swiss Retro Interface (Instantly Visible & Accessible) -->
+    <div id="main-interface">
+        
+        <!-- Swiss Header Bar -->
+        <header class="app-header">
+            <div class="brand-section">
+                <div class="brand-emblem-box">
+                    <img src="./sanjaya_logo.jpg" alt="Sanjaya" class="brand-emblem-img">
+                </div>
+                <div class="brand-typography">
+                    <span class="brand-title">Sanjaya</span>
+                    <span class="brand-sys-tag">SYS // v2.5</span>
+                </div>
+            </div>
+
+            <div class="header-tools">
+                <button onclick="toggleTheme()" id="theme-toggle-btn" class="swiss-btn" title="Toggle Theme" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                    <span>THEME</span>
+                </button>
+
+                <button onclick="clearChat()" class="swiss-btn swiss-btn-primary" title="Start New Conversation" aria-label="New Chat">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>NEW CHAT</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Swiss Workspace Container -->
+        <main class="chat-workspace-container">
+            
+            <div id="chat-window">
+                
+                <!-- Welcome Hero (Initial Empty State) -->
+                <div id="welcome-card">
+                    <div class="swiss-hero-badge">
+                        <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo">
+                    </div>
+
+                    <h1 class="swiss-hero-title">What scriptural wisdom do you seek?</h1>
+                    
+                    <div class="swiss-rule">
+                        · · · ॐ · · ·
+                    </div>
+
+                    <p class="swiss-hero-subtitle">
+                        Ask any question from the Bhagavad Gita, Ramayana, or Mahabharata.
+                    </p>
+
+                    <div class="swiss-chips-grid">
+                        <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
+                                class="swiss-chip-tile">
+                            <span class="swiss-chip-idx">01 // KNOWLEDGE</span>
+                            <span class="swiss-chip-text">Where was the Bhagavad Gita imparted?</span>
+                        </button>
+                        <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
+                                class="swiss-chip-tile">
+                            <span class="swiss-chip-idx">02 // ESSENCE</span>
+                            <span class="swiss-chip-text">What is the essence of Karma Yoga in the Gita?</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Swiss Console Input Bar -->
+            <div class="chat-input-bar-container">
+                <div class="input-console-frame">
+                    <span class="input-prompt-label">INPUT //</span>
+                    <input type="text" id="user-input" 
+                           placeholder="Ask of the Gita, Ramayana, or Mahabharata..." 
+                           class="chat-input-field"
+                           autocomplete="off"
+                           aria-label="Ask Sanjaya a spiritual question"
+                           onkeydown="if(event.key === 'Enter') sendMessage()">
+                    
+                    <button onclick="sendMessage()" 
+                            class="btn-send-message"
+                            aria-label="Send Query"
+                            title="Send Query">
+                        <span>SEND</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="footer-meta-note">
+                    SANJAYA AI · SCRIPTURAL WISDOM RETRIEVAL ENGINE · v2.5
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- App Configuration -->
+    <script>
+        window.SANJAYA_CONFIG = { API_URL: "https://sanjay-d7dl.onrender.com/api/query" };
+    </script>
+
+    <!-- Core App Logic (Minimal & Clean) -->
+    <script>
+        const API_URL = (window.SANJAYA_CONFIG && window.SANJAYA_CONFIG.API_URL) 
+            || (window.location.protocol === 'file:' 
+                ? 'http://localhost:5000/api/query' 
+                : '/api/query');
+
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('sanjaya_theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            applyTheme(theme);
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('sanjaya_theme', theme);
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        }
+
+        initTheme();
+
+        function usePreset(queryText) {
+            const input = document.getElementById('user-input');
+            if (input) {
+                input.value = queryText;
+                input.focus();
+            }
+        }
+
+        function copyToClipboard(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btnElement.innerText;
+                btnElement.innerText = "COPIED";
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                }, 2000);
+            });
+        }
+
+        function clearChat() {
+            const chatWindow = document.getElementById('chat-window');
+            if (!chatWindow) return;
+            chatWindow.innerHTML = `
+                <div id="welcome-card">
+                    <div class="swiss-hero-badge">
+                        <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo">
+                    </div>
+                    <h1 class="swiss-hero-title">What scriptural wisdom do you seek?</h1>
+                    <div class="swiss-rule">· · · ॐ · · ·</div>
+                    <p class="swiss-hero-subtitle">
+                        Ask any question from the Bhagavad Gita, Ramayana, or Mahabharata.
+                    </p>
+                    <div class="swiss-chips-grid">
+                        <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
+                                class="swiss-chip-tile">
+                            <span class="swiss-chip-idx">01 // KNOWLEDGE</span>
+                            <span class="swiss-chip-text">Where was the Bhagavad Gita imparted?</span>
+                        </button>
+                        <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
+                                class="swiss-chip-tile">
+                            <span class="swiss-chip-idx">02 // ESSENCE</span>
+                            <span class="swiss-chip-text">What is the essence of Karma Yoga in the Gita?</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatMarkdown(text) {
+            if (!text) return '';
+            let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            const paragraphs = formatted.split(/\n\s*\n/);
+            return paragraphs
+                .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                .join('');
+        }
+
+        async function typeWriter(element, text, speed = 8) {
+            let i = 0;
+            element.classList.add('cursor-pen');
+            const formattedHTML = formatMarkdown(text);
+            
+            return new Promise(resolve => {
+                function type() {
+                    if (i >= formattedHTML.length) {
+                        element.classList.remove('cursor-pen');
+                        resolve();
+                        return;
+                    }
+
+                    if (formattedHTML[i] === '<') {
+                        let tagEnd = formattedHTML.indexOf('>', i);
+                        if (tagEnd !== -1) {
+                            element.innerHTML += formattedHTML.substring(i, tagEnd + 1);
+                            i = tagEnd + 1;
+                            type();
+                            return;
+                        }
+                    }
+
+                    element.innerHTML += formattedHTML.charAt(i);
+                    i++;
+                    
+                    const chatWindow = document.getElementById('chat-window');
+                    if (chatWindow) {
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                    }
+
+                    setTimeout(type, speed);
+                }
+                type();
+            });
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chat = document.getElementById('chat-window');
+            if (!input || !chat) return;
+
+            const text = input.value.trim();
+            if (!text) return;
+
+            const welcomeCard = document.getElementById('welcome-card');
+            if (welcomeCard) welcomeCard.remove();
+
+            // 1. User Message (Swiss structured block)
+            chat.innerHTML += `
+                <div class="user-msg-container">
+                    <div class="bubble-user">
+                        <div class="bubble-user-label">SEEKER // QUERY</div>
+                        ${text}
+                    </div>
+                </div>
+            `;
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+
+            // 2. Loading State
+            const loadingId = 'loading-' + Date.now();
+            chat.innerHTML += `
+                <div id="${loadingId}" class="loading-row">
+                    <i class="fa-solid fa-square-full spinner-icon"></i>
+                    <span>SEARCHING SACRED CORPUS...</span>
+                </div>
+            `;
+            chat.scrollTop = chat.scrollHeight;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: text })
+                });
+                
+                const data = await response.json();
+                document.getElementById(loadingId)?.remove();
+
+                const aiText = data.answer || "I could not retrieve scriptural answers at this moment.";
+                const msgId = 'msg-' + Date.now();
+
+                // 3. AI Message (Swiss architectural card)
+                chat.innerHTML += `
+                    <div class="ai-msg-container">
+                        <div class="ai-avatar-box">
+                            <img src="./sanjaya_logo.jpg" alt="Sanjaya">
+                        </div>
+                        <div class="ai-card-body">
+                            <div class="ai-meta-bar">
+                                <span class="ai-meta-title">SANJAYA // SCRIPTURAL RECITAL</span>
+                                <button onclick="copyToClipboard(document.getElementById('${msgId}').innerText, this)" class="btn-copy-tool" title="Copy text">
+                                    [ COPY ]
+                                </button>
+                            </div>
+                            <div id="${msgId}" class="response-text"></div>
+                        </div>
+                    </div>
+                `;
+
+                const contentElement = document.getElementById(msgId);
+                await typeWriter(contentElement, aiText, 8);
+
+            } catch (e) {
+                document.getElementById(loadingId)?.remove();
+                chat.innerHTML += `
+                    <div style="display: flex; justify-content: flex-start;">
+                        <div class="error-notice-card">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span>CONNECTION ERROR: UNABLE TO REACH BACKEND SERVICE.</span>
+                        </div>
+                    </div>
+                `;
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

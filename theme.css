@@ -1,0 +1,735 @@
+/* ==========================================================================
+   SANJAYA AI — RETRO SWISS DESIGN SYSTEM
+   International Typographic Style + Warm Olive & Clay Heritage
+   Base Palette: Olive #6B7048 | Clay Accent #CF9A6F
+   Zero background animation. Pure typographic clarity, grid discipline & functional beauty.
+   ========================================================================== */
+
+:root {
+    /* --- TONAL OLIVE & CLAY PALETTE --- */
+    --olive-50:    #F6F3EB; /* Light antique vellum */
+    --olive-100:   #EDE8DC; /* Warm retro parchment */
+    --olive-200:   #DDD6C2; /* Muted card surface */
+    --olive-300:   #CDC4AA; /* Border rule light */
+    --olive-400:   #9C9675; /* Mid olive */
+    --olive-500:   #6B7048; /* PRIMARY SWISS OLIVE (#6B7048) */
+    --olive-600:   #545936; /* Deep olive */
+    --olive-700:   #3E4227; /* Dark olive rule */
+    --olive-800:   #272B18; /* Retro dark olive */
+    --olive-900:   #171A0E; /* Deepest olive ink */
+    --olive-950:   #0E1008; /* Pure deep olive dark */
+
+    /* Clay Functional Accent (#CF9A6F) */
+    --clay-accent:         #CF9A6F;
+    --clay-accent-hover:   #DBA77D;
+    --clay-accent-active:  #BA8457;
+    --clay-ring:           rgba(207, 154, 111, 0.45);
+
+    /* --- LIGHT THEME: SWISS MANUSCRIPT ON VELLUM --- */
+    --bg-app:              #F4F0E6;
+    --bg-surface:          #FCFAF5;
+    --bg-surface-alt:      #EDE8DC;
+    --text-primary:        #171A0E;
+    --text-secondary:      #4D5333;
+    --text-muted:          #6E764E;
+    --text-inverse:        #FCFAF5;
+
+    --border-grid:         #CDC4AA;
+    --border-strong:       #6B7048;
+    --shadow-swiss:        2px 2px 0px #C7BD9F;
+
+    --user-bubble-bg:      #545936;
+    --user-bubble-text:    #FCFAF5;
+    --user-bubble-border:  #3E4227;
+
+    --ai-card-bg:          #FCFAF5;
+    --ai-card-text:        #171A0E;
+    --ai-card-border:      #CDC4AA;
+
+    --chip-bg:             #FCFAF5;
+    --chip-border:         #CDC4AA;
+    --chip-text:           #171A0E;
+    --chip-hover-bg:       #EDE8DC;
+
+    --input-bg:            #FCFAF5;
+    --input-border:        #CDC4AA;
+
+    --font-heading:        'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    --font-body:           'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono:           ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
+}
+
+/* --- DARK THEME: SWISS RETRO MIDNIGHT TERMINAL --- */
+[data-theme="dark"] {
+    --bg-app:              #12150D;
+    --bg-surface:          #1A1E12;
+    --bg-surface-alt:      #232819;
+    --text-primary:        #F6F3EB;
+    --text-secondary:      #C8CEB5;
+    --text-muted:          #8F9972;
+    --text-inverse:        #12150D;
+
+    --border-grid:         #333A22;
+    --border-strong:       #6B7048;
+    --shadow-swiss:        2px 2px 0px #090B06;
+
+    --user-bubble-bg:      #2A301D;
+    --user-bubble-text:    #F6F3EB;
+    --user-bubble-border:  #444D2F;
+
+    --ai-card-bg:          #1A1E12;
+    --ai-card-text:        #F6F3EB;
+    --ai-card-border:      #333A22;
+
+    --chip-bg:             #1A1E12;
+    --chip-border:         #333A22;
+    --chip-text:           #F6F3EB;
+    --chip-hover-bg:       #262C1B;
+
+    --input-bg:            #1A1E12;
+    --input-border:        #333A22;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-app:              #12150D;
+        --bg-surface:          #1A1E12;
+        --bg-surface-alt:      #232819;
+        --text-primary:        #F6F3EB;
+        --text-secondary:      #C8CEB5;
+        --text-muted:          #8F9972;
+        --text-inverse:        #12150D;
+
+        --border-grid:         #333A22;
+        --border-strong:       #6B7048;
+        --shadow-swiss:        2px 2px 0px #090B06;
+
+        --user-bubble-bg:      #2A301D;
+        --user-bubble-text:    #F6F3EB;
+        --user-bubble-border:  #444D2F;
+
+        --ai-card-bg:          #1A1E12;
+        --ai-card-text:        #F6F3EB;
+        --ai-card-border:      #333A22;
+
+        --chip-bg:             #1A1E12;
+        --chip-border:         #333A22;
+        --chip-text:           #F6F3EB;
+        --chip-hover-bg:       #262C1B;
+
+        --input-bg:            #1A1E12;
+        --input-border:        #333A22;
+    }
+}
+
+/* ==========================================================================
+   RESET & STRUCTURE
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-grid);
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--olive-500);
+}
+
+:focus-visible {
+    outline: 2px solid var(--clay-accent);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   SWISS RETRO LAYOUT
+   ========================================================================== */
+#main-interface {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    opacity: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   SWISS HEADER
+   -------------------------------------------------------------------------- */
+.app-header {
+    width: 100%;
+    padding: calc(0.65rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 2.5rem) 0.65rem;
+    border-bottom: 2px solid var(--border-grid);
+    background: var(--bg-app);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.brand-emblem-box {
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--border-grid);
+    background: var(--bg-surface);
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-swiss);
+}
+
+.brand-emblem-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.brand-typography {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 3.2vw, 1.45rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.brand-sys-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.45rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-grid);
+    color: var(--olive-500);
+}
+
+.header-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Swiss Retro Action Buttons */
+.swiss-btn {
+    min-height: 34px;
+    padding: 0.35rem 0.75rem;
+    border: 1.5px solid var(--border-grid);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: var(--shadow-swiss);
+    transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.15s ease;
+}
+
+.swiss-btn:hover {
+    background: var(--bg-surface-alt);
+    border-color: var(--olive-500);
+}
+
+.swiss-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px var(--border-grid);
+}
+
+.swiss-btn-primary {
+    background: var(--olive-500);
+    color: var(--text-inverse);
+    border-color: var(--olive-600);
+}
+
+.swiss-btn-primary:hover {
+    background: var(--olive-600);
+}
+
+/* --------------------------------------------------------------------------
+   CHAT COLUMN (SWISS GRID)
+   -------------------------------------------------------------------------- */
+.chat-workspace-container {
+    flex: 1;
+    width: 100%;
+    max-width: min(820px, 100% - 2rem);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border-left: 1px solid var(--border-grid);
+    border-right: 1px solid var(--border-grid);
+}
+
+#chat-window {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+}
+
+/* --------------------------------------------------------------------------
+   SWISS RETRO WELCOME STATE
+   -------------------------------------------------------------------------- */
+#welcome-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(1.5rem, 5vw, 3rem) 1rem;
+    margin: auto 0;
+}
+
+.swiss-hero-badge {
+    width: clamp(72px, 14vw, 88px);
+    height: clamp(72px, 14vw, 88px);
+    border: 2px solid var(--border-grid);
+    background: var(--bg-surface);
+    padding: 3px;
+    box-shadow: var(--shadow-swiss);
+    margin-bottom: 1.25rem;
+}
+
+.swiss-hero-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiss-hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 4vw, 2.1rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.swiss-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 280px;
+    margin: 0.65rem 0 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--olive-500);
+}
+
+.swiss-rule::before,
+.swiss-rule::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+    background: var(--border-grid);
+}
+
+.swiss-hero-subtitle {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    color: var(--text-secondary);
+    max-width: 540px;
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+}
+
+/* Swiss Index Grid for Questions */
+.swiss-chips-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    width: 100%;
+    max-width: 620px;
+}
+
+@media (min-width: 600px) {
+    .swiss-chips-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.swiss-chip-tile {
+    padding: 0.75rem 0.95rem;
+    border: 1.5px solid var(--border-grid);
+    background: var(--chip-bg);
+    color: var(--chip-text);
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--shadow-swiss);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: transform 0.06s ease, box-shadow 0.06s ease, border-color 0.15s ease;
+}
+
+.swiss-chip-tile:hover {
+    background: var(--chip-hover-bg);
+    border-color: var(--olive-500);
+}
+
+.swiss-chip-tile:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px var(--border-grid);
+}
+
+.swiss-chip-idx {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--olive-500);
+    letter-spacing: 0.06em;
+}
+
+.swiss-chip-text {
+    font-size: clamp(0.82rem, 1.8vw, 0.88rem);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   CHAT MESSAGES
+   -------------------------------------------------------------------------- */
+/* User Bubble: Crisp Swiss Block */
+.user-msg-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.bubble-user {
+    max-width: min(85%, 620px);
+    padding: 0.85rem 1.15rem;
+    border: 1.5px solid var(--user-bubble-border);
+    background: var(--user-bubble-bg);
+    color: var(--user-bubble-text);
+    font-size: clamp(0.9rem, 2vw, 0.96rem);
+    line-height: 1.6;
+    box-shadow: var(--shadow-swiss);
+    word-break: break-word;
+}
+
+.bubble-user-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--olive-300);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+/* AI Card: Architectural Swiss Panel */
+.ai-msg-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    width: 100%;
+}
+
+.ai-avatar-box {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--border-grid);
+    background: var(--bg-surface);
+    padding: 2px;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    box-shadow: var(--shadow-swiss);
+}
+
+.ai-avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ai-card-body {
+    flex: 1;
+    min-width: 0;
+    background: var(--ai-card-bg);
+    border: 1.5px solid var(--ai-card-border);
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow-swiss);
+}
+
+.ai-meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1.5px solid var(--border-grid);
+}
+
+.ai-meta-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--olive-500);
+    text-transform: uppercase;
+}
+
+.btn-copy-tool {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border-grid);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.btn-copy-tool:hover {
+    border-color: var(--olive-500);
+    color: var(--text-primary);
+}
+
+.response-text {
+    color: var(--ai-card-text);
+    font-size: clamp(0.92rem, 2vw, 0.98rem);
+    line-height: 1.75;
+}
+
+.response-text p {
+    margin-bottom: 0.85rem;
+}
+
+.response-text p:last-child {
+    margin-bottom: 0;
+}
+
+.response-text strong {
+    color: var(--olive-500);
+    font-weight: 700;
+}
+
+[data-theme="dark"] .response-text strong,
+:root:not([data-theme="light"]) .response-text strong {
+    color: var(--clay-accent);
+}
+
+/* Typewriter Cursor */
+.cursor-pen::after {
+    content: '█';
+    display: inline-block;
+    color: var(--clay-accent);
+    margin-left: 3px;
+    font-size: 0.85em;
+    vertical-align: middle;
+    animation: blinkCursor 0.7s steps(2, start) infinite;
+}
+
+@keyframes blinkCursor {
+    to { visibility: hidden; }
+}
+
+/* Loading State */
+.loading-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.spinner-icon {
+    color: var(--clay-accent);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-notice-card {
+    border: 1.5px solid #C25442;
+    padding: 0.75rem 1rem;
+    background: rgba(194, 84, 66, 0.1);
+    color: #C25442;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* --------------------------------------------------------------------------
+   SWISS CONSOLE INPUT BAR
+   -------------------------------------------------------------------------- */
+.chat-input-bar-container {
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    flex-shrink: 0;
+    width: 100%;
+    border-top: 1.5px solid var(--border-grid);
+    background: var(--bg-app);
+}
+
+.input-console-frame {
+    display: flex;
+    align-items: center;
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    padding: 0.25rem 0.35rem 0.25rem 0.85rem;
+    box-shadow: var(--shadow-swiss);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-console-frame:focus-within {
+    border-color: var(--clay-accent);
+    box-shadow: 0 0 0 2px var(--clay-ring), var(--shadow-swiss);
+}
+
+.input-prompt-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--olive-500);
+    letter-spacing: 0.08em;
+    margin-right: 0.5rem;
+    user-select: none;
+}
+
+.chat-input-field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: clamp(0.88rem, 2vw, 0.95rem);
+    color: var(--text-primary);
+    padding: 0.5rem 0.25rem;
+}
+
+.chat-input-field::placeholder {
+    color: var(--text-muted);
+    opacity: 0.75;
+}
+
+/* Swiss Clay Send Button */
+.btn-send-message {
+    min-height: 36px;
+    padding: 0 0.95rem;
+    background: var(--clay-accent);
+    color: #12150D;
+    border: 1.5px solid #A8764E;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 1.5px 1.5px 0px #A8764E;
+    transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.15s ease;
+}
+
+.btn-send-message:hover {
+    background: var(--clay-accent-hover);
+}
+
+.btn-send-message:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0.5px 0.5px 0px #A8764E;
+}
+
+.footer-meta-note {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.45rem;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE TWEAKS
+   ========================================================================== */
+@media (max-width: 480px) {
+    .app-header {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    .brand-sys-tag {
+        display: none;
+    }
+    .swiss-btn span {
+        display: none;
+    }
+    .swiss-btn {
+        padding: 0.35rem 0.55rem;
+    }
+    .chat-workspace-container {
+        border-left: none;
+        border-right: none;
+        max-width: 100%;
+    }
+    .input-prompt-label {
+        display: none;
+    }
+}

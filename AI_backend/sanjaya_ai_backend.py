@@ -290,7 +290,7 @@ def run_standalone_server(port=5000):
                 else:
                     self.send_response(404)
                     self.end_headers()
-            elif parsed in ["/theme.css", "/canvas.js", "/sanjaya_logo.jpg", "/ancient_parchment.jpg", "/lord_ram_archer.jpg"]:
+            elif parsed in ["/theme.css", "/sanjaya_logo.jpg", "/ancient_parchment.jpg", "/lord_ram_archer.jpg"]:
                 asset_file = os.path.join(script_dir, parsed.lstrip("/"))
                 if os.path.exists(asset_file):
                     ext = os.path.splitext(asset_file)[1].lower()
