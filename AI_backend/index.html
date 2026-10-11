@@ -5,137 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sanjaya AI — Sacred Scriptural Vision</title>
     
-    <!-- Warm Tonal Google Fonts: Cormorant Garamond (Serif), Plus Jakarta Sans (UI Sans), Noto Serif Devanagari (Sanskrit) -->
+    <!-- Retro & Classical Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+Devanagari:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Monochrome Tonal Design System (Olive #6B7048 & Clay #CF9A6F) -->
+    <!-- Minimal Retro Tonal Olive & Clay System -->
     <link rel="stylesheet" href="./theme.css">
 </head>
 <body>
 
-    <!-- ================= 1. SACRED ORGANIC CANVAS BACKGROUND ================= -->
-    <canvas id="bg-canvas" id="bg-canvas-container" aria-hidden="true"></canvas>
+    <!-- 1. Ambient Background Canvas (Fixed, Non-blocking, Behind Everything) -->
+    <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
 
-    <!-- ================= 2. BRAND LOGO STARTUP ANIMATION ================= -->
-    <div id="intro-screen">
-        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 10;">
-            <!-- Animated Sacred Tree & Manuscript Logo with Warm Tonal Glow -->
-            <div class="logo-container-intro">
-                <div class="logo-glow-ring"></div>
-                <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo" class="logo-img-intro">
-            </div>
-
-            <h1 class="intro-title">SANJAYA</h1>
-            <p class="intro-subtext">Divine Scriptural Vision AI</p>
-        </div>
-    </div>
-
-    <!-- ================= 3. MAIN APPLICATION INTERFACE ================= -->
+    <!-- 2. Main Interface (Instantly Visible & Accessible) -->
     <div id="main-interface">
         
-        <!-- TOP NAVIGATION HEADER -->
+        <!-- Retro Header Bar -->
         <header class="app-header">
             <div class="brand-wrapper">
-                <div class="brand-logo-container">
-                    <img src="./sanjaya_logo.jpg" alt="Sanjaya Logo" class="brand-logo-header">
+                <div class="brand-logo-frame">
+                    <img src="./sanjaya_logo.jpg" alt="Sanjaya" class="brand-logo-img">
                 </div>
-                <span class="brand-name">Sanjaya</span>
-                <span class="brand-badge">v2.5 AI</span>
+                <span class="brand-title">Sanjaya</span>
+                <span class="retro-badge">v2.5 AI</span>
             </div>
 
-            <div class="header-actions">
-                <!-- Theme Toggle Button -->
-                <button onclick="toggleTheme()" id="theme-toggle-btn" class="btn-icon-action" title="Toggle Theme" aria-label="Toggle Light and Dark Theme">
-                    <i class="fa-solid fa-moon" id="theme-icon"></i>
-                </button>
-
-                <!-- Audio Speech Toggle Button -->
-                <button onclick="toggleAudioSpeech()" id="audio-toggle-btn" class="btn-icon-action" title="Toggle Speech Readout" aria-label="Toggle Audio Speech Readout">
+            <div class="header-controls">
+                <button onclick="toggleAudioSpeech()" id="audio-toggle-btn" class="btn-retro" title="Toggle Speech Readout">
                     <i class="fa-solid fa-volume-high"></i>
+                    <span>AUDIO</span>
                 </button>
 
-                <!-- New Chat Button -->
-                <button onclick="clearChat()" class="btn-new-chat" title="Start a New Conversation" aria-label="New Chat">
+                <button onclick="toggleTheme()" id="theme-toggle-btn" class="btn-retro" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                    <span>THEME</span>
+                </button>
+
+                <button onclick="clearChat()" class="btn-retro btn-new-chat" title="Start New Conversation">
                     <i class="fa-solid fa-pen-to-square"></i>
-                    <span>New Chat</span>
+                    <span>NEW CHAT</span>
                 </button>
             </div>
         </header>
 
-        <!-- CHAT FEED CONTAINER -->
+        <!-- Main Chat Log -->
         <main class="chat-main-container">
             
             <div id="chat-window">
                 
-                <!-- EMPTY CHAT WELCOME HERO -->
+                <!-- Welcome Hero (Initial Empty State) -->
                 <div id="welcome-card" class="message-anim">
-                    <div class="welcome-logo-badge">
-                        <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Emblem" class="welcome-logo-img">
+                    <div class="welcome-emblem">
+                        <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo">
                     </div>
 
-                    <h2 class="welcome-title">What scriptural wisdom do you seek?</h2>
+                    <h1 class="welcome-title">What scriptural wisdom do you seek?</h1>
                     
-                    <!-- Decorative Botanical Leaf-and-Vine Ornament (Single Tone Olive Bezier Curves) -->
-                    <div class="ornament-divider" aria-hidden="true">
-                        <svg viewBox="0 0 240 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 22px;">
-                            <path d="M10 12C35 12 55 6 75 12C95 18 105 12 120 12C135 12 145 18 165 12C185 6 205 12 230 12" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
-                            <!-- Center Sacred Lotus/Leaf Bud -->
-                            <path d="M120 4C123 8 126 10 120 16C114 10 117 8 120 4Z" fill="currentColor"/>
-                            <!-- Left Leaf Pairs -->
-                            <path d="M75 12C78 8 84 9 82 13C78 13 76 12 75 12Z" fill="currentColor" opacity="0.85"/>
-                            <path d="M50 11C47 8 41 9 43 13C47 13 49 12 50 11Z" fill="currentColor" opacity="0.85"/>
-                            <!-- Right Leaf Pairs -->
-                            <path d="M165 12C162 8 156 9 158 13C162 13 164 12 165 12Z" fill="currentColor" opacity="0.85"/>
-                            <path d="M190 11C193 8 199 9 197 13C193 13 191 12 190 11Z" fill="currentColor" opacity="0.85"/>
-                            <!-- Branch Finials -->
-                            <circle cx="8" cy="12" r="1.5" fill="currentColor"/>
-                            <circle cx="232" cy="12" r="1.5" fill="currentColor"/>
-                        </svg>
+                    <div class="retro-divider">
+                        · · · ॐ · · ·
                     </div>
 
                     <p class="welcome-subtitle">
                         Ask any question from the Bhagavad Gita, Ramayana, or Mahabharata.
                     </p>
 
-                    <!-- Suggested Question Chips -->
                     <div class="chips-wrapper">
                         <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
                                 class="suggested-chip">
-                            Where was the Bhagavad Gita imparted?
+                            <strong>[ 01 ]</strong> Where was the Bhagavad Gita imparted?
                         </button>
                         <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
                                 class="suggested-chip">
-                            Essence of Karma Yoga
+                            <strong>[ 02 ]</strong> What is the essence of Karma Yoga?
                         </button>
                     </div>
                 </div>
 
             </div>
 
-            <!-- PINNED BOTTOM INPUT BAR -->
+            <!-- Pinned Console Input Bar -->
             <div class="chat-input-bar-container">
-                <div class="input-pill-wrapper">
+                <div class="input-console-wrapper">
+                    <span class="input-prompt-label">[ &gt; ]</span>
                     <input type="text" id="user-input" 
-                           placeholder="Message Sanjaya..." 
+                           placeholder="Ask of the Gita, Ramayana, or Mahabharata..." 
                            class="chat-input-field"
                            autocomplete="off"
-                           aria-label="Ask Sanjaya a spiritual or scriptural question"
+                           aria-label="Ask Sanjaya a spiritual question"
                            onkeydown="if(event.key === 'Enter') sendMessage()">
                     
                     <button onclick="sendMessage()" 
                             class="btn-send-message"
                             aria-label="Send Query"
                             title="Send Query">
+                        <span>SEND</span>
                         <i class="fa-solid fa-arrow-up"></i>
                     </button>
                 </div>
                 <div class="footer-scripture-note">
-                    Sanjaya AI recites knowledge from ancient sacred scriptures.
+                    Sanjaya AI · Scriptural Wisdom Retrieval Engine
                 </div>
             </div>
 
@@ -143,7 +115,7 @@
 
     </div>
 
-    <!-- Background Organic Canvas Script -->
+    <!-- Background Canvas Ambient Script -->
     <script src="./canvas.js"></script>
 
     <!-- App Configuration -->
@@ -151,7 +123,7 @@
         window.SANJAYA_CONFIG = { API_URL: "https://sanjay-d7dl.onrender.com/api/query" };
     </script>
 
-    <!-- Core App Logic (Functionality Preserved 100%) -->
+    <!-- Core App Logic -->
     <script>
         const API_URL = (window.SANJAYA_CONFIG && window.SANJAYA_CONFIG.API_URL) 
             || (window.location.protocol === 'file:' 
@@ -183,40 +155,27 @@
             applyTheme(newTheme);
         }
 
-        // Initialize Theme immediately to prevent theme flash
         initTheme();
-
-        // Startup animation Sequence (2.0s preserved)
-        document.addEventListener('DOMContentLoaded', () => {
-            const introScreen = document.getElementById('intro-screen');
-            const mainInterface = document.getElementById('main-interface');
-
-            setTimeout(() => {
-                introScreen.style.opacity = '0';
-                introScreen.style.transform = 'scale(1.02)';
-                
-                setTimeout(() => {
-                    introScreen.style.display = 'none';
-                    mainInterface.classList.add('active');
-                }, 700);
-            }, 2000);
-        });
 
         function usePreset(queryText) {
             const input = document.getElementById('user-input');
-            input.value = queryText;
-            input.focus();
+            if (input) {
+                input.value = queryText;
+                input.focus();
+            }
         }
 
         function toggleAudioSpeech() {
             autoSpeechEnabled = !autoSpeechEnabled;
             const btn = document.getElementById('audio-toggle-btn');
-            if (autoSpeechEnabled) {
-                btn.classList.add('active');
-                speakText("Voice response enabled.");
-            } else {
-                btn.classList.remove('active');
-                window.speechSynthesis.cancel();
+            if (btn) {
+                if (autoSpeechEnabled) {
+                    btn.classList.add('active');
+                    speakText("Voice response enabled.");
+                } else {
+                    btn.classList.remove('active');
+                    window.speechSynthesis.cancel();
+                }
             }
         }
 
@@ -244,38 +203,25 @@
 
         function clearChat() {
             const chatWindow = document.getElementById('chat-window');
+            if (!chatWindow) return;
             chatWindow.innerHTML = `
                 <div id="welcome-card" class="message-anim">
-                    <div class="welcome-logo-badge">
-                        <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Emblem" class="welcome-logo-img">
+                    <div class="welcome-emblem">
+                        <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo">
                     </div>
-                    <h2 class="welcome-title">What scriptural wisdom do you seek?</h2>
-                    
-                    <div class="ornament-divider" aria-hidden="true">
-                        <svg viewBox="0 0 240 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 22px;">
-                            <path d="M10 12C35 12 55 6 75 12C95 18 105 12 120 12C135 12 145 18 165 12C185 6 205 12 230 12" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
-                            <path d="M120 4C123 8 126 10 120 16C114 10 117 8 120 4Z" fill="currentColor"/>
-                            <path d="M75 12C78 8 84 9 82 13C78 13 76 12 75 12Z" fill="currentColor" opacity="0.85"/>
-                            <path d="M50 11C47 8 41 9 43 13C47 13 49 12 50 11Z" fill="currentColor" opacity="0.85"/>
-                            <path d="M165 12C162 8 156 9 158 13C162 13 164 12 165 12Z" fill="currentColor" opacity="0.85"/>
-                            <path d="M190 11C193 8 199 9 197 13C193 13 191 12 190 11Z" fill="currentColor" opacity="0.85"/>
-                            <circle cx="8" cy="12" r="1.5" fill="currentColor"/>
-                            <circle cx="232" cy="12" r="1.5" fill="currentColor"/>
-                        </svg>
-                    </div>
-
+                    <h1 class="welcome-title">What scriptural wisdom do you seek?</h1>
+                    <div class="retro-divider">· · · ॐ · · ·</div>
                     <p class="welcome-subtitle">
                         Ask any question from the Bhagavad Gita, Ramayana, or Mahabharata.
                     </p>
-
                     <div class="chips-wrapper">
                         <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
                                 class="suggested-chip">
-                            Where was the Bhagavad Gita imparted?
+                            <strong>[ 01 ]</strong> Where was the Bhagavad Gita imparted?
                         </button>
                         <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
                                 class="suggested-chip">
-                            Essence of Karma Yoga
+                            <strong>[ 02 ]</strong> What is the essence of Karma Yoga?
                         </button>
                     </div>
                 </div>
@@ -318,7 +264,9 @@
                     i++;
                     
                     const chatWindow = document.getElementById('chat-window');
-                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                    if (chatWindow) {
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                    }
 
                     setTimeout(type, speed);
                 }
@@ -329,14 +277,15 @@
         async function sendMessage() {
             const input = document.getElementById('user-input');
             const chat = document.getElementById('chat-window');
+            if (!input || !chat) return;
+
             const text = input.value.trim();
-            
             if (!text) return;
 
             const welcomeCard = document.getElementById('welcome-card');
             if (welcomeCard) welcomeCard.remove();
 
-            // 1. User Message (Mid-to-Dark Olive Bubble with Warm Light Text)
+            // 1. User Message (Retro olive pill)
             chat.innerHTML += `
                 <div class="user-msg-container message-anim">
                     <div class="bubble-user">
@@ -352,7 +301,7 @@
             chat.innerHTML += `
                 <div id="${loadingId}" class="loading-indicator-row message-anim">
                     <i class="fa-solid fa-circle-notch spinner-icon"></i>
-                    <span>Sanjaya is inspecting sacred scriptures...</span>
+                    <span>Consulting sacred scriptures...</span>
                 </div>
             `;
             chat.scrollTop = chat.scrollHeight;
@@ -370,20 +319,20 @@
                 const aiText = data.answer || "I could not retrieve scriptural answers at this moment.";
                 const msgId = 'msg-' + Date.now();
 
-                // 3. AI Message (Tonal Parchment / Deep Olive-Night Card)
+                // 3. AI Message (Retro Manuscript Panel)
                 chat.innerHTML += `
                     <div class="ai-msg-container message-anim">
                         <div class="ai-avatar">
-                            <img src="./sanjaya_logo.jpg" alt="Sanjaya Emblem">
+                            <img src="./sanjaya_logo.jpg" alt="Sanjaya">
                         </div>
                         <div class="ai-body-wrapper">
                             <div class="ai-header-meta">
-                                <span class="ai-speaker-label">Sanjaya</span>
+                                <span class="ai-speaker-label">SANJAYA // RECITAL</span>
                                 <div class="ai-actions-bar">
-                                    <button onclick="copyToClipboard(document.getElementById('${msgId}').innerText, this)" class="btn-msg-tool" title="Copy Answer" aria-label="Copy Answer">
+                                    <button onclick="copyToClipboard(document.getElementById('${msgId}').innerText, this)" class="btn-msg-tool" title="Copy Answer">
                                         <i class="fa-solid fa-copy"></i>
                                     </button>
-                                    <button onclick="speakText(document.getElementById('${msgId}').innerText)" class="btn-msg-tool" title="Read Aloud" aria-label="Read Answer Aloud">
+                                    <button onclick="speakText(document.getElementById('${msgId}').innerText)" class="btn-msg-tool" title="Read Aloud">
                                         <i class="fa-solid fa-volume-high"></i>
                                     </button>
                                 </div>
