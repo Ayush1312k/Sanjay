@@ -15,8 +15,8 @@ else:
 
 # --- 1. CONFIGURATION & CLIENT INITIALIZATION ---
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY") or os.getenv("CLAUDE_API_KEY")
 
 def sanitize_secret(text):
     """Sanitizes potential API keys and secrets from text before logging."""
@@ -47,7 +47,9 @@ if ANTHROPIC_API_KEY:
     except Exception as e:
         sys.stderr.write(f"Warning: Failed to initialize Anthropic Client: {sanitize_secret(str(e))}\n")
 
-GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')
+GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')
+if GEMINI_MODEL in ['gemini-2.5-flash', 'gemini-2.5', '']:
+    GEMINI_MODEL = 'gemini-2.0-flash'
 CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-3-5-sonnet-20241022')
 EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL', 'models/gemini-embedding-001')
 CHUNK_SEPARATOR = '\n---CHUNK_SEPARATOR---\n'

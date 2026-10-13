@@ -8,8 +8,8 @@
     --app-bg-mesh:
         radial-gradient(60% 50% at 88% 8%, #2a1a7a 0%, transparent 70%),
         radial-gradient(70% 55% at 92% 60%, #8a1fd0 0%, transparent 65%),
-        radial-gradient(90% 50% at 40% 92%, #ff5ccf 0%, transparent 65%),
-        radial-gradient(70% 40% at 55% 110%, #ffb59a 0%, transparent 65%),
+        radial-gradient(90% 50% at 40% 92%, rgba(255, 92, 207, 0.65) 0%, transparent 65%),
+        radial-gradient(70% 40% at 55% 110%, rgba(255, 181, 154, 0.55) 0%, transparent 65%),
         #050309;
 
     /* --- TYPOGRAPHY TOKENS --- */
@@ -643,6 +643,9 @@ html, body {
     width: 100%;
     pointer-events: auto;
     overflow: visible;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)), rgba(22, 10, 36, 0.70) !important;
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
 }
 
 .input-console-frame:focus-within {
