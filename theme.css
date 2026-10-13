@@ -37,15 +37,15 @@
 .glass {
     position: relative;
     border: none !important;
-    background: transparent !important;
-    backdrop-filter: blur(14px) saturate(190%) brightness(1.15);
-    -webkit-backdrop-filter: blur(14px) saturate(190%) brightness(1.15);
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(10px) saturate(115%);
+    -webkit-backdrop-filter: blur(10px) saturate(115%);
     box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.6),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 0 24px rgba(255, 255, 255, 0.08),
-        0 14px 40px rgba(0, 0, 0, 0.35) !important;
-    overflow: hidden;
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.10),
+        inset 0 0 20px rgba(255, 255, 255, 0.04),
+        0 8px 24px rgba(0, 0, 0, 0.18) !important;
+    overflow: visible;
     transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
@@ -54,8 +54,8 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1.5px;
-    background: linear-gradient(150deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.08) 35%, rgba(255, 255, 255, 0.08) 65%, rgba(255, 255, 255, 0.7));
+    padding: 1px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.05) 35%, rgba(255, 255, 255, 0.05) 65%, rgba(255, 255, 255, 0.6));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -69,8 +69,8 @@
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    background: radial-gradient(120% 70% at 15% 0%, rgba(255, 255, 255, 0.35), transparent 60%);
-    opacity: 0.7;
+    background: radial-gradient(120% 70% at 15% 0%, rgba(255, 255, 255, 0.15), transparent 60%);
+    opacity: 1;
 }
 
 .glass > * {
@@ -96,46 +96,35 @@ html, body {
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+    scrollbar-width: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom Minimal Scrollbar */
 ::-webkit-scrollbar {
-    width: 5px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.4);
+    display: none;
 }
 
 /* Slow moving color fields make refraction visible through the glass. */
 .glass-orb {
     position: fixed;
     z-index: 0;
-    width: clamp(200px, 25vw, 320px);
+    width: clamp(150px, 18vw, 220px);
     aspect-ratio: 1;
     border-radius: 50%;
     filter: blur(40px);
-    opacity: 0.72;
+    opacity: 0.30;
     pointer-events: none;
     will-change: transform;
 }
 
-.glass-orb--pink { top: 26%; left: -8%; background: #ff5ccf; animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
-.glass-orb--violet { top: 12%; right: -7%; background: #8a1fd0; animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
-.glass-orb--peach { bottom: -7%; left: 28%; background: #ffb59a; animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
-.glass-orb--indigo { bottom: 12%; right: 3%; background: #5b3cff; animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
+.glass-orb--pink { top: -10%; left: -9%; background: #ff5ccf; animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
+.glass-orb--violet { top: -10%; right: -8%; background: #8a1fd0; animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
+.glass-orb--peach { bottom: -12%; left: -8%; background: #ffb59a; animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
+.glass-orb--indigo { bottom: -10%; right: -8%; background: #5b3cff; animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
 
 @keyframes glass-orb-drift-a { to { transform: translate3d(90px, -45px, 0); } }
 @keyframes glass-orb-drift-b { to { transform: translate3d(-70px, 80px, 0); } }
@@ -159,7 +148,7 @@ html, body {
     position: relative;
     z-index: 1;
     background: transparent;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* --------------------------------------------------------------------------
@@ -276,7 +265,7 @@ html, body {
 .swiss-chip-tile:hover,
 .btn-send-message:hover,
 .btn-copy-tool:hover {
-    background: transparent !important;
+    background: rgba(255, 255, 255, 0.10) !important;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.65),
         inset 0 -1px 0 rgba(255, 255, 255, 0.25),
@@ -290,8 +279,8 @@ html, body {
 .btn-send-message:hover::before,
 .btn-copy-tool:hover::before {
     background: linear-gradient(160deg,
-        rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.12) 40%,
-        rgba(255, 255, 255, 0.12) 60%, rgba(255, 255, 255, 0.8)) !important;
+        rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.08) 35%,
+        rgba(255, 255, 255, 0.08) 65%, rgba(255, 255, 255, 0.75)) !important;
     transition: background 150ms ease;
 }
 
@@ -299,10 +288,6 @@ html, body {
 .swiss-chip-tile:active,
 .btn-send-message:active {
     transform: translateY(0);
-}
-
-.swiss-btn-primary {
-    background: transparent !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -538,6 +523,7 @@ html, body {
     color: #FFFFFF;
     word-break: break-word;
     overflow-wrap: break-word;
+    overflow: visible;
 }
 
 .ai-meta-bar {
