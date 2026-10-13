@@ -1,143 +1,59 @@
 /* ==========================================================================
-   SANJAYA AI — RETRO SWISS DESIGN SYSTEM
-   International Typographic Style + Warm Olive & Clay Heritage
-   Base Palette: Olive #6B7048 | Clay Accent #CF9A6F
-   Zero background animation. Pure typographic clarity, grid discipline & functional beauty.
+   SANJAYA AI — LIQUID GLASS & DARK MESH GRADIENT DESIGN SYSTEM
+   Deep Mesh Gradient + Liquid Glass (blur 20px saturate 160% + inset top highlight)
+   High-contrast crisp white typography & icons
    ========================================================================== */
 
 :root {
-    /* --- TONAL OLIVE & CLAY PALETTE --- */
-    --olive-50:    #F6F3EB; /* Light antique vellum */
-    --olive-100:   #EDE8DC; /* Warm retro parchment */
-    --olive-200:   #DDD6C2; /* Muted card surface */
-    --olive-300:   #CDC4AA; /* Border rule light */
-    --olive-400:   #9C9675; /* Mid olive */
-    --olive-500:   #6B7048; /* PRIMARY SWISS OLIVE (#6B7048) */
-    --olive-600:   #545936; /* Deep olive */
-    --olive-700:   #3E4227; /* Dark olive rule */
-    --olive-800:   #272B18; /* Retro dark olive */
-    --olive-900:   #171A0E; /* Deepest olive ink */
-    --olive-950:   #0E1008; /* Pure deep olive dark */
+    /* --- 1. SHARED DARK MESH GRADIENT BACKGROUND --- */
+    --app-bg-mesh:
+        radial-gradient(ellipse 75% 55% at 50% 100%, rgba(255, 154, 139, 0.32) 0%, rgba(254, 126, 164, 0.24) 28%, transparent 68%),
+        radial-gradient(circle at 15% 85%, rgba(217, 70, 239, 0.28) 0%, transparent 48%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.30) 0%, transparent 52%),
+        radial-gradient(circle at 50% 50%, rgba(88, 28, 135, 0.45) 0%, transparent 65%),
+        radial-gradient(circle at 80% 20%, rgba(126, 34, 206, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 15% 25%, rgba(30, 27, 75, 0.85) 0%, transparent 55%),
+        #05050a;
 
-    /* Clay Functional Accent (#CF9A6F) */
-    --clay-accent:         #CF9A6F;
-    --clay-accent-hover:   #DBA77D;
-    --clay-accent-active:  #BA8457;
-    --clay-ring:           rgba(207, 154, 111, 0.45);
+    /* --- 2. REUSABLE LIQUID GLASS SYSTEM VARIABLES --- */
+    --glass-bg:            rgba(255, 255, 255, 0.12);
+    --glass-bg-hover:      rgba(255, 255, 255, 0.20);
+    --glass-bg-active:     rgba(255, 255, 255, 0.26);
+    --glass-border:        1px solid rgba(255, 255, 255, 0.25);
+    --glass-border-hover:  1px solid rgba(255, 255, 255, 0.42);
+    --glass-shadow:        inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    --glass-shadow-hover:  inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 36px rgba(0, 0, 0, 0.35);
 
-    /* --- LIGHT THEME: SWISS MANUSCRIPT ON VELLUM --- */
-    --bg-app:              #F4F0E6;
-    --bg-surface:          #FCFAF5;
-    --bg-surface-alt:      #EDE8DC;
-    --text-primary:        #171A0E;
-    --text-secondary:      #4D5333;
-    --text-muted:          #6E764E;
-    --text-inverse:        #FCFAF5;
-
-    --border-grid:         #CDC4AA;
-    --border-strong:       #6B7048;
-    --shadow-swiss:        2px 2px 0px #C7BD9F;
-
-    /* Subtle Sacred Glow (Matching Olive & Clay Theme) */
-    --glow-hero:           rgba(207, 154, 111, 0.22);
-    --glow-hero-ambient:   rgba(207, 154, 111, 0.15);
-    --glow-emblem:         rgba(207, 154, 111, 0.18);
-    --glow-backdrop:       rgba(107, 112, 72, 0.08);
-
-    --user-bubble-bg:      #545936;
-    --user-bubble-text:    #FCFAF5;
-    --user-bubble-border:  #3E4227;
-
-    --ai-card-bg:          #FCFAF5;
-    --ai-card-text:        #171A0E;
-    --ai-card-border:      #CDC4AA;
-
-    --chip-bg:             #FCFAF5;
-    --chip-border:         #CDC4AA;
-    --chip-text:           #171A0E;
-    --chip-hover-bg:       #EDE8DC;
-
-    --input-bg:            #FCFAF5;
-    --input-border:        #CDC4AA;
+    /* --- 3. HIGH CONTRAST WHITE TYPOGRAPHY & READABILITY --- */
+    --text-primary:        #FFFFFF;
+    --text-secondary:      rgba(255, 255, 255, 0.88);
+    --text-muted:          rgba(255, 255, 255, 0.72);
+    --text-inverse:        #05050A;
 
     --font-heading:        'Cinzel', 'Cormorant Garamond', Georgia, serif;
     --font-body:           'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --font-mono:           ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
 }
 
-/* --- DARK THEME: SWISS RETRO MIDNIGHT TERMINAL --- */
-[data-theme="dark"] {
-    --bg-app:              #12150D;
-    --bg-surface:          #1A1E12;
-    --bg-surface-alt:      #232819;
-    --text-primary:        #F6F3EB;
-    --text-secondary:      #C8CEB5;
-    --text-muted:          #8F9972;
-    --text-inverse:        #12150D;
-
-    --border-grid:         #333A22;
-    --border-strong:       #6B7048;
-    --shadow-swiss:        2px 2px 0px #090B06;
-
-    /* Subtle Sacred Glow (Matching Olive & Clay Theme) */
-    --glow-hero:           rgba(207, 154, 111, 0.28);
-    --glow-hero-ambient:   rgba(207, 154, 111, 0.20);
-    --glow-emblem:         rgba(207, 154, 111, 0.22);
-    --glow-backdrop:       rgba(107, 112, 72, 0.16);
-
-    --user-bubble-bg:      #2A301D;
-    --user-bubble-text:    #F6F3EB;
-    --user-bubble-border:  #444D2F;
-
-    --ai-card-bg:          #1A1E12;
-    --ai-card-text:        #F6F3EB;
-    --ai-card-border:      #333A22;
-
-    --chip-bg:             #1A1E12;
-    --chip-border:         #333A22;
-    --chip-text:           #F6F3EB;
-    --chip-hover-bg:       #262C1B;
-
-    --input-bg:            #1A1E12;
-    --input-border:        #333A22;
+/* Maintain dark mesh gradient in all theme modes */
+[data-theme="dark"],
+[data-theme="light"],
+:root:not([data-theme]) {
+    --text-primary:        #FFFFFF;
+    --text-secondary:      rgba(255, 255, 255, 0.88);
+    --text-muted:          rgba(255, 255, 255, 0.72);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg-app:              #12150D;
-        --bg-surface:          #1A1E12;
-        --bg-surface-alt:      #232819;
-        --text-primary:        #F6F3EB;
-        --text-secondary:      #C8CEB5;
-        --text-muted:          #8F9972;
-        --text-inverse:        #12150D;
-
-        --border-grid:         #333A22;
-        --border-strong:       #6B7048;
-        --shadow-swiss:        2px 2px 0px #090B06;
-
-        /* Subtle Sacred Glow (Matching Olive & Clay Theme) */
-        --glow-hero:           rgba(207, 154, 111, 0.28);
-        --glow-hero-ambient:   rgba(207, 154, 111, 0.20);
-        --glow-emblem:         rgba(207, 154, 111, 0.22);
-        --glow-backdrop:       rgba(107, 112, 72, 0.16);
-
-        --user-bubble-bg:      #2A301D;
-        --user-bubble-text:    #F6F3EB;
-        --user-bubble-border:  #444D2F;
-
-        --ai-card-bg:          #1A1E12;
-        --ai-card-text:        #F6F3EB;
-        --ai-card-border:      #333A22;
-
-        --chip-bg:             #1A1E12;
-        --chip-border:         #333A22;
-        --chip-text:           #F6F3EB;
-        --chip-hover-bg:       #262C1B;
-
-        --input-bg:            #1A1E12;
-        --input-border:        #333A22;
-    }
+/* ==========================================================================
+   REUSABLE LIQUID GLASS UTILITY CLASS
+   ========================================================================== */
+.glass,
+.liquid-glass {
+    background: rgba(255, 255, 255, 0.12) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+    backdrop-filter: blur(20px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* ==========================================================================
@@ -152,14 +68,17 @@
 html, body {
     width: 100%;
     height: 100%;
-    background-color: var(--bg-app);
+    background: var(--app-bg-mesh);
+    background-color: #05050a;
+    background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
     overflow: hidden;
     position: relative;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom Minimal Scrollbar */
@@ -170,20 +89,20 @@ html, body {
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: var(--border-grid);
-    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--olive-500);
+    background: rgba(255, 255, 255, 0.45);
 }
 
 :focus-visible {
-    outline: 2px solid var(--clay-accent);
+    outline: 2px solid rgba(255, 255, 255, 0.6);
     outline-offset: 2px;
 }
 
 /* ==========================================================================
-   SWISS RETRO LAYOUT
+   APP SHELL
    ========================================================================== */
 #main-interface {
     display: flex;
@@ -194,20 +113,26 @@ html, body {
     opacity: 1;
     position: relative;
     z-index: 1;
+    background: transparent;
 }
 
 /* --------------------------------------------------------------------------
-   SWISS HEADER
+   TOP BAR (LIQUID GLASS)
    -------------------------------------------------------------------------- */
 .app-header {
     width: 100%;
-    padding: calc(0.65rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 2.5rem) 0.65rem;
-    border-bottom: 2px solid var(--border-grid);
-    background: var(--bg-app);
+    padding: calc(0.75rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 2.5rem) 0.75rem;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
+    position: relative;
+    z-index: 10;
 }
 
 .brand-section {
@@ -218,24 +143,28 @@ html, body {
 }
 
 .brand-emblem-box {
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid var(--border-grid);
-    background: var(--bg-surface);
-    padding: 2px;
+    width: 38px;
+    height: 38px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-swiss), 0 0 14px var(--glow-emblem);
     flex-shrink: 0;
-    position: relative;
-    transition: box-shadow 0.25s ease;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .brand-emblem-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 8px;
     display: block;
 }
 
@@ -250,8 +179,9 @@ html, body {
     font-size: clamp(1.2rem, 3.2vw, 1.45rem);
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: var(--text-primary);
+    color: #FFFFFF;
     text-transform: uppercase;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .brand-sys-tag {
@@ -259,10 +189,13 @@ html, body {
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    padding: 0.15rem 0.45rem;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-grid);
-    color: var(--olive-500);
+    padding: 0.2rem 0.6rem;
+    background: rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 9999px;
+    color: #FFFFFF;
 }
 
 .header-tools {
@@ -271,55 +204,64 @@ html, body {
     gap: 0.5rem;
 }
 
-/* Swiss Retro Action Buttons */
+/* Liquid Glass Action Buttons (Pill) */
 .swiss-btn {
-    min-height: 36px;
-    min-width: 36px;
-    padding: 0.35rem 0.75rem;
-    border: 1.5px solid var(--border-grid);
-    background: var(--bg-surface);
-    color: var(--text-primary);
+    min-height: 38px;
+    min-width: 38px;
+    padding: 0.4rem 0.95rem;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 9999px; /* Fully rounded pill */
+    color: #FFFFFF;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    box-shadow: var(--shadow-swiss);
+    gap: 0.45rem;
     touch-action: manipulation;
-    transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.15s ease, border-color 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+}
+
+.swiss-btn i {
+    color: #FFFFFF;
 }
 
 @media (hover: hover) {
     .swiss-btn:hover {
-        background: var(--bg-surface-alt);
-        border-color: var(--olive-500);
+        background: var(--glass-bg-hover);
+        border-color: rgba(255, 255, 255, 0.42);
+        box-shadow: var(--glass-shadow-hover);
+        color: #FFFFFF;
     }
 }
 
 .swiss-btn:active {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0px var(--border-grid);
+    background: var(--glass-bg-active);
+    transform: scale(0.97);
 }
 
 .swiss-btn-primary {
-    background: var(--olive-500);
-    color: var(--text-inverse);
-    border-color: var(--olive-600);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.35);
 }
 
 @media (hover: hover) {
     .swiss-btn-primary:hover {
-        background: var(--olive-600);
+        background: rgba(255, 255, 255, 0.26);
+        border-color: rgba(255, 255, 255, 0.5);
     }
 }
 
 /* --------------------------------------------------------------------------
-   CHAT COLUMN (SWISS GRID)
+   WORKSPACE CONTAINER (TRANSPARENT — NO BLUR ON FULL SCREEN)
    -------------------------------------------------------------------------- */
 .chat-workspace-container {
     flex: 1;
@@ -330,14 +272,15 @@ html, body {
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    border-left: 1.5px solid var(--border-grid);
-    border-right: 1.5px solid var(--border-grid);
+    border-left: 1px solid rgba(255, 255, 255, 0.10);
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
     min-height: 0;
+    background: transparent;
 }
 
 #chat-window {
     flex: 1;
-    min-height: 0; /* Ensures proper scroll container behavior in flexbox */
+    min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -346,10 +289,11 @@ html, body {
     flex-direction: column;
     gap: clamp(0.85rem, 2vw, 1.35rem);
     scroll-behavior: smooth;
+    background: transparent;
 }
 
 /* --------------------------------------------------------------------------
-   SWISS RETRO WELCOME STATE
+   WELCOME STATE
    -------------------------------------------------------------------------- */
 #welcome-card {
     display: flex;
@@ -364,105 +308,86 @@ html, body {
     align-self: center;
     position: relative;
     z-index: 1;
-}
-
-#welcome-card::before {
-    content: '';
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    width: min(420px, 92vw);
-    height: min(320px, 70vw);
-    transform: translate(-50%, -50%);
-    background: radial-gradient(ellipse at center, var(--glow-backdrop) 0%, transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
+    background: transparent;
 }
 
 .swiss-hero-badge {
-    width: clamp(56px, 12vw, 84px);
-    height: clamp(56px, 12vw, 84px);
-    border: 2px solid var(--border-grid);
-    background: var(--bg-surface);
-    padding: 3px;
-    box-shadow: var(--shadow-swiss), 0 0 24px 2px var(--glow-hero);
+    width: clamp(64px, 13vw, 88px);
+    height: clamp(64px, 13vw, 88px);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+    padding: 6px;
     margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
     flex-shrink: 0;
     position: relative;
-    transition: box-shadow 0.25s ease;
-}
-
-.swiss-hero-badge::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 175%;
-    height: 175%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, var(--glow-hero-ambient) 0%, transparent 68%);
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
+    overflow: hidden;
 }
 
 .swiss-hero-badge img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 18px;
+    display: block;
 }
 
 .swiss-hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.2rem, 3.6vw, 1.95rem);
+    font-size: clamp(1.3rem, 3.8vw, 2.1rem);
     font-weight: 700;
-    color: var(--text-primary);
+    color: #FFFFFF;
     line-height: 1.25;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
-    max-width: 580px;
+    margin-bottom: 0.5rem;
+    max-width: 600px;
     word-break: break-word;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
 }
 
 .swiss-rule {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.65rem;
+    gap: 0.75rem;
     width: 100%;
     max-width: 260px;
     margin: 0.5rem 0 0.85rem;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--olive-500);
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .swiss-rule::before,
 .swiss-rule::after {
     content: '';
     flex: 1;
-    height: 1.5px;
-    background: var(--border-grid);
+    height: 1px;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .swiss-hero-subtitle {
-    font-size: clamp(0.82rem, 1.8vw, 0.94rem);
-    color: var(--text-secondary);
+    font-size: clamp(0.85rem, 1.9vw, 0.98rem);
+    color: rgba(255, 255, 255, 0.9);
     max-width: 520px;
-    margin-bottom: clamp(1rem, 2.5vw, 1.6rem);
+    margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
     line-height: 1.55;
     padding: 0 0.5rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Swiss Index Grid for Questions */
+/* Question Preset Cards (Liquid Glass Cards) */
 .swiss-chips-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.6rem;
+    gap: 0.75rem;
     width: 100%;
     max-width: 600px;
 }
@@ -474,52 +399,58 @@ html, body {
 }
 
 .swiss-chip-tile {
-    padding: clamp(0.65rem, 1.8vw, 0.85rem) clamp(0.75rem, 2vw, 1rem);
-    min-height: 44px;
-    border: 1.5px solid var(--border-grid);
-    background: var(--chip-bg);
-    color: var(--chip-text);
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(0.85rem, 2.2vw, 1.2rem);
+    min-height: 52px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 18px; /* Clean card radius */
+    color: #FFFFFF;
     text-align: left;
     cursor: pointer;
-    box-shadow: var(--shadow-swiss);
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.3rem;
     touch-action: manipulation;
-    transition: transform 0.06s ease, box-shadow 0.06s ease, border-color 0.15s ease, background 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
     word-break: break-word;
 }
 
 @media (hover: hover) {
     .swiss-chip-tile:hover {
-        background: var(--chip-hover-bg);
-        border-color: var(--olive-500);
+        background: var(--glass-bg-hover);
+        border-color: rgba(255, 255, 255, 0.42);
+        box-shadow: var(--glass-shadow-hover);
+        transform: translateY(-1px);
     }
 }
 
 .swiss-chip-tile:active {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0px var(--border-grid);
+    background: var(--glass-bg-active);
+    transform: translateY(0) scale(0.99);
 }
 
 .swiss-chip-idx {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    color: var(--olive-500);
-    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.08em;
 }
 
 .swiss-chip-text {
-    font-size: clamp(0.8rem, 1.7vw, 0.88rem);
+    font-size: clamp(0.84rem, 1.8vw, 0.92rem);
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.4;
+    color: #FFFFFF;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* --------------------------------------------------------------------------
    CHAT MESSAGES
    -------------------------------------------------------------------------- */
-/* User Bubble: Crisp Swiss Block */
 .user-msg-container {
     display: flex;
     justify-content: flex-end;
@@ -528,60 +459,74 @@ html, body {
 
 .bubble-user {
     max-width: min(90%, 600px);
-    padding: clamp(0.65rem, 2vw, 0.85rem) clamp(0.85rem, 2.5vw, 1.15rem);
-    border: 1.5px solid var(--user-bubble-border);
-    background: var(--user-bubble-bg);
-    color: var(--user-bubble-text);
-    font-size: clamp(0.88rem, 1.9vw, 0.95rem);
+    padding: clamp(0.75rem, 2vw, 0.95rem) clamp(0.95rem, 2.5vw, 1.25rem);
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-size: clamp(0.9rem, 1.9vw, 0.98rem);
     line-height: 1.55;
-    box-shadow: var(--shadow-swiss);
     word-break: break-word;
     overflow-wrap: break-word;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .bubble-user-label {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: var(--olive-300);
-    margin-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0.3rem;
     text-transform: uppercase;
 }
 
-/* AI Card: Architectural Swiss Panel */
+/* AI Message */
 .ai-msg-container {
     display: flex;
     align-items: flex-start;
-    gap: clamp(0.45rem, 1.5vw, 0.75rem);
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
     width: 100%;
     min-width: 0;
 }
 
 .ai-avatar-box {
-    width: clamp(26px, 5vw, 32px);
-    height: clamp(26px, 5vw, 32px);
-    border: 1.5px solid var(--border-grid);
-    background: var(--bg-surface);
+    width: clamp(28px, 5vw, 34px);
+    height: clamp(28px, 5vw, 34px);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
     padding: 2px;
     flex-shrink: 0;
     margin-top: 0.15rem;
-    box-shadow: var(--shadow-swiss), 0 0 10px var(--glow-emblem);
+    overflow: hidden;
 }
 
 .ai-avatar-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 7px;
+    display: block;
 }
 
 .ai-card-body {
     flex: 1;
     min-width: 0;
-    background: var(--ai-card-bg);
-    border: 1.5px solid var(--ai-card-border);
-    padding: clamp(0.75rem, 2.2vw, 1.15rem) clamp(0.75rem, 2.5vw, 1.25rem);
-    box-shadow: var(--shadow-swiss);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: clamp(0.85rem, 2.2vw, 1.25rem) clamp(0.85rem, 2.5vw, 1.35rem);
+    color: #FFFFFF;
     word-break: break-word;
     overflow-wrap: break-word;
 }
@@ -591,17 +536,17 @@ html, body {
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    padding-bottom: 0.4rem;
-    margin-bottom: 0.65rem;
-    border-bottom: 1.5px solid var(--border-grid);
+    padding-bottom: 0.45rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .ai-meta-title {
     font-family: var(--font-mono);
-    font-size: clamp(0.62rem, 1.5vw, 0.7rem);
+    font-size: clamp(0.64rem, 1.5vw, 0.72rem);
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: var(--olive-500);
+    color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -609,38 +554,44 @@ html, body {
 }
 
 .btn-copy-tool {
-    padding: 0.2rem 0.45rem;
-    min-height: 26px;
-    border: 1px solid var(--border-grid);
-    background: var(--bg-surface);
-    color: var(--text-secondary);
+    padding: 0.25rem 0.65rem;
+    min-height: 28px;
+    background: rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 9999px; /* Fully rounded pill */
+    color: #FFFFFF;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     cursor: pointer;
     touch-action: manipulation;
     flex-shrink: 0;
-    transition: all 0.1s ease;
+    transition: all 0.15s ease;
 }
 
 @media (hover: hover) {
     .btn-copy-tool:hover {
-        border-color: var(--olive-500);
-        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.22);
+        border-color: rgba(255, 255, 255, 0.4);
+        color: #FFFFFF;
     }
 }
 
 .response-text {
-    color: var(--ai-card-text);
-    font-size: clamp(0.88rem, 1.8vw, 0.96rem);
-    line-height: 1.7;
+    color: #FFFFFF;
+    font-size: clamp(0.9rem, 1.8vw, 0.98rem);
+    line-height: 1.75;
     word-break: break-word;
     overflow-wrap: break-word;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .response-text p {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.8rem;
 }
 
 .response-text p:last-child {
@@ -648,20 +599,16 @@ html, body {
 }
 
 .response-text strong {
-    color: var(--olive-500);
+    color: #FFFFFF;
     font-weight: 700;
-}
-
-[data-theme="dark"] .response-text strong,
-:root:not([data-theme="light"]) .response-text strong {
-    color: var(--clay-accent);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
 /* Typewriter Cursor */
 .cursor-pen::after {
     content: '█';
     display: inline-block;
-    color: var(--clay-accent);
+    color: #FFFFFF;
     margin-left: 3px;
     font-size: 0.85em;
     vertical-align: middle;
@@ -676,18 +623,25 @@ html, body {
 .loading-row {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.5rem;
+    gap: 0.65rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 9999px;
+    width: fit-content;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
+    color: #FFFFFF;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
 .spinner-icon {
-    color: var(--clay-accent);
+    color: #FFFFFF;
     font-size: 0.75rem;
     animation: spin 1s linear infinite;
 }
@@ -697,55 +651,65 @@ html, body {
 }
 
 .error-notice-card {
-    border: 1.5px solid #C25442;
-    padding: 0.65rem 0.85rem;
-    background: rgba(194, 84, 66, 0.1);
-    color: #C25442;
+    border: 1px solid rgba(255, 100, 100, 0.4);
+    padding: 0.75rem 1rem;
+    background: rgba(220, 38, 38, 0.2);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    color: #FFFFFF;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     word-break: break-word;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* --------------------------------------------------------------------------
-   SWISS CONSOLE INPUT BAR
+   BOTTOM TAB / INPUT CONSOLE (LIQUID GLASS PILL)
    -------------------------------------------------------------------------- */
 .chat-input-bar-container {
-    padding: 0.65rem clamp(0.65rem, 3vw, 1.25rem) calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    padding: 0.75rem clamp(0.75rem, 3vw, 1.5rem) calc(0.85rem + env(safe-area-inset-bottom, 0px));
     flex-shrink: 0;
     width: 100%;
-    border-top: 1.5px solid var(--border-grid);
-    background: var(--bg-app);
+    background: transparent;
+    border-top: none;
+    position: relative;
+    z-index: 10;
 }
 
 .input-console-frame {
     display: flex;
     align-items: center;
-    background: var(--input-bg);
-    border: 1.5px solid var(--input-border);
-    padding: 0.25rem 0.35rem 0.25rem clamp(0.5rem, 2vw, 0.85rem);
-    box-shadow: var(--shadow-swiss);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 9999px; /* Fully rounded pill for bottom tab bar / console */
+    padding: 0.35rem 0.45rem 0.35rem clamp(0.75rem, 2.5vw, 1.25rem);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     width: 100%;
 }
 
 .input-console-frame:focus-within {
-    border-color: var(--clay-accent);
-    box-shadow: 0 0 0 2px var(--clay-ring), var(--shadow-swiss);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.22), 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .input-prompt-label {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--olive-500);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #FFFFFF;
     letter-spacing: 0.08em;
-    margin-right: 0.45rem;
+    margin-right: 0.5rem;
     user-select: none;
     flex-shrink: 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .chat-input-field {
@@ -755,34 +719,37 @@ html, body {
     border: none;
     outline: none;
     font-family: var(--font-body);
-    /* 16px min on mobile stops unwanted iOS Safari auto-zoom */
     font-size: 16px;
-    color: var(--text-primary);
+    color: #FFFFFF;
     padding: 0.45rem 0.25rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 768px) {
     .chat-input-field {
-        font-size: 0.94rem;
+        font-size: 0.96rem;
     }
 }
 
 .chat-input-field::placeholder {
-    color: var(--text-muted);
-    opacity: 0.75;
-    font-size: clamp(0.82rem, 1.8vw, 0.92rem);
+    color: rgba(255, 255, 255, 0.65);
+    opacity: 1;
+    font-size: clamp(0.85rem, 1.8vw, 0.94rem);
 }
 
-/* Swiss Clay Send Button */
+/* Glass Send Button (Pill) */
 .btn-send-message {
-    min-height: 38px;
-    min-width: 38px;
-    padding: 0 clamp(0.55rem, 1.8vw, 0.95rem);
-    background: var(--clay-accent);
-    color: #12150D;
-    border: 1.5px solid #A8764E;
+    min-height: 40px;
+    padding: 0 clamp(0.75rem, 2vw, 1.15rem);
+    background: rgba(255, 255, 255, 0.22);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 9999px; /* Fully rounded pill */
+    color: #FFFFFF;
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -790,44 +757,47 @@ html, body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.35rem;
-    box-shadow: 1.5px 1.5px 0px #A8764E;
+    gap: 0.4rem;
     touch-action: manipulation;
     flex-shrink: 0;
-    transition: transform 0.06s ease, box-shadow 0.06s ease, background 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+}
+
+.btn-send-message i {
+    color: #FFFFFF;
 }
 
 @media (hover: hover) {
     .btn-send-message:hover {
-        background: var(--clay-accent-hover);
+        background: rgba(255, 255, 255, 0.32);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 }
 
 .btn-send-message:active {
-    transform: translate(1px, 1px);
-    box-shadow: 0.5px 0.5px 0px #A8764E;
+    transform: scale(0.97);
 }
 
 .footer-meta-note {
     font-family: var(--font-mono);
-    font-size: clamp(0.58rem, 1.5vw, 0.65rem);
+    font-size: clamp(0.6rem, 1.5vw, 0.68rem);
     font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.7);
     text-align: center;
-    margin-top: 0.35rem;
+    margin-top: 0.45rem;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 0.25rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* ==========================================================================
    MULTI-SCREEN RESPONSIVE BREAKPOINTS
    ========================================================================== */
-
-/* Tablet & Mobile: Expand full container width */
 @media (max-width: 860px) {
     .chat-workspace-container {
         border-left: none;
@@ -836,7 +806,6 @@ html, body {
     }
 }
 
-/* Compact Mobile Screens (<= 540px) */
 @media (max-width: 540px) {
     .app-header {
         padding-left: 0.75rem;
@@ -858,9 +827,9 @@ html, body {
     }
 
     .swiss-btn {
-        min-height: 34px;
-        min-width: 34px;
-        padding: 0.3rem 0.5rem;
+        min-height: 36px;
+        min-width: 36px;
+        padding: 0.35rem 0.65rem;
     }
 
     .swiss-btn span {
@@ -876,11 +845,10 @@ html, body {
     }
 
     .btn-send-message {
-        padding: 0 0.65rem;
+        padding: 0 0.75rem;
     }
 }
 
-/* Ultra-compact Phones (<= 360px, e.g. iPhone SE, Fold) */
 @media (max-width: 360px) {
     .app-header {
         padding-left: 0.5rem;
@@ -888,8 +856,8 @@ html, body {
     }
 
     .brand-emblem-box {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
     }
 
     .brand-title {
@@ -901,15 +869,14 @@ html, body {
     }
 
     .ai-card-body {
-        padding: 0.65rem 0.75rem;
+        padding: 0.75rem 0.85rem;
     }
 
     .swiss-chip-tile {
-        padding: 0.55rem 0.65rem;
+        padding: 0.65rem 0.75rem;
     }
 }
 
-/* Short Heights & Landscape Mobile (e.g. height <= 540px) */
 @media (max-height: 540px) {
     .app-header {
         padding-top: calc(0.35rem + env(safe-area-inset-top, 0px));
@@ -953,4 +920,3 @@ html, body {
         display: none;
     }
 }
-

@@ -27,9 +27,9 @@
     <div id="main-interface">
         
         <!-- Swiss Header Bar -->
-        <header class="app-header">
+        <header class="app-header liquid-glass">
             <div class="brand-section">
-                <div class="brand-emblem-box">
+                <div class="brand-emblem-box liquid-glass">
                     <img src="./sanjaya_logo.jpg" alt="Sanjaya" class="brand-emblem-img">
                 </div>
                 <div class="brand-typography">
@@ -39,12 +39,12 @@
             </div>
 
             <div class="header-tools">
-                <button onclick="toggleTheme()" id="theme-toggle-btn" class="swiss-btn" title="Toggle Theme" aria-label="Toggle Theme">
+                <button onclick="toggleTheme()" id="theme-toggle-btn" class="swiss-btn liquid-glass" title="Toggle Theme" aria-label="Toggle Theme">
                     <i class="fa-solid fa-moon" id="theme-icon"></i>
                     <span>THEME</span>
                 </button>
 
-                <button onclick="clearChat()" class="swiss-btn swiss-btn-primary" title="Start New Conversation" aria-label="New Chat">
+                <button onclick="clearChat()" class="swiss-btn swiss-btn-primary liquid-glass" title="Start New Conversation" aria-label="New Chat">
                     <i class="fa-solid fa-plus"></i>
                     <span>NEW CHAT</span>
                 </button>
@@ -58,7 +58,7 @@
                 
                 <!-- Welcome Hero (Initial Empty State) -->
                 <div id="welcome-card">
-                    <div class="swiss-hero-badge">
+                    <div class="swiss-hero-badge liquid-glass">
                         <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo">
                     </div>
 
@@ -74,12 +74,12 @@
 
                     <div class="swiss-chips-grid">
                         <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
-                                class="swiss-chip-tile">
+                                class="swiss-chip-tile liquid-glass">
                             <span class="swiss-chip-idx">01 // KNOWLEDGE</span>
                             <span class="swiss-chip-text">Where was the Bhagavad Gita imparted?</span>
                         </button>
                         <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
-                                class="swiss-chip-tile">
+                                class="swiss-chip-tile liquid-glass">
                             <span class="swiss-chip-idx">02 // ESSENCE</span>
                             <span class="swiss-chip-text">What is the essence of Karma Yoga in the Gita?</span>
                         </button>
@@ -90,7 +90,7 @@
 
             <!-- Swiss Console Input Bar -->
             <div class="chat-input-bar-container">
-                <div class="input-console-frame">
+                <div class="input-console-frame liquid-glass">
                     <span class="input-prompt-label">INPUT //</span>
                     <input type="text" id="user-input" 
                            placeholder="Ask of the Gita, Ramayana, or Mahabharata..." 
@@ -101,7 +101,7 @@
                            onkeydown="if(event.key === 'Enter') sendMessage()">
                     
                     <button onclick="sendMessage()" 
-                            class="btn-send-message"
+                            class="btn-send-message liquid-glass"
                             aria-label="Send Query"
                             title="Send Query">
                         <span>SEND</span>
@@ -178,7 +178,7 @@
             if (!chatWindow) return;
             chatWindow.innerHTML = `
                 <div id="welcome-card">
-                    <div class="swiss-hero-badge">
+                    <div class="swiss-hero-badge liquid-glass">
                         <img src="./sanjaya_logo.jpg" alt="Sanjaya Sacred Logo">
                     </div>
                     <h1 class="swiss-hero-title">What scriptural wisdom do you seek?</h1>
@@ -188,12 +188,12 @@
                     </p>
                     <div class="swiss-chips-grid">
                         <button onclick="usePreset('Where did Lord Krishna impart the knowledge of Bhagavad Gita?')" 
-                                class="swiss-chip-tile">
+                                class="swiss-chip-tile liquid-glass">
                             <span class="swiss-chip-idx">01 // KNOWLEDGE</span>
                             <span class="swiss-chip-text">Where was the Bhagavad Gita imparted?</span>
                         </button>
                         <button onclick="usePreset('What is the essence of Karma Yoga in the Gita?')" 
-                                class="swiss-chip-tile">
+                                class="swiss-chip-tile liquid-glass">
                             <span class="swiss-chip-idx">02 // ESSENCE</span>
                             <span class="swiss-chip-text">What is the essence of Karma Yoga in the Gita?</span>
                         </button>
@@ -259,10 +259,10 @@
             const welcomeCard = document.getElementById('welcome-card');
             if (welcomeCard) welcomeCard.remove();
 
-            // 1. User Message (Swiss structured block)
+            // 1. User Message (Liquid Glass Card)
             chat.innerHTML += `
                 <div class="user-msg-container">
-                    <div class="bubble-user">
+                    <div class="bubble-user liquid-glass">
                         <div class="bubble-user-label">SEEKER // QUERY</div>
                         ${text}
                     </div>
@@ -274,7 +274,7 @@
             // 2. Loading State
             const loadingId = 'loading-' + Date.now();
             chat.innerHTML += `
-                <div id="${loadingId}" class="loading-row">
+                <div id="${loadingId}" class="loading-row liquid-glass">
                     <i class="fa-solid fa-square-full spinner-icon"></i>
                     <span>SEARCHING SACRED CORPUS...</span>
                 </div>
@@ -294,16 +294,16 @@
                 const aiText = data.answer || "I could not retrieve scriptural answers at this moment.";
                 const msgId = 'msg-' + Date.now();
 
-                // 3. AI Message (Swiss architectural card)
+                // 3. AI Message (Liquid Glass Card)
                 chat.innerHTML += `
                     <div class="ai-msg-container">
-                        <div class="ai-avatar-box">
+                        <div class="ai-avatar-box liquid-glass">
                             <img src="./sanjaya_logo.jpg" alt="Sanjaya">
                         </div>
-                        <div class="ai-card-body">
+                        <div class="ai-card-body liquid-glass">
                             <div class="ai-meta-bar">
                                 <span class="ai-meta-title">SANJAYA // SCRIPTURAL RECITAL</span>
-                                <button onclick="copyToClipboard(document.getElementById('${msgId}').innerText, this)" class="btn-copy-tool" title="Copy text">
+                                <button onclick="copyToClipboard(document.getElementById('${msgId}').innerText, this)" class="btn-copy-tool liquid-glass" title="Copy text">
                                     [ COPY ]
                                 </button>
                             </div>
