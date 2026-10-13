@@ -59,9 +59,9 @@ if ANTHROPIC_API_KEY:
 else:
     _LAST_CLAUDE_ERROR = "No ANTHROPIC_API_KEY provided in environment"
 
-_raw_model = (os.getenv('GEMINI_MODEL') or 'gemini-2.5-flash').strip()
+_raw_model = (os.getenv('GEMINI_MODEL') or 'gemini-3.8-flash').strip()
 if '2.0-flash' in _raw_model.lower() or not _raw_model:
-    GEMINI_MODEL = 'gemini-2.5-flash'
+    GEMINI_MODEL = 'gemini-3.8-flash'
 else:
     GEMINI_MODEL = _raw_model
 CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-3-5-sonnet-20241022')
@@ -145,26 +145,15 @@ def generate_gemini_answer(prompt, system_instruction):
             parts=[types.Part.from_text(text=system_instruction)]
         )
 
-        resp = gemini_client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=[user_content],
-            config=types.GenerateContentConfig(
-                temperature=0.3,
-                max_output_tokens=2048,
-                system_instruction=sys_instruction_content
-            )
-        )
-        return resp.text.strip() if resp.text else None
-    except Exception as e:
-        global _LAST_GEMINI_ERROR
-        _LAST_GEMINI_ERROR = sanitize_secret(str(e))
-        sys.stderr.write(f"Gemini Generation Error ({GEMINI_MODEL}): {_LAST_GEMINI_ERROR}\n")
+        candidate_models = [GEMINI_MODEL]
+        for fallback in ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.5-flash-lite', 'gemini-2.5-flash']:
+            if fallback not in candidate_models:
+                candidate_models.append(fallback)
 
-        # Fallback to gemini-2.5-flash if not already used
-        if GEMINI_MODEL != 'gemini-2.5-flash':
+        for model_name in candidate_models:
             try:
                 resp = gemini_client.models.generate_content(
-                    model='gemini-2.5-flash',
+                    model=model_name,
                     contents=[user_content],
                     config=types.GenerateContentConfig(
                         temperature=0.3,
@@ -172,11 +161,17 @@ def generate_gemini_answer(prompt, system_instruction):
                         system_instruction=sys_instruction_content
                     )
                 )
-                return resp.text.strip() if resp.text else None
-            except Exception as e2:
-                _LAST_GEMINI_ERROR = sanitize_secret(str(e2))
-                sys.stderr.write(f"Gemini Fallback Error: {_LAST_GEMINI_ERROR}\n")
+                if resp.text:
+                    return resp.text.strip()
+            except Exception as e:
+                global _LAST_GEMINI_ERROR
+                _LAST_GEMINI_ERROR = sanitize_secret(str(e))
+                sys.stderr.write(f"Gemini error with {model_name}: {_LAST_GEMINI_ERROR}\n")
+                continue
 
+        return None
+    except Exception as outer_e:
+        _LAST_GEMINI_ERROR = sanitize_secret(str(outer_e))
         return None
 
 def generate_claude_answer(prompt, system_instruction):
