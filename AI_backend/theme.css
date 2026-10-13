@@ -1,59 +1,70 @@
 /* ==========================================================================
-   SANJAYA AI — LIQUID GLASS & DARK MESH GRADIENT DESIGN SYSTEM
-   Deep Mesh Gradient + Liquid Glass (blur 20px saturate 160% + inset top highlight)
-   High-contrast crisp white typography & icons
+   SANJAYA AI — DARK MESH GRADIENT & LIQUID GLASS SYSTEM
+   High-contrast Mesh Gradient + Liquid Glass with Dynamic Gradient Rim
    ========================================================================== */
 
 :root {
-    /* --- 1. SHARED DARK MESH GRADIENT BACKGROUND --- */
+    /* --- 1. GLOBAL HIGH-CONTRAST MESH GRADIENT (Shared in one global place) --- */
     --app-bg-mesh:
-        radial-gradient(ellipse 75% 55% at 50% 100%, rgba(255, 154, 139, 0.32) 0%, rgba(254, 126, 164, 0.24) 28%, transparent 68%),
-        radial-gradient(circle at 15% 85%, rgba(217, 70, 239, 0.28) 0%, transparent 48%),
-        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.30) 0%, transparent 52%),
-        radial-gradient(circle at 50% 50%, rgba(88, 28, 135, 0.45) 0%, transparent 65%),
-        radial-gradient(circle at 80% 20%, rgba(126, 34, 206, 0.35) 0%, transparent 50%),
-        radial-gradient(circle at 15% 25%, rgba(30, 27, 75, 0.85) 0%, transparent 55%),
-        #05050a;
+        radial-gradient(60% 50% at 88% 8%, #2a1a7a 0%, transparent 70%),
+        radial-gradient(70% 55% at 92% 60%, #8a1fd0 0%, transparent 65%),
+        radial-gradient(90% 50% at 40% 92%, #ff5ccf 0%, transparent 65%),
+        radial-gradient(70% 40% at 55% 110%, #ffb59a 0%, transparent 65%),
+        #050309;
 
-    /* --- 2. REUSABLE LIQUID GLASS SYSTEM VARIABLES --- */
-    --glass-bg:            rgba(255, 255, 255, 0.12);
-    --glass-bg-hover:      rgba(255, 255, 255, 0.20);
-    --glass-bg-active:     rgba(255, 255, 255, 0.26);
-    --glass-border:        1px solid rgba(255, 255, 255, 0.25);
-    --glass-border-hover:  1px solid rgba(255, 255, 255, 0.42);
-    --glass-shadow:        inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    --glass-shadow-hover:  inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 36px rgba(0, 0, 0, 0.35);
-
-    /* --- 3. HIGH CONTRAST WHITE TYPOGRAPHY & READABILITY --- */
+    /* --- TYPOGRAPHY TOKENS --- */
     --text-primary:        #FFFFFF;
-    --text-secondary:      rgba(255, 255, 255, 0.88);
-    --text-muted:          rgba(255, 255, 255, 0.72);
-    --text-inverse:        #05050A;
+    --text-secondary:      rgba(255, 255, 255, 0.70);
+    --text-muted:          rgba(255, 255, 255, 0.55);
 
-    --font-heading:        'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-body:           'SF Pro Display', 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-mono:           'SF Mono', SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
+    /* Serif headline & Monospace label preserved */
+    --font-heading:        'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    --font-body:           'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono:           ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
 }
 
-/* Maintain dark mesh gradient in all theme modes */
 [data-theme="dark"],
 [data-theme="light"],
 :root:not([data-theme]) {
     --text-primary:        #FFFFFF;
-    --text-secondary:      rgba(255, 255, 255, 0.88);
-    --text-muted:          rgba(255, 255, 255, 0.72);
+    --text-secondary:      rgba(255, 255, 255, 0.70);
+    --text-muted:          rgba(255, 255, 255, 0.55);
 }
 
 /* ==========================================================================
-   REUSABLE LIQUID GLASS UTILITY CLASS
+   2. REUSABLE .glass CLASS SPECIFICATION
    ========================================================================== */
-.glass,
-.liquid-glass {
-    background: rgba(255, 255, 255, 0.12) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
-    backdrop-filter: blur(20px) saturate(160%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+.glass {
+    position: relative;
+    border: none !important;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03)),
+        rgba(40, 10, 70, 0.35) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.15),
+        0 10px 30px rgba(0, 0, 0, 0.30) !important;
+    transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.glass::before {
+    /* Gradient rim: bright at top-left and bottom-right corners */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(160deg,
+        rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.05) 40%,
+        rgba(255, 255, 255, 0.05) 60%, rgba(255, 255, 255, 0.6));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: background 150ms ease, opacity 150ms ease;
 }
 
 /* ==========================================================================
@@ -69,7 +80,6 @@ html, body {
     width: 100%;
     height: 100%;
     background: var(--app-bg-mesh);
-    background-color: #05050a;
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -83,17 +93,17 @@ html, body {
 
 /* Custom Minimal Scrollbar */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
 }
 ::-webkit-scrollbar-track {
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 :focus-visible {
@@ -110,46 +120,52 @@ html, body {
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    opacity: 1;
     position: relative;
     z-index: 1;
     background: transparent;
+    overflow: hidden;
 }
 
 /* --------------------------------------------------------------------------
-   TOP BAR (LIQUID GLASS)
+   TOP HEADER BAR
+   Lighter liquid glass tint (~0.25, blur 20px), no hard bottom border
+   Overlay header so content visibly scrolls underneath
    -------------------------------------------------------------------------- */
 .app-header {
     width: 100%;
-    padding: calc(0.75rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 2.5rem) 0.75rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: calc(0.85rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 2.5rem) 0.85rem;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+        rgba(35, 12, 60, 0.25) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+        0 8px 32px rgba(0, 0, 0, 0.25) !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
-    position: relative;
-    z-index: 10;
 }
 
 .brand-section {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     flex-shrink: 0;
 }
 
 .brand-emblem-box {
     width: 38px;
     height: 38px;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
     padding: 3px;
     display: flex;
@@ -157,14 +173,13 @@ html, body {
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .brand-emblem-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 9px;
     display: block;
 }
 
@@ -181,7 +196,7 @@ html, body {
     letter-spacing: 0.08em;
     color: #FFFFFF;
     text-transform: uppercase;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .brand-sys-tag {
@@ -189,35 +204,29 @@ html, body {
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 0.55rem;
     background: rgba(255, 255, 255, 0.12);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 9999px;
-    color: #FFFFFF;
+    color: var(--text-secondary);
 }
 
 .header-tools {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
 }
 
-/* Liquid Glass Action Buttons (Pill) */
+/* THEME & NEW CHAT PILLS */
 .swiss-btn {
     min-height: 38px;
     min-width: 38px;
-    padding: 0.4rem 0.95rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 9999px; /* Fully rounded pill */
+    padding: 0.4rem 1rem;
+    border-radius: 9999px; /* Pill */
     color: #FFFFFF;
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -227,41 +236,52 @@ html, body {
     justify-content: center;
     gap: 0.45rem;
     touch-action: manipulation;
-    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
 }
 
 .swiss-btn i {
     color: #FFFFFF;
 }
 
-@media (hover: hover) {
-    .swiss-btn:hover {
-        background: var(--glass-bg-hover);
-        border-color: rgba(255, 255, 255, 0.42);
-        box-shadow: var(--glass-shadow-hover);
-        color: #FFFFFF;
-    }
+/* Hover on cards & buttons: slightly brighter fill and rim, translateY(-1px), 150ms ease */
+.swiss-btn:hover,
+.swiss-chip-tile:hover,
+.btn-send-message:hover,
+.btn-copy-tool:hover {
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
+        rgba(55, 18, 95, 0.45) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.65),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+        0 14px 36px rgba(0, 0, 0, 0.40) !important;
+    transform: translateY(-1px);
+    transition: all 150ms ease;
 }
 
-.swiss-btn:active {
-    background: var(--glass-bg-active);
-    transform: scale(0.97);
+.swiss-btn:hover::before,
+.swiss-chip-tile:hover::before,
+.btn-send-message:hover::before,
+.btn-copy-tool:hover::before {
+    background: linear-gradient(160deg,
+        rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.12) 40%,
+        rgba(255, 255, 255, 0.12) 60%, rgba(255, 255, 255, 0.8)) !important;
+    transition: background 150ms ease;
+}
+
+.swiss-btn:active,
+.swiss-chip-tile:active,
+.btn-send-message:active {
+    transform: translateY(0);
 }
 
 .swiss-btn-primary {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.35);
-}
-
-@media (hover: hover) {
-    .swiss-btn-primary:hover {
-        background: rgba(255, 255, 255, 0.26);
-        border-color: rgba(255, 255, 255, 0.5);
-    }
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.05)),
+        rgba(75, 20, 120, 0.45) !important;
 }
 
 /* --------------------------------------------------------------------------
-   WORKSPACE CONTAINER (TRANSPARENT — NO BLUR ON FULL SCREEN)
+   CHAT COLUMN (NO VERTICAL DIVIDER LINES)
    -------------------------------------------------------------------------- */
 .chat-workspace-container {
     flex: 1;
@@ -270,21 +290,22 @@ html, body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     position: relative;
-    border-left: 1px solid rgba(255, 255, 255, 0.10);
-    border-right: 1px solid rgba(255, 255, 255, 0.10);
     min-height: 0;
+    height: 100%;
     background: transparent;
+    border-left: none !important;
+    border-right: none !important;
 }
 
+/* Content scrolls full height behind header and input bar */
 #chat-window {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: clamp(0.75rem, 2.5vw, 1.5rem) clamp(0.65rem, 3vw, 1.25rem) 0.75rem;
+    padding: calc(76px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(90px + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     gap: clamp(0.85rem, 2vw, 1.35rem);
@@ -311,19 +332,14 @@ html, body {
     background: transparent;
 }
 
+/* LOGO BADGE */
 .swiss-hero-badge {
-    width: clamp(64px, 13vw, 88px);
-    height: clamp(64px, 13vw, 88px);
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 24px;
+    width: clamp(68px, 14vw, 92px);
+    height: clamp(68px, 14vw, 92px);
+    border-radius: 26px;
     padding: 6px;
-    margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
+    margin-bottom: clamp(0.85rem, 2vw, 1.4rem);
     flex-shrink: 0;
-    position: relative;
     overflow: hidden;
 }
 
@@ -331,13 +347,14 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 18px;
+    border-radius: 20px;
     display: block;
 }
 
+/* SERIF HEADLINE PRESERVED */
 .swiss-hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 3.8vw, 2.1rem);
+    font-size: clamp(1.35rem, 3.8vw, 2.15rem);
     font-weight: 700;
     color: #FFFFFF;
     line-height: 1.25;
@@ -346,7 +363,7 @@ html, body {
     margin-bottom: 0.5rem;
     max-width: 600px;
     word-break: break-word;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
 }
 
 .swiss-rule {
@@ -361,8 +378,8 @@ html, body {
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.25em;
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 .swiss-rule::before,
@@ -374,22 +391,22 @@ html, body {
 }
 
 .swiss-hero-subtitle {
-    font-size: clamp(0.85rem, 1.9vw, 0.98rem);
-    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(0.88rem, 1.9vw, 1rem);
+    color: var(--text-secondary);
     max-width: 520px;
     margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
     line-height: 1.55;
     padding: 0 0.5rem;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Question Preset Cards (Liquid Glass Cards) */
+/* BOTH SUGGESTION CARDS */
 .swiss-chips-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 0.85rem;
     width: 100%;
-    max-width: 600px;
+    max-width: 620px;
 }
 
 @media (min-width: 560px) {
@@ -399,53 +416,35 @@ html, body {
 }
 
 .swiss-chip-tile {
-    padding: clamp(0.75rem, 2vw, 1rem) clamp(0.85rem, 2.2vw, 1.2rem);
-    min-height: 52px;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 18px; /* Clean card radius */
+    padding: clamp(0.85rem, 2vw, 1.1rem) clamp(0.95rem, 2.2vw, 1.25rem);
+    min-height: 56px;
+    border-radius: 20px;
     color: #FFFFFF;
     text-align: left;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.35rem;
     touch-action: manipulation;
-    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
     word-break: break-word;
 }
 
-@media (hover: hover) {
-    .swiss-chip-tile:hover {
-        background: var(--glass-bg-hover);
-        border-color: rgba(255, 255, 255, 0.42);
-        box-shadow: var(--glass-shadow-hover);
-        transform: translateY(-1px);
-    }
-}
-
-.swiss-chip-tile:active {
-    background: var(--glass-bg-active);
-    transform: translateY(0) scale(0.99);
-}
-
+/* MONOSPACE "01 // KNOWLEDGE" LABEL PRESERVED */
 .swiss-chip-idx {
     font-family: var(--font-mono);
     font-size: 0.68rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.70);
     letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .swiss-chip-text {
-    font-size: clamp(0.84rem, 1.8vw, 0.92rem);
+    font-size: clamp(0.86rem, 1.8vw, 0.94rem);
     font-weight: 600;
     line-height: 1.4;
     color: #FFFFFF;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -459,16 +458,11 @@ html, body {
 
 .bubble-user {
     max-width: min(90%, 600px);
-    padding: clamp(0.75rem, 2vw, 0.95rem) clamp(0.95rem, 2.5vw, 1.25rem);
-    background: rgba(255, 255, 255, 0.15);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+    padding: clamp(0.8rem, 2vw, 1rem) clamp(1rem, 2.5vw, 1.3rem);
+    border-radius: 22px;
     color: #FFFFFF;
-    font-size: clamp(0.9rem, 1.9vw, 0.98rem);
-    line-height: 1.55;
+    font-size: clamp(0.92rem, 1.9vw, 0.98rem);
+    line-height: 1.6;
     word-break: break-word;
     overflow-wrap: break-word;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
@@ -479,7 +473,7 @@ html, body {
     font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.70);
     margin-bottom: 0.3rem;
     text-transform: uppercase;
 }
@@ -488,20 +482,15 @@ html, body {
 .ai-msg-container {
     display: flex;
     align-items: flex-start;
-    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+    gap: clamp(0.55rem, 1.5vw, 0.85rem);
     width: 100%;
     min-width: 0;
 }
 
 .ai-avatar-box {
-    width: clamp(28px, 5vw, 34px);
-    height: clamp(28px, 5vw, 34px);
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    width: clamp(30px, 5vw, 36px);
+    height: clamp(30px, 5vw, 36px);
+    border-radius: 12px;
     padding: 2px;
     flex-shrink: 0;
     margin-top: 0.15rem;
@@ -512,20 +501,15 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 7px;
+    border-radius: 9px;
     display: block;
 }
 
 .ai-card-body {
     flex: 1;
     min-width: 0;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    padding: clamp(0.85rem, 2.2vw, 1.25rem) clamp(0.85rem, 2.5vw, 1.35rem);
+    border-radius: 22px;
+    padding: clamp(0.9rem, 2.2vw, 1.35rem) clamp(0.95rem, 2.5vw, 1.45rem);
     color: #FFFFFF;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -536,17 +520,17 @@ html, body {
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    padding-bottom: 0.45rem;
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .ai-meta-title {
     font-family: var(--font-mono);
-    font-size: clamp(0.64rem, 1.5vw, 0.72rem);
+    font-size: clamp(0.65rem, 1.5vw, 0.74rem);
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.85);
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -554,14 +538,9 @@ html, body {
 }
 
 .btn-copy-tool {
-    padding: 0.25rem 0.65rem;
+    padding: 0.25rem 0.7rem;
     min-height: 28px;
-    background: rgba(255, 255, 255, 0.12);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    border-radius: 9999px; /* Fully rounded pill */
+    border-radius: 9999px;
     color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.68rem;
@@ -570,20 +549,11 @@ html, body {
     cursor: pointer;
     touch-action: manipulation;
     flex-shrink: 0;
-    transition: all 0.15s ease;
-}
-
-@media (hover: hover) {
-    .btn-copy-tool:hover {
-        background: rgba(255, 255, 255, 0.22);
-        border-color: rgba(255, 255, 255, 0.4);
-        color: #FFFFFF;
-    }
 }
 
 .response-text {
     color: #FFFFFF;
-    font-size: clamp(0.9rem, 1.8vw, 0.98rem);
+    font-size: clamp(0.92rem, 1.8vw, 1rem);
     line-height: 1.75;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -591,7 +561,7 @@ html, body {
 }
 
 .response-text p {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.85rem;
 }
 
 .response-text p:last-child {
@@ -601,7 +571,7 @@ html, body {
 .response-text strong {
     color: #FFFFFF;
     font-weight: 700;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 /* Typewriter Cursor */
@@ -624,12 +594,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 0.65rem;
-    padding: 0.6rem 0.85rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 0.65rem 1rem;
     border-radius: 9999px;
     width: fit-content;
     font-family: var(--font-mono);
@@ -652,11 +617,11 @@ html, body {
 
 .error-notice-card {
     border: 1px solid rgba(255, 100, 100, 0.4);
-    padding: 0.75rem 1rem;
-    background: rgba(220, 38, 38, 0.2);
+    padding: 0.75rem 1.1rem;
+    background: rgba(220, 38, 38, 0.25);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    border-radius: 16px;
+    border-radius: 18px;
     color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -665,39 +630,44 @@ html, body {
     align-items: center;
     gap: 0.6rem;
     word-break: break-word;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 /* --------------------------------------------------------------------------
-   BOTTOM TAB / INPUT CONSOLE (LIQUID GLASS PILL)
+   INPUT BAR & SEND BUTTON
+   Dark enough tint so white text stays readable over the bright pink gradient
    -------------------------------------------------------------------------- */
 .chat-input-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
     padding: 0.75rem clamp(0.75rem, 3vw, 1.5rem) calc(0.85rem + env(safe-area-inset-bottom, 0px));
-    flex-shrink: 0;
-    width: 100%;
     background: transparent;
     border-top: none;
-    position: relative;
-    z-index: 10;
+    pointer-events: none;
 }
 
 .input-console-frame {
     display: flex;
     align-items: center;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.25);
-    border-radius: 9999px; /* Fully rounded pill for bottom tab bar / console */
-    padding: 0.35rem 0.45rem 0.35rem clamp(0.75rem, 2.5vw, 1.25rem);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    /* Darker tinted glass base ensuring readability over bottom pink/peach glow */
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+        rgba(20, 5, 36, 0.65) !important;
+    border-radius: 9999px; /* Pill */
+    padding: 0.4rem 0.45rem 0.4rem clamp(0.85rem, 2.5vw, 1.35rem);
     width: 100%;
+    pointer-events: auto;
 }
 
 .input-console-frame:focus-within {
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.22), 0 8px 32px rgba(0, 0, 0, 0.35);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+        0 0 0 2px rgba(255, 255, 255, 0.25),
+        0 14px 40px rgba(0, 0, 0, 0.45) !important;
 }
 
 .input-prompt-label {
@@ -709,7 +679,7 @@ html, body {
     margin-right: 0.5rem;
     user-select: none;
     flex-shrink: 0;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .chat-input-field {
@@ -722,7 +692,7 @@ html, body {
     font-size: 16px;
     color: #FFFFFF;
     padding: 0.45rem 0.25rem;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 768px) {
@@ -732,21 +702,16 @@ html, body {
 }
 
 .chat-input-field::placeholder {
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.70);
     opacity: 1;
     font-size: clamp(0.85rem, 1.8vw, 0.94rem);
 }
 
-/* Glass Send Button (Pill) */
+/* SEND BUTTON (PILL) */
 .btn-send-message {
     min-height: 40px;
-    padding: 0 clamp(0.75rem, 2vw, 1.15rem);
-    background: rgba(255, 255, 255, 0.22);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 16px rgba(0, 0, 0, 0.25);
-    border-radius: 9999px; /* Fully rounded pill */
+    padding: 0 clamp(0.85rem, 2vw, 1.25rem);
+    border-radius: 9999px; /* Pill */
     color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.76rem;
@@ -757,26 +722,13 @@ html, body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
     touch-action: manipulation;
     flex-shrink: 0;
-    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
 }
 
 .btn-send-message i {
     color: #FFFFFF;
-}
-
-@media (hover: hover) {
-    .btn-send-message:hover {
-        background: rgba(255, 255, 255, 0.32);
-        border-color: rgba(255, 255, 255, 0.5);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
-}
-
-.btn-send-message:active {
-    transform: scale(0.97);
 }
 
 .footer-meta-note {
@@ -784,7 +736,7 @@ html, body {
     font-size: clamp(0.6rem, 1.5vw, 0.68rem);
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     text-align: center;
     margin-top: 0.45rem;
     text-transform: uppercase;
@@ -793,25 +745,23 @@ html, body {
     text-overflow: ellipsis;
     padding: 0 0.25rem;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
 }
 
 /* ==========================================================================
    MULTI-SCREEN RESPONSIVE BREAKPOINTS
    ========================================================================== */
-@media (max-width: 860px) {
-    .chat-workspace-container {
-        border-left: none;
-        border-right: none;
-        max-width: 100%;
-    }
-}
-
 @media (max-width: 540px) {
     .app-header {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
-        padding-top: calc(0.5rem + env(safe-area-inset-top, 0px));
-        padding-bottom: 0.5rem;
+        padding-top: calc(0.55rem + env(safe-area-inset-top, 0px));
+        padding-bottom: 0.55rem;
+    }
+
+    #chat-window {
+        padding-top: calc(64px + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
     }
 
     .brand-section {
@@ -829,7 +779,7 @@ html, body {
     .swiss-btn {
         min-height: 36px;
         min-width: 36px;
-        padding: 0.35rem 0.65rem;
+        padding: 0.35rem 0.75rem;
     }
 
     .swiss-btn span {
@@ -845,7 +795,7 @@ html, body {
     }
 
     .btn-send-message {
-        padding: 0 0.75rem;
+        padding: 0 0.85rem;
     }
 }
 
@@ -881,6 +831,11 @@ html, body {
     .app-header {
         padding-top: calc(0.35rem + env(safe-area-inset-top, 0px));
         padding-bottom: 0.35rem;
+    }
+
+    #chat-window {
+        padding-top: calc(52px + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
     }
 
     #welcome-card {
