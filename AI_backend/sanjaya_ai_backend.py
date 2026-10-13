@@ -329,6 +329,19 @@ def run_standalone_server(port=5000):
                     "last_claude_error": _LAST_CLAUDE_ERROR
                 }
                 self.wfile.write(json.dumps(info).encode("utf-8"))
+            elif parsed == "/models":
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self._set_cors()
+                self.end_headers()
+                models_list = []
+                if gemini_client:
+                    try:
+                        for m in gemini_client.models.list():
+                            models_list.append(getattr(m, "name", str(m)))
+                    except Exception as me:
+                        models_list.append(f"List error: {sanitize_secret(str(me))}")
+                self.wfile.write(json.dumps({"models": models_list}).encode("utf-8"))
             elif parsed in ["/", "/index.html"]:
                 html_path = os.path.join(script_dir, "index.html")
                 if os.path.exists(html_path):
