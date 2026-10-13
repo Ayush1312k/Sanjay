@@ -15,8 +15,14 @@ else:
 
 # --- 1. CONFIGURATION & CLIENT INITIALIZATION ---
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY") or os.getenv("CLAUDE_API_KEY")
+_raw_gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or ""
+GEMINI_API_KEY = _raw_gemini_key.strip().strip('"').strip("'") or None
+
+_raw_claude_key = os.getenv("ANTHROPIC_API_KEY") or os.getenv("CLAUDE_API_KEY") or ""
+ANTHROPIC_API_KEY = _raw_claude_key.strip().strip('"').strip("'") or None
+
+_LAST_GEMINI_ERROR = None
+_LAST_CLAUDE_ERROR = None
 
 def sanitize_secret(text):
     """Sanitizes potential API keys and secrets from text before logging."""
@@ -36,7 +42,10 @@ if GEMINI_API_KEY:
         from google import genai
         gemini_client = genai.Client(api_key=GEMINI_API_KEY)
     except Exception as e:
-        sys.stderr.write(f"Warning: Failed to initialize Gemini Client: {sanitize_secret(str(e))}\n")
+        _LAST_GEMINI_ERROR = f"Init error: {sanitize_secret(str(e))}"
+        sys.stderr.write(f"Warning: Failed to initialize Gemini Client: {_LAST_GEMINI_ERROR}\n")
+else:
+    _LAST_GEMINI_ERROR = "No GEMINI_API_KEY or GOOGLE_API_KEY provided in environment"
 
 # Initialize Anthropic Client
 claude_client = None
@@ -45,7 +54,10 @@ if ANTHROPIC_API_KEY:
         import anthropic
         claude_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     except Exception as e:
-        sys.stderr.write(f"Warning: Failed to initialize Anthropic Client: {sanitize_secret(str(e))}\n")
+        _LAST_CLAUDE_ERROR = f"Init error: {sanitize_secret(str(e))}"
+        sys.stderr.write(f"Warning: Failed to initialize Anthropic Client: {_LAST_CLAUDE_ERROR}\n")
+else:
+    _LAST_CLAUDE_ERROR = "No ANTHROPIC_API_KEY provided in environment"
 
 GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')
 if GEMINI_MODEL in ['gemini-2.5-flash', 'gemini-2.5', '']:
@@ -142,7 +154,9 @@ def generate_gemini_answer(prompt, system_instruction):
         )
         return resp.text.strip() if resp.text else None
     except Exception as e:
-        sys.stderr.write(f"Gemini Generation Error: {sanitize_secret(str(e))}\n")
+        global _LAST_GEMINI_ERROR
+        _LAST_GEMINI_ERROR = sanitize_secret(str(e))
+        sys.stderr.write(f"Gemini Generation Error: {_LAST_GEMINI_ERROR}\n")
         return None
 
 def generate_claude_answer(prompt, system_instruction):
@@ -160,7 +174,9 @@ def generate_claude_answer(prompt, system_instruction):
         )
         return response.content[0].text.strip()
     except Exception as e:
-        sys.stderr.write(f"Claude Generation Error: {sanitize_secret(str(e))}\n")
+        global _LAST_CLAUDE_ERROR
+        _LAST_CLAUDE_ERROR = sanitize_secret(str(e))
+        sys.stderr.write(f"Claude Generation Error: {_LAST_CLAUDE_ERROR}\n")
         return None
 
 def merge_answers(user_query, gemini_answer, claude_answer, system_persona):
@@ -240,7 +256,10 @@ def process_query(user_query):
     elif claude_resp:
         return claude_resp
     else:
-        return "I am having trouble connecting to the AI Guru services. Please check your network and API configuration."
+        err_detail = ""
+        if _LAST_GEMINI_ERROR:
+            err_detail = f" [{_LAST_GEMINI_ERROR[:180]}]"
+        return f"I am having trouble connecting to the AI Guru services.{err_detail} Please check your network and API configuration."
 
 # --- 5. STANDALONE HTTP SERVER MODE ---
 
@@ -280,7 +299,16 @@ def run_standalone_server(port=5000):
                 self.send_header("Content-Type", "application/json")
                 self._set_cors()
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "healthy", "service": "Sanjaya AI Backend"}).encode("utf-8"))
+                info = {
+                    "status": "healthy",
+                    "service": "Sanjaya AI Backend",
+                    "gemini_configured": gemini_client is not None,
+                    "claude_configured": claude_client is not None,
+                    "gemini_model": GEMINI_MODEL,
+                    "last_gemini_error": _LAST_GEMINI_ERROR,
+                    "last_claude_error": _LAST_CLAUDE_ERROR
+                }
+                self.wfile.write(json.dumps(info).encode("utf-8"))
             elif parsed in ["/", "/index.html"]:
                 html_path = os.path.join(script_dir, "index.html")
                 if os.path.exists(html_path):
