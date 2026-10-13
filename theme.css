@@ -1,53 +1,117 @@
 /* ==========================================================================
-   SANJAYA AI — DARK MESH GRADIENT & LIQUID GLASS SYSTEM
-   High-contrast Mesh Gradient + Liquid Glass with Dynamic Gradient Rim
+   SANJAYA AI — DUAL-MODE FROSTED GLASS & LIQUID 3D SYSTEM
+   Left: Light Mode (Ice white, lavender, soft candy pink, warm peach)
+   Right: Dark Mode (Obsidian midnight, royal violet, electric neon pink)
    ========================================================================== */
 
 :root {
-    /* --- 1. GLOBAL HIGH-CONTRAST MESH GRADIENT (Shared in one global place) --- */
-    --app-bg-mesh:
-        radial-gradient(60% 50% at 88% 8%, #2a1a7a 0%, transparent 70%),
-        radial-gradient(70% 55% at 92% 60%, #8a1fd0 0%, transparent 65%),
-        radial-gradient(90% 50% at 40% 92%, rgba(255, 92, 207, 0.65) 0%, transparent 65%),
-        radial-gradient(70% 40% at 55% 110%, rgba(255, 181, 154, 0.55) 0%, transparent 65%),
-        #050309;
-
-    /* --- TYPOGRAPHY TOKENS --- */
-    --text-primary:        #FFFFFF;
-    --text-secondary:      rgba(255, 255, 255, 0.70);
-    --text-muted:          rgba(255, 255, 255, 0.55);
-
-    /* Serif headline & Monospace label preserved */
-    --font-heading:        'Cinzel', 'Cormorant Garamond', Georgia, serif;
-    --font-body:           'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', system-ui, sans-serif;
-    --font-mono:           ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
-}
-
-[data-theme="dark"],
-[data-theme="light"],
-:root:not([data-theme]) {
-    --text-primary:        #FFFFFF;
-    --text-secondary:      rgba(255, 255, 255, 0.70);
-    --text-muted:          rgba(255, 255, 255, 0.55);
+    /* --- TYPOGRAPHY TOKENS (SF Pro / Apple modern bold neo-grotesque) --- */
+    --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-body:    'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
 }
 
 /* ==========================================================================
-   2. REUSABLE .glass CLASS — FROSTED GLASS & 3D TONE
-   No glowing white border rim; tactile 3D bevel, soft frosted diffusion
+   DARK THEME (Default) — Right half of reference image
+   Obsidian midnight top, deep purple mid, electric neon pink & peach bottom
+   ========================================================================== */
+[data-theme="dark"],
+:root:not([data-theme]) {
+    --app-bg-mesh:
+        radial-gradient(65% 50% at 85% 10%, #35085e 0%, transparent 68%),
+        radial-gradient(75% 55% at 92% 52%, #581c87 0%, transparent 65%),
+        radial-gradient(90% 55% at 40% 90%, #ec4899 0%, transparent 65%),
+        radial-gradient(75% 45% at 55% 108%, #fb923c 0%, transparent 65%),
+        #06020A;
+
+    --text-primary:        #FFFFFF;
+    --text-secondary:      rgba(255, 255, 255, 0.82);
+    --text-muted:          rgba(255, 255, 255, 0.55);
+
+    /* Pure translucent frosted glass - NO independent opaque dark color */
+    --glass-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --glass-border:        rgba(255, 255, 255, 0.18);
+    --glass-bevel-top:     rgba(255, 255, 255, 0.45);
+    --glass-bevel-bottom:  rgba(0, 0, 0, 0.28);
+    --glass-shadow:        0 4px 10px -2px rgba(0, 0, 0, 0.25), 0 18px 40px -6px rgba(0, 0, 0, 0.45);
+
+    --glass-hover-bg:      linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.07) 100%);
+    --glass-hover-border:  rgba(255, 255, 255, 0.30);
+
+    --btn-primary-bg:      linear-gradient(180deg, rgba(236, 72, 153, 0.35) 0%, rgba(168, 85, 247, 0.20) 100%);
+    --btn-primary-border:  rgba(255, 255, 255, 0.28);
+
+    --input-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
+    --input-focus-border:  rgba(255, 255, 255, 0.38);
+
+    --text-shadow:         0 1px 4px rgba(0, 0, 0, 0.5);
+    --rule-color:          rgba(255, 255, 255, 0.25);
+
+    --orb-pink:            #ec4899;
+    --orb-violet:          #581c87;
+    --orb-peach:           #fb923c;
+    --orb-indigo:          #3b0764;
+    --orb-opacity:         0.35;
+}
+
+/* ==========================================================================
+   LIGHT THEME — Left half of reference image
+   Crisp white top, soft lavender mid, radiant pastel pink & warm peach bottom
+   ========================================================================== */
+[data-theme="light"] {
+    --app-bg-mesh:
+        radial-gradient(65% 55% at 85% 12%, rgba(196, 181, 253, 0.65) 0%, transparent 65%),
+        radial-gradient(75% 60% at 92% 58%, rgba(244, 114, 182, 0.55) 0%, transparent 65%),
+        radial-gradient(85% 55% at 35% 88%, rgba(251, 113, 133, 0.58) 0%, transparent 65%),
+        radial-gradient(70% 45% at 55% 105%, rgba(254, 215, 170, 0.65) 0%, transparent 65%),
+        #F7F6FC;
+
+    --text-primary:        #140826;
+    --text-secondary:      rgba(20, 8, 38, 0.76);
+    --text-muted:          rgba(20, 8, 38, 0.55);
+
+    /* Pure translucent frosted glass in light mode */
+    --glass-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.32) 100%);
+    --glass-border:        rgba(255, 255, 255, 0.75);
+    --glass-bevel-top:     rgba(255, 255, 255, 0.95);
+    --glass-bevel-bottom:  rgba(0, 0, 0, 0.06);
+    --glass-shadow:        0 4px 12px -2px rgba(110, 50, 160, 0.08), 0 16px 36px -6px rgba(110, 50, 160, 0.14);
+
+    --glass-hover-bg:      linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.44) 100%);
+    --glass-hover-border:  rgba(255, 255, 255, 0.92);
+
+    --btn-primary-bg:      linear-gradient(180deg, rgba(244, 114, 182, 0.35) 0%, rgba(196, 181, 253, 0.25) 100%);
+    --btn-primary-border:  rgba(255, 255, 255, 0.85);
+
+    --input-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.48) 100%);
+    --input-focus-border:  rgba(200, 130, 240, 0.65);
+
+    --text-shadow:         none;
+    --rule-color:          rgba(20, 8, 38, 0.22);
+
+    --orb-pink:            #f472b6;
+    --orb-violet:          #c084fc;
+    --orb-peach:           #fed7aa;
+    --orb-indigo:          #ddd6fe;
+    --orb-opacity:         0.45;
+}
+
+/* ==========================================================================
+   2. REUSABLE .glass CLASS — PURE FROSTED GLASS & 3D TONE
+   No independent dark color; background mesh shines right through with optical blur
    ========================================================================== */
 .glass {
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.13) !important;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(20, 10, 32, 0.45) !important;
-    backdrop-filter: blur(28px) saturate(160%);
-    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid var(--glass-border) !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
     box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.28),
-        0 4px 10px -2px rgba(0, 0, 0, 0.25),
-        0 16px 36px -6px rgba(0, 0, 0, 0.45) !important;
+        inset 0 1px 1.5px 0 var(--glass-bevel-top),
+        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
+        var(--glass-shadow) !important;
     overflow: visible;
-    transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+    transition: background 250ms ease, box-shadow 250ms ease, transform 180ms ease, border-color 250ms ease;
 }
 
 .glass::before {
@@ -86,6 +150,7 @@ html, body {
     scrollbar-width: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background 350ms ease, color 250ms ease;
 }
 
 /* Custom Minimal Scrollbar */
@@ -101,15 +166,16 @@ html, body {
     aspect-ratio: 1;
     border-radius: 50%;
     filter: blur(40px);
-    opacity: 0.30;
+    opacity: var(--orb-opacity);
     pointer-events: none;
     will-change: transform;
+    transition: background 350ms ease, opacity 350ms ease;
 }
 
-.glass-orb--pink { top: -10%; left: -9%; background: #ff5ccf; animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
-.glass-orb--violet { top: -10%; right: -8%; background: #8a1fd0; animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
-.glass-orb--peach { bottom: -12%; left: -8%; background: #ffb59a; animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
-.glass-orb--indigo { bottom: -10%; right: -8%; background: #5b3cff; animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
+.glass-orb--pink { top: -10%; left: -9%; background: var(--orb-pink); animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
+.glass-orb--violet { top: -10%; right: -8%; background: var(--orb-violet); animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
+.glass-orb--peach { bottom: -12%; left: -8%; background: var(--orb-peach); animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
+.glass-orb--indigo { bottom: -10%; right: -8%; background: var(--orb-indigo); animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
 
 @keyframes glass-orb-drift-a { to { transform: translate3d(90px, -45px, 0); } }
 @keyframes glass-orb-drift-b { to { transform: translate3d(-70px, 80px, 0); } }
@@ -138,33 +204,23 @@ html, body {
 
 /* --------------------------------------------------------------------------
    TOP HEADER BAR
-   Lighter liquid glass tint (~0.25, blur 20px), no hard bottom border
-   Overlay header so content visibly scrolls underneath
+   Compact pill width (min(620px, calc(100% - 32px))), pure frosted glass, no dark tint
    -------------------------------------------------------------------------- */
 .app-header {
-    width: min(780px, calc(100% - 32px));
+    width: min(620px, calc(100% - 32px));
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 50;
-    margin: 18px 0 0 0;
+    margin: 16px 0 0 0;
     padding: 0.52rem clamp(0.9rem, 2.5vw, 1.4rem);
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 9999px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
     overflow: visible;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(20, 10, 32, 0.52) !important;
-    backdrop-filter: blur(28px) saturate(160%);
-    -webkit-backdrop-filter: blur(28px) saturate(160%);
-    box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.40),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.28),
-        0 4px 10px -2px rgba(0, 0, 0, 0.25),
-        0 20px 45px -8px rgba(0, 0, 0, 0.50) !important;
 }
 
 .brand-section {
@@ -184,11 +240,6 @@ html, body {
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(25, 12, 40, 0.45) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow:
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
-        0 2px 6px rgba(0, 0, 0, 0.20) !important;
 }
 
 .brand-emblem-img {
@@ -208,23 +259,23 @@ html, body {
 .brand-title {
     font-family: var(--font-heading);
     font-size: clamp(1.15rem, 3vw, 1.35rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #FFFFFF;
+    font-weight: 850;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
     text-transform: uppercase;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: var(--text-shadow);
 }
 
 .brand-sys-tag {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.06em;
     padding: 0.18rem 0.5rem;
-    background: rgba(255, 255, 255, 0.10);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
     border-radius: 9999px;
     color: var(--text-secondary);
 }
@@ -241,11 +292,11 @@ html, body {
     min-width: 36px;
     padding: 0.38rem 0.95rem;
     border-radius: 9999px; /* Pill */
-    color: #FFFFFF;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 0.74rem;
+    font-weight: 850;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     cursor: pointer;
     display: inline-flex;
@@ -253,25 +304,16 @@ html, body {
     justify-content: center;
     gap: 0.45rem;
     touch-action: manipulation;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(25, 12, 40, 0.50) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow:
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.25),
-        0 2px 6px rgba(0, 0, 0, 0.25) !important;
+    transition: all 180ms ease;
 }
 
 .swiss-btn-primary {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.09) 100%), rgba(90, 20, 130, 0.55) !important;
-    border: 1px solid rgba(255, 255, 255, 0.24) !important;
-    box-shadow:
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.45),
-        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.30),
-        0 3px 8px rgba(0, 0, 0, 0.30) !important;
+    background: var(--btn-primary-bg) !important;
+    border: 1px solid var(--btn-primary-border) !important;
 }
 
 .swiss-btn i {
-    color: #FFFFFF;
+    color: var(--text-primary);
 }
 
 /* Hover on cards & buttons: 3D lift, slightly brighter fill, NO white border glow */
@@ -279,13 +321,12 @@ html, body {
 .swiss-chip-tile:hover,
 .btn-send-message:hover,
 .btn-copy-tool:hover {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%), rgba(35, 15, 55, 0.60) !important;
-    border-color: rgba(255, 255, 255, 0.24) !important;
+    background: var(--glass-hover-bg) !important;
+    border-color: var(--glass-hover-border) !important;
     box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.45),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
-        0 6px 14px -2px rgba(0, 0, 0, 0.35),
-        0 20px 40px -6px rgba(0, 0, 0, 0.50) !important;
+        inset 0 1px 1.5px 0 var(--glass-bevel-top),
+        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
+        var(--glass-shadow) !important;
     transform: translateY(-2px);
     transition: all 180ms ease;
 }
@@ -328,7 +369,7 @@ html, body {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: calc(104px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(96px + env(safe-area-inset-bottom, 0px));
+    padding: calc(96px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(96px + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     gap: clamp(0.85rem, 2vw, 1.35rem);
@@ -364,12 +405,6 @@ html, body {
     margin-bottom: clamp(0.85rem, 2vw, 1.4rem);
     flex-shrink: 0;
     overflow: hidden;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(20, 10, 32, 0.50) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
-        0 8px 24px -4px rgba(0, 0, 0, 0.40) !important;
 }
 
 .swiss-hero-badge img {
@@ -380,19 +415,19 @@ html, body {
     display: block;
 }
 
-/* SERIF HEADLINE PRESERVED */
+/* BOLD HEADLINE */
 .swiss-hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.35rem, 3.8vw, 2.15rem);
-    font-weight: 700;
-    color: #FFFFFF;
-    line-height: 1.25;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    max-width: 600px;
+    font-size: clamp(1.4rem, 4vw, 2.3rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    text-transform: none;
+    margin-bottom: 0.6rem;
+    max-width: 620px;
     word-break: break-word;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
+    text-shadow: var(--text-shadow);
 }
 
 .swiss-rule {
@@ -405,10 +440,9 @@ html, body {
     margin: 0.5rem 0 0.85rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 850;
     letter-spacing: 0.25em;
-    color: rgba(255, 255, 255, 0.75);
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    color: var(--text-secondary);
 }
 
 .swiss-rule::before,
@@ -416,17 +450,18 @@ html, body {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255, 255, 255, 0.25);
+    background: var(--rule-color);
 }
 
 .swiss-hero-subtitle {
-    font-size: clamp(0.88rem, 1.9vw, 1rem);
+    font-size: clamp(0.92rem, 2vw, 1.05rem);
+    font-weight: 600;
     color: var(--text-secondary);
     max-width: 520px;
     margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
     line-height: 1.55;
     padding: 0 0.5rem;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    text-shadow: var(--text-shadow);
 }
 
 /* BOTH SUGGESTION CARDS */
@@ -448,7 +483,7 @@ html, body {
     padding: clamp(0.95rem, 2vw, 1.15rem) clamp(1rem, 2.2vw, 1.3rem);
     min-height: 58px;
     border-radius: 20px;
-    color: #FFFFFF;
+    color: var(--text-primary);
     text-align: left;
     cursor: pointer;
     display: flex;
@@ -456,31 +491,26 @@ html, body {
     gap: 0.35rem;
     touch-action: manipulation;
     word-break: break-word;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(22, 10, 36, 0.50) !important;
-    border: 1px solid rgba(255, 255, 255, 0.13) !important;
-    box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.30),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.28),
-        0 4px 10px -2px rgba(0, 0, 0, 0.25),
-        0 14px 28px -6px rgba(0, 0, 0, 0.40) !important;
+    transition: all 180ms ease;
 }
 
 /* MONOSPACE "01 // KNOWLEDGE" LABEL PRESERVED */
 .swiss-chip-idx {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.70);
+    font-size: 0.7rem;
+    font-weight: 850;
+    color: var(--text-muted);
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
 .swiss-chip-text {
-    font-size: clamp(0.86rem, 1.8vw, 0.94rem);
-    font-weight: 600;
+    font-family: var(--font-heading);
+    font-size: clamp(0.88rem, 1.8vw, 0.98rem);
+    font-weight: 800;
     line-height: 1.4;
-    color: #FFFFFF;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    color: var(--text-primary);
+    text-shadow: var(--text-shadow);
 }
 
 /* --------------------------------------------------------------------------
@@ -496,20 +526,27 @@ html, body {
     max-width: min(90%, 600px);
     padding: clamp(0.8rem, 2vw, 1rem) clamp(1rem, 2.5vw, 1.3rem);
     border-radius: 22px;
-    color: #FFFFFF;
-    font-size: clamp(0.92rem, 1.9vw, 0.98rem);
+    color: var(--text-primary);
+    font-size: clamp(0.94rem, 1.9vw, 1.02rem);
+    font-weight: 700;
     line-height: 1.6;
     word-break: break-word;
     overflow-wrap: break-word;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    text-shadow: var(--text-shadow);
+    background: var(--btn-primary-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow:
+        inset 0 1px 1.5px 0 var(--glass-bevel-top),
+        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
+        var(--glass-shadow) !important;
 }
 
 .bubble-user-label {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
-    font-weight: 700;
+    font-size: 0.65rem;
+    font-weight: 850;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.70);
+    color: var(--text-muted);
     margin-bottom: 0.3rem;
     text-transform: uppercase;
 }
@@ -546,7 +583,7 @@ html, body {
     min-width: 0;
     border-radius: 22px;
     padding: clamp(0.9rem, 2.2vw, 1.35rem) clamp(0.95rem, 2.5vw, 1.45rem);
-    color: #FFFFFF;
+    color: var(--text-primary);
     word-break: break-word;
     overflow-wrap: break-word;
     overflow: visible;
@@ -559,15 +596,15 @@ html, body {
     gap: 0.5rem;
     padding-bottom: 0.5rem;
     margin-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .ai-meta-title {
     font-family: var(--font-mono);
-    font-size: clamp(0.65rem, 1.5vw, 0.74rem);
-    font-weight: 700;
+    font-size: clamp(0.66rem, 1.5vw, 0.75rem);
+    font-weight: 850;
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-secondary);
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -578,29 +615,31 @@ html, body {
     padding: 0.25rem 0.75rem;
     min-height: 28px;
     border-radius: 9999px;
-    color: #FFFFFF;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 850;
     letter-spacing: 0.05em;
     cursor: pointer;
     touch-action: manipulation;
     flex-shrink: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(25, 12, 40, 0.50) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
     box-shadow:
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.25),
-        0 2px 5px rgba(0, 0, 0, 0.25) !important;
+        inset 0 1px 1px 0 var(--glass-bevel-top),
+        inset 0 -1px 1.5px 0 var(--glass-bevel-bottom),
+        var(--glass-shadow) !important;
+    transition: all 180ms ease;
 }
 
 .response-text {
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-size: clamp(0.92rem, 1.8vw, 1rem);
     line-height: 1.75;
+    font-weight: 600;
     word-break: break-word;
     overflow-wrap: break-word;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    text-shadow: var(--text-shadow);
 }
 
 .response-text p {
@@ -612,16 +651,15 @@ html, body {
 }
 
 .response-text strong {
-    color: #FFFFFF;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    color: var(--text-primary);
+    font-weight: 900;
 }
 
 /* Typewriter Cursor */
 .cursor-pen::after {
     content: '█';
     display: inline-block;
-    color: #FFFFFF;
+    color: var(--text-primary);
     margin-left: 3px;
     font-size: 0.85em;
     vertical-align: middle;
@@ -642,14 +680,14 @@ html, body {
     width: fit-content;
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-weight: 850;
+    color: var(--text-primary);
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
 .spinner-icon {
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-size: 0.75rem;
     animation: spin 1s linear infinite;
 }
@@ -668,7 +706,7 @@ html, body {
     color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    font-weight: 700;
+    font-weight: 800;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -678,7 +716,7 @@ html, body {
 
 /* --------------------------------------------------------------------------
    INPUT BAR & SEND BUTTON
-   Dark enough tint so white text stays readable over the bright pink gradient
+   Pure frosted glass, no independent opaque dark color
    -------------------------------------------------------------------------- */
 .chat-input-bar-container {
     position: absolute;
@@ -700,36 +738,36 @@ html, body {
     width: 100%;
     pointer-events: auto;
     overflow: visible;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(20, 10, 32, 0.72) !important;
-    backdrop-filter: blur(28px) saturate(160%);
-    -webkit-backdrop-filter: blur(28px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: var(--input-bg) !important;
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid var(--glass-border) !important;
     box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.30),
-        0 4px 8px -2px rgba(0, 0, 0, 0.25),
-        0 18px 36px -6px rgba(0, 0, 0, 0.45) !important;
+        inset 0 1px 1.5px 0 var(--glass-bevel-top),
+        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
+        var(--glass-shadow) !important;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .input-console-frame:focus-within {
-    border-color: rgba(255, 255, 255, 0.26) !important;
+    border-color: var(--input-focus-border) !important;
     box-shadow:
-        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.50),
-        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
-        0 0 0 2px rgba(255, 255, 255, 0.18),
-        0 20px 45px rgba(0, 0, 0, 0.55) !important;
+        inset 0 1px 1.5px 0 var(--glass-bevel-top),
+        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
+        0 0 0 2px var(--input-focus-border),
+        var(--glass-shadow) !important;
 }
 
 .input-prompt-label {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: #FFFFFF;
+    font-size: 0.76rem;
+    font-weight: 900;
+    color: var(--text-secondary);
     letter-spacing: 0.08em;
     margin-right: 0.5rem;
     user-select: none;
     flex-shrink: 0;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: var(--text-shadow);
 }
 
 .chat-input-field {
@@ -740,9 +778,10 @@ html, body {
     outline: none;
     font-family: var(--font-body);
     font-size: 16px;
-    color: #FFFFFF;
+    font-weight: 700;
+    color: var(--text-primary);
     padding: 0.45rem 0.25rem;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: var(--text-shadow);
 }
 
 @media (min-width: 768px) {
@@ -752,9 +791,10 @@ html, body {
 }
 
 .chat-input-field::placeholder {
-    color: rgba(255, 255, 255, 0.70);
+    color: var(--text-muted);
     opacity: 1;
     font-size: clamp(0.85rem, 1.8vw, 0.94rem);
+    font-weight: 600;
 }
 
 /* SEND BUTTON (PILL) */
@@ -762,37 +802,38 @@ html, body {
     min-height: 38px;
     padding: 0 clamp(0.85rem, 2vw, 1.25rem);
     border-radius: 9999px; /* Pill */
-    color: #FFFFFF;
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    font-weight: 800;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 900;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.09) 100%), rgba(90, 20, 130, 0.55) !important;
-    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    background: var(--btn-primary-bg) !important;
+    border: 1px solid var(--btn-primary-border) !important;
     box-shadow:
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.40),
-        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.25),
-        0 3px 8px rgba(0, 0, 0, 0.30) !important;
+        inset 0 1px 1px 0 var(--glass-bevel-top),
+        inset 0 -1px 2px 0 var(--glass-bevel-bottom),
+        var(--glass-shadow) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.45rem;
     touch-action: manipulation;
     flex-shrink: 0;
+    transition: all 180ms ease;
 }
 
 .btn-send-message i {
-    color: #FFFFFF;
+    color: var(--text-primary);
 }
 
 .footer-meta-note {
     font-family: var(--font-mono);
     font-size: clamp(0.6rem, 1.5vw, 0.68rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.08em;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     text-align: center;
     margin-top: 0.45rem;
     text-transform: uppercase;
@@ -800,7 +841,7 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 0.25rem;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: var(--text-shadow);
     pointer-events: auto;
 }
 
@@ -816,7 +857,7 @@ html, body {
     }
 
     #chat-window {
-        padding-top: calc(64px + env(safe-area-inset-top, 0px));
+        padding-top: calc(72px + env(safe-area-inset-top, 0px));
         padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
     }
 
