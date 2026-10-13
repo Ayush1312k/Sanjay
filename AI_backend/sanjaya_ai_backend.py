@@ -59,8 +59,12 @@ if ANTHROPIC_API_KEY:
 else:
     _LAST_CLAUDE_ERROR = "No ANTHROPIC_API_KEY provided in environment"
 
-GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')
-if GEMINI_MODEL in ['gemini-2.5-flash', 'gemini-2.5', '']:
+_raw_model = (os.getenv('GEMINI_MODEL') or 'gemini-2.0-flash').strip().lower()
+if '3.5' in _raw_model or '2.5' in _raw_model or 'flash-lite' in _raw_model:
+    GEMINI_MODEL = 'gemini-2.0-flash'
+elif _raw_model in ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro']:
+    GEMINI_MODEL = _raw_model
+else:
     GEMINI_MODEL = 'gemini-2.0-flash'
 CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-3-5-sonnet-20241022')
 EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL', 'models/gemini-embedding-001')
