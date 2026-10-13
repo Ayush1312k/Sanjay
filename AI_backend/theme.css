@@ -30,9 +30,9 @@
     --text-muted:          rgba(255, 255, 255, 0.72);
     --text-inverse:        #05050A;
 
-    --font-heading:        'Cinzel', 'Cormorant Garamond', Georgia, serif;
-    --font-body:           'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --font-mono:           ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
+    --font-heading:        'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body:           'SF Pro Display', 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono:           'SF Mono', SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
 }
 
 /* Maintain dark mesh gradient in all theme modes */
