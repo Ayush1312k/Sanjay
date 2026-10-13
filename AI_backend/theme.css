@@ -32,39 +32,36 @@
 }
 
 /* ==========================================================================
-   2. REUSABLE .glass CLASS SPECIFICATION
+   2. REUSABLE .glass CLASS — FROSTED GLASS & 3D TONE
+   No glowing white border rim; tactile 3D bevel, soft frosted diffusion
    ========================================================================== */
 .glass {
     position: relative;
-    border: none !important;
-    background: rgba(255, 255, 255, 0.06) !important;
-    backdrop-filter: blur(10px) saturate(115%);
-    -webkit-backdrop-filter: blur(10px) saturate(115%);
+    border: 1px solid rgba(255, 255, 255, 0.13) !important;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(20, 10, 32, 0.45) !important;
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.10),
-        inset 0 0 20px rgba(255, 255, 255, 0.04),
-        0 8px 24px rgba(0, 0, 0, 0.18) !important;
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.28),
+        0 4px 10px -2px rgba(0, 0, 0, 0.25),
+        0 16px 36px -6px rgba(0, 0, 0, 0.45) !important;
     overflow: visible;
-    transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+    transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
 .glass::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(150deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.05) 35%, rgba(255, 255, 255, 0.05) 65%, rgba(255, 255, 255, 0.6));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    transition: background 150ms ease, opacity 150ms ease;
+    display: none !important;
 }
 
-.glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(120% 70% at 15% 0%, rgba(255, 255, 255, 0.15), transparent 60%); opacity: 1; }
-.glass > * { position: relative; z-index: 1; }
+.glass::after {
+    display: none !important;
+}
+
+.glass > * {
+    position: relative;
+    z-index: 1;
+}
 
 /* ==========================================================================
    RESET & STRUCTURE
@@ -96,11 +93,24 @@ html, body {
     display: none;
 }
 
-.glass-orb { position: fixed; z-index: 0; width: clamp(150px, 18vw, 220px); aspect-ratio: 1; border-radius: 50%; filter: blur(40px); opacity: 0.30; pointer-events: none; will-change: transform; }
+/* Slow moving color fields make refraction visible through the glass. */
+.glass-orb {
+    position: fixed;
+    z-index: 0;
+    width: clamp(150px, 18vw, 220px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.30;
+    pointer-events: none;
+    will-change: transform;
+}
+
 .glass-orb--pink { top: -10%; left: -9%; background: #ff5ccf; animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
 .glass-orb--violet { top: -10%; right: -8%; background: #8a1fd0; animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
 .glass-orb--peach { bottom: -12%; left: -8%; background: #ffb59a; animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
 .glass-orb--indigo { bottom: -10%; right: -8%; background: #5b3cff; animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
+
 @keyframes glass-orb-drift-a { to { transform: translate3d(90px, -45px, 0); } }
 @keyframes glass-orb-drift-b { to { transform: translate3d(-70px, 80px, 0); } }
 @keyframes glass-orb-drift-c { to { transform: translate3d(-85px, -50px, 0); } }
@@ -132,21 +142,29 @@ html, body {
    Overlay header so content visibly scrolls underneath
    -------------------------------------------------------------------------- */
 .app-header {
-    width: auto;
+    width: min(780px, calc(100% - 32px));
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 50;
-    margin: 12px;
-    padding: calc(0.85rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 2.5rem) 0.85rem;
-    border: none !important;
-    border-radius: 28px;
+    margin: 18px 0 0 0;
+    padding: 0.52rem clamp(0.9rem, 2.5vw, 1.4rem);
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 9999px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
     overflow: visible;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(20, 10, 32, 0.52) !important;
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    box-shadow:
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.40),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.28),
+        0 4px 10px -2px rgba(0, 0, 0, 0.25),
+        0 20px 45px -8px rgba(0, 0, 0, 0.50) !important;
 }
 
 .brand-section {
@@ -157,22 +175,27 @@ html, body {
 }
 
 .brand-emblem-box {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    padding: 3px;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    padding: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(25, 12, 40, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+        0 2px 6px rgba(0, 0, 0, 0.20) !important;
 }
 
 .brand-emblem-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 9px;
+    border-radius: 9999px;
     display: block;
 }
 
@@ -184,23 +207,24 @@ html, body {
 
 .brand-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.2rem, 3.2vw, 1.45rem);
+    font-size: clamp(1.15rem, 3vw, 1.35rem);
     font-weight: 700;
     letter-spacing: 0.08em;
     color: #FFFFFF;
     text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .brand-sys-tag {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    padding: 0.2rem 0.55rem;
-    background: rgba(255, 255, 255, 0.12);
+    padding: 0.18rem 0.5rem;
+    background: rgba(255, 255, 255, 0.10);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 9999px;
     color: var(--text-secondary);
 }
@@ -213,9 +237,9 @@ html, body {
 
 /* THEME & NEW CHAT PILLS */
 .swiss-btn {
-    min-height: 38px;
-    min-width: 38px;
-    padding: 0.4rem 1rem;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 0.38rem 0.95rem;
     border-radius: 9999px; /* Pill */
     color: #FFFFFF;
     font-family: var(--font-mono);
@@ -229,34 +253,48 @@ html, body {
     justify-content: center;
     gap: 0.45rem;
     touch-action: manipulation;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(25, 12, 40, 0.50) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.25),
+        0 2px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+.swiss-btn-primary {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.09) 100%), rgba(90, 20, 130, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.24) !important;
+    box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.30),
+        0 3px 8px rgba(0, 0, 0, 0.30) !important;
 }
 
 .swiss-btn i {
     color: #FFFFFF;
 }
 
-/* Hover on cards & buttons: slightly brighter fill and rim, translateY(-1px), 150ms ease */
+/* Hover on cards & buttons: 3D lift, slightly brighter fill, NO white border glow */
 .swiss-btn:hover,
 .swiss-chip-tile:hover,
 .btn-send-message:hover,
 .btn-copy-tool:hover {
-    background: rgba(255, 255, 255, 0.10) !important;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%), rgba(35, 15, 55, 0.60) !important;
+    border-color: rgba(255, 255, 255, 0.24) !important;
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.65),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.25),
-        0 14px 36px rgba(0, 0, 0, 0.40) !important;
-    transform: translateY(-1px);
-    transition: all 150ms ease;
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
+        0 6px 14px -2px rgba(0, 0, 0, 0.35),
+        0 20px 40px -6px rgba(0, 0, 0, 0.50) !important;
+    transform: translateY(-2px);
+    transition: all 180ms ease;
 }
 
 .swiss-btn:hover::before,
 .swiss-chip-tile:hover::before,
 .btn-send-message:hover::before,
 .btn-copy-tool:hover::before {
-    background: linear-gradient(160deg,
-        rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.08) 35%,
-        rgba(255, 255, 255, 0.08) 65%, rgba(255, 255, 255, 0.75)) !important;
-    transition: background 150ms ease;
+    display: none !important;
 }
 
 .swiss-btn:active,
@@ -290,7 +328,7 @@ html, body {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: calc(76px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(90px + env(safe-area-inset-bottom, 0px));
+    padding: calc(104px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(96px + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     gap: clamp(0.85rem, 2vw, 1.35rem);
@@ -307,7 +345,7 @@ html, body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: clamp(1rem, 3.5vw, 2.5rem) clamp(0.5rem, 2vw, 1rem);
+    padding: clamp(1.5rem, 3.5vw, 2.8rem) clamp(0.5rem, 2vw, 1rem);
     margin: auto 0;
     width: 100%;
     max-width: 660px;
@@ -326,6 +364,12 @@ html, body {
     margin-bottom: clamp(0.85rem, 2vw, 1.4rem);
     flex-shrink: 0;
     overflow: hidden;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(20, 10, 32, 0.50) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow:
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
+        0 8px 24px -4px rgba(0, 0, 0, 0.40) !important;
 }
 
 .swiss-hero-badge img {
@@ -401,8 +445,8 @@ html, body {
 }
 
 .swiss-chip-tile {
-    padding: clamp(0.85rem, 2vw, 1.1rem) clamp(0.95rem, 2.2vw, 1.25rem);
-    min-height: 56px;
+    padding: clamp(0.95rem, 2vw, 1.15rem) clamp(1rem, 2.2vw, 1.3rem);
+    min-height: 58px;
     border-radius: 20px;
     color: #FFFFFF;
     text-align: left;
@@ -412,6 +456,13 @@ html, body {
     gap: 0.35rem;
     touch-action: manipulation;
     word-break: break-word;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(22, 10, 36, 0.50) !important;
+    border: 1px solid rgba(255, 255, 255, 0.13) !important;
+    box-shadow:
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.30),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.28),
+        0 4px 10px -2px rgba(0, 0, 0, 0.25),
+        0 14px 28px -6px rgba(0, 0, 0, 0.40) !important;
 }
 
 /* MONOSPACE "01 // KNOWLEDGE" LABEL PRESERVED */
@@ -524,7 +575,7 @@ html, body {
 }
 
 .btn-copy-tool {
-    padding: 0.25rem 0.7rem;
+    padding: 0.25rem 0.75rem;
     min-height: 28px;
     border-radius: 9999px;
     color: #FFFFFF;
@@ -535,6 +586,12 @@ html, body {
     cursor: pointer;
     touch-action: manipulation;
     flex-shrink: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(25, 12, 40, 0.50) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.25),
+        0 2px 5px rgba(0, 0, 0, 0.25) !important;
 }
 
 .response-text {
@@ -639,21 +696,28 @@ html, body {
     display: flex;
     align-items: center;
     border-radius: 9999px; /* Pill */
-    padding: 0.4rem 0.45rem 0.4rem clamp(0.85rem, 2.5vw, 1.35rem);
+    padding: 0.42rem 0.5rem 0.42rem clamp(0.95rem, 2.5vw, 1.4rem);
     width: 100%;
     pointer-events: auto;
     overflow: visible;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)), rgba(22, 10, 36, 0.70) !important;
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(20, 10, 32, 0.72) !important;
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow:
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.30),
+        0 4px 8px -2px rgba(0, 0, 0, 0.25),
+        0 18px 36px -6px rgba(0, 0, 0, 0.45) !important;
 }
 
 .input-console-frame:focus-within {
+    border-color: rgba(255, 255, 255, 0.26) !important;
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.6),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.2),
-        0 0 0 2px rgba(255, 255, 255, 0.25),
-        0 14px 40px rgba(0, 0, 0, 0.45) !important;
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.50),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25),
+        0 0 0 2px rgba(255, 255, 255, 0.18),
+        0 20px 45px rgba(0, 0, 0, 0.55) !important;
 }
 
 .input-prompt-label {
@@ -695,7 +759,7 @@ html, body {
 
 /* SEND BUTTON (PILL) */
 .btn-send-message {
-    min-height: 40px;
+    min-height: 38px;
     padding: 0 clamp(0.85rem, 2vw, 1.25rem);
     border-radius: 9999px; /* Pill */
     color: #FFFFFF;
@@ -705,6 +769,12 @@ html, body {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.09) 100%), rgba(90, 20, 130, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.40),
+        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.25),
+        0 3px 8px rgba(0, 0, 0, 0.30) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
