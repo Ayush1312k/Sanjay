@@ -38,6 +38,12 @@
     --border-strong:       #6B7048;
     --shadow-swiss:        2px 2px 0px #C7BD9F;
 
+    /* Subtle Sacred Glow (Matching Olive & Clay Theme) */
+    --glow-hero:           rgba(207, 154, 111, 0.22);
+    --glow-hero-ambient:   rgba(207, 154, 111, 0.15);
+    --glow-emblem:         rgba(207, 154, 111, 0.18);
+    --glow-backdrop:       rgba(107, 112, 72, 0.08);
+
     --user-bubble-bg:      #545936;
     --user-bubble-text:    #FCFAF5;
     --user-bubble-border:  #3E4227;
@@ -73,6 +79,12 @@
     --border-strong:       #6B7048;
     --shadow-swiss:        2px 2px 0px #090B06;
 
+    /* Subtle Sacred Glow (Matching Olive & Clay Theme) */
+    --glow-hero:           rgba(207, 154, 111, 0.28);
+    --glow-hero-ambient:   rgba(207, 154, 111, 0.20);
+    --glow-emblem:         rgba(207, 154, 111, 0.22);
+    --glow-backdrop:       rgba(107, 112, 72, 0.16);
+
     --user-bubble-bg:      #2A301D;
     --user-bubble-text:    #F6F3EB;
     --user-bubble-border:  #444D2F;
@@ -103,6 +115,12 @@
         --border-grid:         #333A22;
         --border-strong:       #6B7048;
         --shadow-swiss:        2px 2px 0px #090B06;
+
+        /* Subtle Sacred Glow (Matching Olive & Clay Theme) */
+        --glow-hero:           rgba(207, 154, 111, 0.28);
+        --glow-hero-ambient:   rgba(207, 154, 111, 0.20);
+        --glow-emblem:         rgba(207, 154, 111, 0.22);
+        --glow-backdrop:       rgba(107, 112, 72, 0.16);
 
         --user-bubble-bg:      #2A301D;
         --user-bubble-text:    #F6F3EB;
@@ -208,8 +226,10 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-swiss);
+    box-shadow: var(--shadow-swiss), 0 0 14px var(--glow-emblem);
     flex-shrink: 0;
+    position: relative;
+    transition: box-shadow 0.25s ease;
 }
 
 .brand-emblem-img {
@@ -342,6 +362,22 @@ html, body {
     width: 100%;
     max-width: 660px;
     align-self: center;
+    position: relative;
+    z-index: 1;
+}
+
+#welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: min(420px, 92vw);
+    height: min(320px, 70vw);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, var(--glow-backdrop) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .swiss-hero-badge {
@@ -350,9 +386,25 @@ html, body {
     border: 2px solid var(--border-grid);
     background: var(--bg-surface);
     padding: 3px;
-    box-shadow: var(--shadow-swiss);
+    box-shadow: var(--shadow-swiss), 0 0 24px 2px var(--glow-hero);
     margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
     flex-shrink: 0;
+    position: relative;
+    transition: box-shadow 0.25s ease;
+}
+
+.swiss-hero-badge::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 175%;
+    height: 175%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, var(--glow-hero-ambient) 0%, transparent 68%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .swiss-hero-badge img {
@@ -514,7 +566,7 @@ html, body {
     padding: 2px;
     flex-shrink: 0;
     margin-top: 0.15rem;
-    box-shadow: var(--shadow-swiss);
+    box-shadow: var(--shadow-swiss), 0 0 10px var(--glow-emblem);
 }
 
 .ai-avatar-box img {
