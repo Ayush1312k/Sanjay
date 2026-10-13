@@ -37,7 +37,7 @@
 .glass {
     position: relative;
     border: none !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.14) 100%) !important;
+    background: transparent !important;
     backdrop-filter: blur(14px) saturate(190%) brightness(1.15);
     -webkit-backdrop-filter: blur(14px) saturate(190%) brightness(1.15);
     box-shadow:
@@ -276,7 +276,7 @@ html, body {
 .swiss-chip-tile:hover,
 .btn-send-message:hover,
 .btn-copy-tool:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.29) 0%, rgba(255, 255, 255, 0.09) 45%, rgba(255, 255, 255, 0.19) 100%) !important;
+    background: transparent !important;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.65),
         inset 0 -1px 0 rgba(255, 255, 255, 0.25),
@@ -302,7 +302,7 @@ html, body {
 }
 
 .swiss-btn-primary {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.14) 100%) !important;
+    background: transparent !important;
 }
 
 /* --------------------------------------------------------------------------
