@@ -59,13 +59,11 @@ if ANTHROPIC_API_KEY:
 else:
     _LAST_CLAUDE_ERROR = "No ANTHROPIC_API_KEY provided in environment"
 
-_raw_model = (os.getenv('GEMINI_MODEL') or 'gemini-2.0-flash').strip().lower()
-if '3.5' in _raw_model or '2.5' in _raw_model or 'flash-lite' in _raw_model:
-    GEMINI_MODEL = 'gemini-2.0-flash'
-elif _raw_model in ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro']:
-    GEMINI_MODEL = _raw_model
+_raw_model = (os.getenv('GEMINI_MODEL') or 'gemini-2.5-flash').strip()
+if '2.0-flash' in _raw_model.lower() or not _raw_model:
+    GEMINI_MODEL = 'gemini-2.5-flash'
 else:
-    GEMINI_MODEL = 'gemini-2.0-flash'
+    GEMINI_MODEL = _raw_model
 CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-3-5-sonnet-20241022')
 EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL', 'models/gemini-embedding-001')
 CHUNK_SEPARATOR = '\n---CHUNK_SEPARATOR---\n'
@@ -160,7 +158,25 @@ def generate_gemini_answer(prompt, system_instruction):
     except Exception as e:
         global _LAST_GEMINI_ERROR
         _LAST_GEMINI_ERROR = sanitize_secret(str(e))
-        sys.stderr.write(f"Gemini Generation Error: {_LAST_GEMINI_ERROR}\n")
+        sys.stderr.write(f"Gemini Generation Error ({GEMINI_MODEL}): {_LAST_GEMINI_ERROR}\n")
+
+        # Fallback to gemini-2.5-flash if not already used
+        if GEMINI_MODEL != 'gemini-2.5-flash':
+            try:
+                resp = gemini_client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=[user_content],
+                    config=types.GenerateContentConfig(
+                        temperature=0.3,
+                        max_output_tokens=2048,
+                        system_instruction=sys_instruction_content
+                    )
+                )
+                return resp.text.strip() if resp.text else None
+            except Exception as e2:
+                _LAST_GEMINI_ERROR = sanitize_secret(str(e2))
+                sys.stderr.write(f"Gemini Fallback Error: {_LAST_GEMINI_ERROR}\n")
+
         return None
 
 def generate_claude_answer(prompt, system_instruction):
