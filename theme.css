@@ -1,123 +1,138 @@
 /* ==========================================================================
-   SANJAYA AI — DUAL-MODE FROSTED GLASS & LIQUID 3D SYSTEM
-   Left: Light Mode (Ice white, lavender, soft candy pink, warm peach)
-   Right: Dark Mode (Obsidian midnight, royal violet, electric neon pink)
+   SANJAYA AI — MINIMAL MESH GRADIENT & TRIOPTUS FLOATING GLASS SYSTEM
+   Minimal subtle dark mesh gradient + TriOptus floating water glassmorphism & nav
    ========================================================================== */
 
 :root {
-    /* --- TYPOGRAPHY TOKENS (SF Pro / Apple modern bold neo-grotesque) --- */
-    --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-    --font-body:    'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    /* --- TYPOGRAPHY TOKENS (TriOptus: Instrument Serif + Sora) --- */
+    --font-heading: 'Instrument Serif', Georgia, serif;
+    --font-body:    'Sora', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-mono:    ui-monospace, 'SF Mono', 'Courier Prime', Menlo, monospace;
 }
 
 /* ==========================================================================
-   DARK THEME (Default) — Right half of reference image
-   Obsidian midnight top, deep purple mid, electric neon pink & peach bottom
+   DARK THEME (Default)
+   Minimal subtle dark mesh gradient (used earlier) + TriOptus floating water glass
    ========================================================================== */
 [data-theme="dark"],
 :root:not([data-theme]) {
+    /* Earlier Minimal Subtle Dark Mesh Gradient */
     --app-bg-mesh:
-        radial-gradient(65% 50% at 85% 10%, #35085e 0%, transparent 68%),
-        radial-gradient(75% 55% at 92% 52%, #581c87 0%, transparent 65%),
-        radial-gradient(90% 55% at 40% 90%, #ec4899 0%, transparent 65%),
-        radial-gradient(75% 45% at 55% 108%, #fb923c 0%, transparent 65%),
-        #06020A;
+        radial-gradient(ellipse 75% 55% at 50% 100%, rgba(255, 154, 139, 0.22) 0%, rgba(254, 126, 164, 0.16) 28%, transparent 68%),
+        radial-gradient(circle at 15% 85%, rgba(217, 70, 239, 0.18) 0%, transparent 48%),
+        radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.20) 0%, transparent 52%),
+        radial-gradient(circle at 50% 50%, rgba(88, 28, 135, 0.30) 0%, transparent 65%),
+        radial-gradient(circle at 80% 20%, rgba(126, 34, 206, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 15% 25%, rgba(30, 27, 75, 0.65) 0%, transparent 55%),
+        #05050A;
 
-    --text-primary:        #FFFFFF;
-    --text-secondary:      rgba(255, 255, 255, 0.82);
-    --text-muted:          rgba(255, 255, 255, 0.55);
+    --text-primary:        #F8FAFC;
+    --text-secondary:      #94A3B8;
+    --text-muted:          #64748B;
 
-    /* Pure translucent frosted glass - NO independent opaque dark color */
-    --glass-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 100%);
-    --glass-border:        rgba(255, 255, 255, 0.18);
-    --glass-bevel-top:     rgba(255, 255, 255, 0.45);
-    --glass-bevel-bottom:  rgba(0, 0, 0, 0.28);
-    --glass-shadow:        0 4px 10px -2px rgba(0, 0, 0, 0.25), 0 18px 40px -6px rgba(0, 0, 0, 0.45);
+    /* TriOptus Floating Water Glassmorphism (Dark) */
+    --glass-bg:            rgba(255, 255, 255, 0.04);
+    --glass-hover-bg:      rgba(255, 255, 255, 0.08);
+    --glass-border:        rgba(255, 255, 255, 0.10);
+    --glass-hover-border:  rgba(255, 255, 255, 0.25);
+    --glass-shadow:        0 15px 35px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    --glass-hover-shadow:  0 25px 60px -10px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
-    --glass-hover-bg:      linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.07) 100%);
-    --glass-hover-border:  rgba(255, 255, 255, 0.30);
+    /* Navbar / Header */
+    --header-bg:           rgba(5, 5, 12, 0.68);
+    --header-border:       rgba(255, 255, 255, 0.08);
+    --header-shadow:       0 4px 30px rgba(0, 0, 0, 0.25);
 
-    --btn-primary-bg:      linear-gradient(180deg, rgba(236, 72, 153, 0.35) 0%, rgba(168, 85, 247, 0.20) 100%);
-    --btn-primary-border:  rgba(255, 255, 255, 0.28);
+    /* Buttons */
+    --btn-capsule-bg:           rgba(255, 255, 255, 0.08);
+    --btn-capsule-border:       rgba(255, 255, 255, 0.18);
+    --btn-capsule-hover-bg:     rgba(255, 255, 255, 0.15);
+    --btn-capsule-hover-border: rgba(255, 255, 255, 0.35);
 
-    --input-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
-    --input-focus-border:  rgba(255, 255, 255, 0.38);
+    /* TriOptus Primary Pill Gradient: Blue to Mint */
+    --btn-primary-bg:           linear-gradient(135deg, #2563EB, #10B981);
+    --btn-primary-border:       rgba(255, 255, 255, 0.25);
+    --btn-primary-shadow:       0 4px 20px rgba(37, 99, 235, 0.35);
 
-    --text-shadow:         0 1px 4px rgba(0, 0, 0, 0.5);
-    --rule-color:          rgba(255, 255, 255, 0.25);
+    /* Input Console */
+    --input-bg:                 rgba(255, 255, 255, 0.05);
+    --input-focus-border:       rgba(37, 99, 235, 0.6);
 
-    --orb-pink:            #ec4899;
-    --orb-violet:          #581c87;
-    --orb-peach:           #fb923c;
-    --orb-indigo:          #3b0764;
-    --orb-opacity:         0.35;
+    --rule-color:               rgba(255, 255, 255, 0.15);
+
+    /* Gentle ambient orbs */
+    --orb-pink:                 #d946ef;
+    --orb-violet:               #8b5cf6;
+    --orb-peach:                #f97316;
+    --orb-indigo:               #3b82f6;
+    --orb-opacity:              0.14;
 }
 
 /* ==========================================================================
-   LIGHT THEME — Left half of reference image
-   Crisp white top, soft lavender mid, radiant pastel pink & warm peach bottom
+   LIGHT THEME
+   TriOptus Minimal Hero Gradient + Translucent Water Glass
    ========================================================================== */
 [data-theme="light"] {
     --app-bg-mesh:
-        radial-gradient(65% 55% at 85% 12%, rgba(196, 181, 253, 0.65) 0%, transparent 65%),
-        radial-gradient(75% 60% at 92% 58%, rgba(244, 114, 182, 0.55) 0%, transparent 65%),
-        radial-gradient(85% 55% at 35% 88%, rgba(251, 113, 133, 0.58) 0%, transparent 65%),
-        radial-gradient(70% 45% at 55% 105%, rgba(254, 215, 170, 0.65) 0%, transparent 65%),
-        #F7F6FC;
+        linear-gradient(115deg, #FFFFFF 0%, #F0F6FF 50%, #E8F8F2 100%);
 
-    --text-primary:        #140826;
-    --text-secondary:      rgba(20, 8, 38, 0.76);
-    --text-muted:          rgba(20, 8, 38, 0.55);
+    --text-primary:        #0F172A;
+    --text-secondary:      #475569;
+    --text-muted:          #94A3B8;
 
-    /* Pure translucent frosted glass in light mode */
-    --glass-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.32) 100%);
+    /* TriOptus Floating Water Glassmorphism (Light) */
+    --glass-bg:            rgba(255, 255, 255, 0.65);
+    --glass-hover-bg:      rgba(255, 255, 255, 0.85);
     --glass-border:        rgba(255, 255, 255, 0.75);
-    --glass-bevel-top:     rgba(255, 255, 255, 0.95);
-    --glass-bevel-bottom:  rgba(0, 0, 0, 0.06);
-    --glass-shadow:        0 4px 12px -2px rgba(110, 50, 160, 0.08), 0 16px 36px -6px rgba(110, 50, 160, 0.14);
+    --glass-hover-border:  rgba(37, 99, 235, 0.35);
+    --glass-shadow:        0 20px 50px -10px rgba(37, 99, 235, 0.12), 0 10px 20px -5px rgba(16, 185, 129, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    --glass-hover-shadow:  0 30px 70px -15px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 
-    --glass-hover-bg:      linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.44) 100%);
-    --glass-hover-border:  rgba(255, 255, 255, 0.92);
+    /* Navbar / Header */
+    --header-bg:           rgba(255, 255, 255, 0.82);
+    --header-border:       rgba(226, 232, 240, 0.8);
+    --header-shadow:       0 4px 40px rgba(15, 23, 42, 0.06);
 
-    --btn-primary-bg:      linear-gradient(180deg, rgba(244, 114, 182, 0.35) 0%, rgba(196, 181, 253, 0.25) 100%);
-    --btn-primary-border:  rgba(255, 255, 255, 0.85);
+    /* Buttons */
+    --btn-capsule-bg:           rgba(255, 255, 255, 0.85);
+    --btn-capsule-border:       #E2E8F0;
+    --btn-capsule-hover-bg:     #FFFFFF;
+    --btn-capsule-hover-border: rgba(37, 99, 235, 0.3);
 
-    --input-bg:            linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.48) 100%);
-    --input-focus-border:  rgba(200, 130, 240, 0.65);
+    /* TriOptus Primary Pill Gradient */
+    --btn-primary-bg:           linear-gradient(135deg, #2563EB, #10B981);
+    --btn-primary-border:       rgba(255, 255, 255, 0.4);
+    --btn-primary-shadow:       0 4px 20px rgba(37, 99, 235, 0.28);
 
-    --text-shadow:         none;
-    --rule-color:          rgba(20, 8, 38, 0.22);
+    /* Input Console */
+    --input-bg:                 rgba(255, 255, 255, 0.85);
+    --input-focus-border:       rgba(37, 99, 235, 0.5);
 
-    --orb-pink:            #f472b6;
-    --orb-violet:          #c084fc;
-    --orb-peach:           #fed7aa;
-    --orb-indigo:          #ddd6fe;
-    --orb-opacity:         0.45;
+    --rule-color:               rgba(15, 23, 42, 0.12);
+
+    /* Light ambient orbs */
+    --orb-pink:                 #60a5fa;
+    --orb-violet:               #a7f3d0;
+    --orb-peach:                #bae6fd;
+    --orb-indigo:               #c7d2fe;
+    --orb-opacity:              0.25;
 }
 
 /* ==========================================================================
-   2. REUSABLE .glass CLASS — PURE FROSTED GLASS & 3D TONE
-   No independent dark color; background mesh shines right through with optical blur
+   REUSABLE .glass CLASS — TRIOPTUS FLOATING WATER GLASS
    ========================================================================== */
 .glass {
     position: relative;
     border: 1px solid var(--glass-border) !important;
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(28px) saturate(170%);
-    -webkit-backdrop-filter: blur(28px) saturate(170%);
-    box-shadow:
-        inset 0 1px 1.5px 0 var(--glass-bevel-top),
-        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
-        var(--glass-shadow) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: var(--glass-shadow) !important;
     overflow: visible;
-    transition: background 250ms ease, box-shadow 250ms ease, transform 180ms ease, border-color 250ms ease;
+    transition: background 250ms ease, box-shadow 250ms ease, transform 200ms ease, border-color 250ms ease;
 }
 
-.glass::before {
-    display: none !important;
-}
-
+.glass::before,
 .glass::after {
     display: none !important;
 }
@@ -158,32 +173,32 @@ html, body {
     display: none;
 }
 
-/* Slow moving color fields make refraction visible through the glass. */
+/* Gentle ambient color fields */
 .glass-orb {
     position: fixed;
     z-index: 0;
-    width: clamp(150px, 18vw, 220px);
+    width: clamp(180px, 22vw, 260px);
     aspect-ratio: 1;
     border-radius: 50%;
-    filter: blur(40px);
+    filter: blur(50px);
     opacity: var(--orb-opacity);
     pointer-events: none;
     will-change: transform;
     transition: background 350ms ease, opacity 350ms ease;
 }
 
-.glass-orb--pink { top: -10%; left: -9%; background: var(--orb-pink); animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
-.glass-orb--violet { top: -10%; right: -8%; background: var(--orb-violet); animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
-.glass-orb--peach { bottom: -12%; left: -8%; background: var(--orb-peach); animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
-.glass-orb--indigo { bottom: -10%; right: -8%; background: var(--orb-indigo); animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
+.glass-orb--pink { top: -8%; left: -6%; background: var(--orb-pink); animation: glass-orb-drift-a 34s ease-in-out infinite alternate; }
+.glass-orb--violet { top: -6%; right: -6%; background: var(--orb-violet); animation: glass-orb-drift-b 38s ease-in-out infinite alternate; }
+.glass-orb--peach { bottom: -10%; left: -6%; background: var(--orb-peach); animation: glass-orb-drift-c 36s ease-in-out infinite alternate; }
+.glass-orb--indigo { bottom: -8%; right: -6%; background: var(--orb-indigo); animation: glass-orb-drift-d 32s ease-in-out infinite alternate; }
 
-@keyframes glass-orb-drift-a { to { transform: translate3d(90px, -45px, 0); } }
-@keyframes glass-orb-drift-b { to { transform: translate3d(-70px, 80px, 0); } }
-@keyframes glass-orb-drift-c { to { transform: translate3d(-85px, -50px, 0); } }
-@keyframes glass-orb-drift-d { to { transform: translate3d(55px, 55px, 0); } }
+@keyframes glass-orb-drift-a { to { transform: translate3d(80px, -40px, 0); } }
+@keyframes glass-orb-drift-b { to { transform: translate3d(-60px, 70px, 0); } }
+@keyframes glass-orb-drift-c { to { transform: translate3d(-70px, -40px, 0); } }
+@keyframes glass-orb-drift-d { to { transform: translate3d(50px, 50px, 0); } }
 
 :focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline: 2px solid rgba(37, 99, 235, 0.6);
     outline-offset: 2px;
 }
 
@@ -203,24 +218,29 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   TOP HEADER BAR
-   Compact pill width (min(620px, calc(100% - 32px))), pure frosted glass, no dark tint
+   TRIOPTUS-STYLE NAVBAR / TOP HEADER BAR
    -------------------------------------------------------------------------- */
 .app-header {
-    width: min(620px, calc(100% - 32px));
+    width: min(720px, calc(100% - 32px));
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 50;
     margin: 16px 0 0 0;
-    padding: 0.52rem clamp(0.9rem, 2.5vw, 1.4rem);
-    border-radius: 9999px;
+    padding: 0.55rem clamp(1rem, 2.5vw, 1.5rem);
+    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
     overflow: visible;
+    background: var(--header-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--header-border) !important;
+    box-shadow: var(--header-shadow) !important;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .brand-section {
@@ -231,53 +251,76 @@ html, body {
 }
 
 .brand-emblem-box {
-    width: 36px;
-    height: 36px;
-    border-radius: 9999px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     padding: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
 }
 
 .brand-emblem-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 9999px;
+    border-radius: 50%;
     display: block;
 }
 
 .brand-typography {
     display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.55rem;
 }
 
 .brand-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.15rem, 3vw, 1.35rem);
-    font-weight: 850;
-    letter-spacing: -0.02em;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3.2vw, 1.7rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.01em;
     color: var(--text-primary);
-    text-transform: uppercase;
-    text-shadow: var(--text-shadow);
+}
+
+/* TriOptus Signature Pulsing Dot */
+.logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563EB, #10B981);
+    animation: dot-beat 2s ease-in-out infinite;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+@keyframes dot-beat {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.45);
+    }
+    50% {
+        transform: scale(1.35);
+        box-shadow: 0 0 0 6px rgba(37, 99, 235, 0);
+    }
 }
 
 .brand-sys-tag {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    padding: 0.18rem 0.5rem;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 9999px;
-    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.18rem 0.55rem;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 50px;
+    color: #3b82f6;
+    text-transform: uppercase;
 }
 
 .header-tools {
@@ -286,17 +329,17 @@ html, body {
     gap: 0.6rem;
 }
 
-/* THEME & NEW CHAT PILLS */
+/* TRIOPTUS CAPSULE BUTTONS */
 .swiss-btn {
-    min-height: 36px;
-    min-width: 36px;
-    padding: 0.38rem 0.95rem;
-    border-radius: 9999px; /* Pill */
-    color: var(--text-primary);
-    font-family: var(--font-heading);
-    font-size: 0.74rem;
-    font-weight: 850;
-    letter-spacing: 0.04em;
+    min-height: 38px;
+    min-width: 38px;
+    padding: 0.45rem 1.15rem;
+    border-radius: 50px !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
     display: inline-flex;
@@ -304,38 +347,36 @@ html, body {
     justify-content: center;
     gap: 0.45rem;
     touch-action: manipulation;
-    transition: all 180ms ease;
+    background: var(--btn-capsule-bg) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid var(--btn-capsule-border) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.25s ease !important;
+}
+
+.swiss-btn:hover {
+    background: var(--btn-capsule-hover-bg) !important;
+    border-color: var(--btn-capsule-hover-border) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+    transform: translateY(-2px);
 }
 
 .swiss-btn-primary {
     background: var(--btn-primary-bg) !important;
     border: 1px solid var(--btn-primary-border) !important;
+    color: #FFFFFF !important;
+    box-shadow: var(--btn-primary-shadow) !important;
+}
+
+.swiss-btn-primary:hover {
+    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.48) !important;
+    transform: translateY(-2px);
 }
 
 .swiss-btn i {
-    color: var(--text-primary);
-}
-
-/* Hover on cards & buttons: 3D lift, slightly brighter fill, NO white border glow */
-.swiss-btn:hover,
-.swiss-chip-tile:hover,
-.btn-send-message:hover,
-.btn-copy-tool:hover {
-    background: var(--glass-hover-bg) !important;
-    border-color: var(--glass-hover-border) !important;
-    box-shadow:
-        inset 0 1px 1.5px 0 var(--glass-bevel-top),
-        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
-        var(--glass-shadow) !important;
-    transform: translateY(-2px);
-    transition: all 180ms ease;
-}
-
-.swiss-btn:hover::before,
-.swiss-chip-tile:hover::before,
-.btn-send-message:hover::before,
-.btn-copy-tool:hover::before {
-    display: none !important;
+    color: inherit;
+    font-size: 0.78rem;
 }
 
 .swiss-btn:active,
@@ -345,7 +386,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   CHAT COLUMN (NO VERTICAL DIVIDER LINES)
+   CHAT COLUMN
    -------------------------------------------------------------------------- */
 .chat-workspace-container {
     flex: 1;
@@ -369,7 +410,7 @@ html, body {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: calc(96px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(96px + env(safe-area-inset-bottom, 0px));
+    padding: calc(104px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(100px + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     gap: clamp(0.85rem, 2vw, 1.35rem);
@@ -389,7 +430,7 @@ html, body {
     padding: clamp(1.5rem, 3.5vw, 2.8rem) clamp(0.5rem, 2vw, 1rem);
     margin: auto 0;
     width: 100%;
-    max-width: 660px;
+    max-width: 680px;
     align-self: center;
     position: relative;
     z-index: 1;
@@ -398,36 +439,38 @@ html, body {
 
 /* LOGO BADGE */
 .swiss-hero-badge {
-    width: clamp(68px, 14vw, 92px);
-    height: clamp(68px, 14vw, 92px);
-    border-radius: 26px;
+    width: clamp(72px, 14vw, 96px);
+    height: clamp(72px, 14vw, 96px);
+    border-radius: 28px;
     padding: 6px;
-    margin-bottom: clamp(0.85rem, 2vw, 1.4rem);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
     flex-shrink: 0;
     overflow: hidden;
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
 }
 
 .swiss-hero-badge img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 22px;
     display: block;
 }
 
-/* BOLD HEADLINE */
+/* TRIOPTUS INSTRUMENT SERIF HEADLINE */
 .swiss-hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.4rem, 4vw, 2.3rem);
-    font-weight: 900;
+    font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+    font-weight: 400;
     color: var(--text-primary);
-    line-height: 1.2;
-    letter-spacing: -0.03em;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
     text-transform: none;
-    margin-bottom: 0.6rem;
-    max-width: 620px;
+    margin-bottom: 0.75rem;
+    max-width: 680px;
     word-break: break-word;
-    text-shadow: var(--text-shadow);
 }
 
 .swiss-rule {
@@ -438,9 +481,9 @@ html, body {
     width: 100%;
     max-width: 260px;
     margin: 0.5rem 0 0.85rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.75rem;
-    font-weight: 850;
+    font-weight: 600;
     letter-spacing: 0.25em;
     color: var(--text-secondary);
 }
@@ -454,23 +497,23 @@ html, body {
 }
 
 .swiss-hero-subtitle {
-    font-size: clamp(0.92rem, 2vw, 1.05rem);
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-weight: 400;
     color: var(--text-secondary);
     max-width: 520px;
-    margin-bottom: clamp(1.2rem, 2.6vw, 1.8rem);
-    line-height: 1.55;
+    margin-bottom: clamp(1.4rem, 2.8vw, 2rem);
+    line-height: 1.75;
     padding: 0 0.5rem;
-    text-shadow: var(--text-shadow);
 }
 
-/* BOTH SUGGESTION CARDS */
+/* TRIOPTUS FLOATING WATER CARDS */
 .swiss-chips-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.85rem;
+    gap: 1rem;
     width: 100%;
-    max-width: 620px;
+    max-width: 640px;
 }
 
 @media (min-width: 560px) {
@@ -480,37 +523,47 @@ html, body {
 }
 
 .swiss-chip-tile {
-    padding: clamp(0.95rem, 2vw, 1.15rem) clamp(1rem, 2.2vw, 1.3rem);
-    min-height: 58px;
+    padding: clamp(1rem, 2.2vw, 1.25rem) clamp(1.1rem, 2.5vw, 1.4rem);
+    min-height: 62px;
     border-radius: 20px;
     color: var(--text-primary);
     text-align: left;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.4rem;
     touch-action: manipulation;
     word-break: break-word;
-    transition: all 180ms ease;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* MONOSPACE "01 // KNOWLEDGE" LABEL PRESERVED */
+.swiss-chip-tile:hover {
+    transform: translateY(-5px);
+    background: var(--glass-hover-bg) !important;
+    border-color: var(--glass-hover-border) !important;
+    box-shadow: var(--glass-hover-shadow) !important;
+}
+
 .swiss-chip-idx {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 850;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #3b82f6;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
 .swiss-chip-text {
-    font-family: var(--font-heading);
-    font-size: clamp(0.88rem, 1.8vw, 0.98rem);
-    font-weight: 800;
-    line-height: 1.4;
+    font-family: var(--font-body);
+    font-size: clamp(0.88rem, 1.8vw, 0.96rem);
+    font-weight: 500;
+    line-height: 1.5;
     color: var(--text-primary);
-    text-shadow: var(--text-shadow);
 }
 
 /* --------------------------------------------------------------------------
@@ -524,29 +577,28 @@ html, body {
 
 .bubble-user {
     max-width: min(90%, 600px);
-    padding: clamp(0.8rem, 2vw, 1rem) clamp(1rem, 2.5vw, 1.3rem);
-    border-radius: 22px;
-    color: var(--text-primary);
-    font-size: clamp(0.94rem, 1.9vw, 1.02rem);
-    font-weight: 700;
+    padding: clamp(0.85rem, 2vw, 1.05rem) clamp(1.1rem, 2.5vw, 1.35rem);
+    border-radius: 22px 22px 4px 22px;
+    color: #FFFFFF !important;
+    font-family: var(--font-body);
+    font-size: clamp(0.92rem, 1.9vw, 0.98rem);
+    font-weight: 400;
     line-height: 1.6;
     word-break: break-word;
     overflow-wrap: break-word;
-    text-shadow: var(--text-shadow);
-    background: var(--btn-primary-bg) !important;
-    border: 1px solid var(--glass-border) !important;
-    box-shadow:
-        inset 0 1px 1.5px 0 var(--glass-bevel-top),
-        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
-        var(--glass-shadow) !important;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(16, 185, 129, 0.80)) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.22) !important;
 }
 
 .bubble-user-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.65rem;
-    font-weight: 850;
+    font-weight: 600;
     letter-spacing: 0.1em;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.75);
     margin-bottom: 0.3rem;
     text-transform: uppercase;
 }
@@ -561,32 +613,39 @@ html, body {
 }
 
 .ai-avatar-box {
-    width: clamp(30px, 5vw, 36px);
-    height: clamp(30px, 5vw, 36px);
-    border-radius: 12px;
+    width: clamp(32px, 5vw, 38px);
+    height: clamp(32px, 5vw, 38px);
+    border-radius: 50%;
     padding: 2px;
     flex-shrink: 0;
     margin-top: 0.15rem;
     overflow: hidden;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
 }
 
 .ai-avatar-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 9px;
+    border-radius: 50%;
     display: block;
 }
 
 .ai-card-body {
     flex: 1;
     min-width: 0;
-    border-radius: 22px;
-    padding: clamp(0.9rem, 2.2vw, 1.35rem) clamp(0.95rem, 2.5vw, 1.45rem);
+    border-radius: 20px;
+    padding: clamp(0.95rem, 2.2vw, 1.35rem) clamp(1rem, 2.5vw, 1.45rem);
     color: var(--text-primary);
     word-break: break-word;
     overflow-wrap: break-word;
     overflow: visible;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
 }
 
 .ai-meta-bar {
@@ -596,15 +655,15 @@ html, body {
     gap: 0.5rem;
     padding-bottom: 0.5rem;
     margin-bottom: 0.8rem;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--rule-color);
 }
 
 .ai-meta-title {
-    font-family: var(--font-mono);
-    font-size: clamp(0.66rem, 1.5vw, 0.75rem);
-    font-weight: 850;
-    letter-spacing: 0.08em;
-    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: clamp(0.68rem, 1.5vw, 0.75rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #3b82f6;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -614,32 +673,33 @@ html, body {
 .btn-copy-tool {
     padding: 0.25rem 0.75rem;
     min-height: 28px;
-    border-radius: 9999px;
+    border-radius: 50px;
     color: var(--text-primary);
-    font-family: var(--font-heading);
-    font-size: 0.7rem;
-    font-weight: 850;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 600;
     letter-spacing: 0.05em;
     cursor: pointer;
     touch-action: manipulation;
     flex-shrink: 0;
-    background: var(--glass-bg) !important;
-    border: 1px solid var(--glass-border) !important;
-    box-shadow:
-        inset 0 1px 1px 0 var(--glass-bevel-top),
-        inset 0 -1px 1.5px 0 var(--glass-bevel-bottom),
-        var(--glass-shadow) !important;
-    transition: all 180ms ease;
+    background: var(--btn-capsule-bg) !important;
+    border: 1px solid var(--btn-capsule-border) !important;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-tool:hover {
+    background: var(--btn-capsule-hover-bg) !important;
+    border-color: var(--btn-capsule-hover-border) !important;
+    transform: translateY(-1px);
 }
 
 .response-text {
     color: var(--text-primary);
     font-size: clamp(0.92rem, 1.8vw, 1rem);
-    line-height: 1.75;
-    font-weight: 600;
+    line-height: 1.8;
+    font-weight: 400;
     word-break: break-word;
     overflow-wrap: break-word;
-    text-shadow: var(--text-shadow);
 }
 
 .response-text p {
@@ -652,14 +712,14 @@ html, body {
 
 .response-text strong {
     color: var(--text-primary);
-    font-weight: 900;
+    font-weight: 600;
 }
 
 /* Typewriter Cursor */
 .cursor-pen::after {
     content: '█';
     display: inline-block;
-    color: var(--text-primary);
+    color: #3b82f6;
     margin-left: 3px;
     font-size: 0.85em;
     vertical-align: middle;
@@ -675,19 +735,21 @@ html, body {
     display: flex;
     align-items: center;
     gap: 0.65rem;
-    padding: 0.65rem 1rem;
-    border-radius: 9999px;
+    padding: 0.65rem 1.1rem;
+    border-radius: 50px;
     width: fit-content;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.72rem;
-    font-weight: 850;
+    font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
 }
 
 .spinner-icon {
-    color: var(--text-primary);
+    color: #3b82f6;
     font-size: 0.75rem;
     animation: spin 1s linear infinite;
 }
@@ -697,16 +759,16 @@ html, body {
 }
 
 .error-notice-card {
-    border: 1px solid rgba(255, 100, 100, 0.4);
+    border: 1px solid rgba(239, 68, 68, 0.4);
     padding: 0.75rem 1.1rem;
-    background: rgba(220, 38, 38, 0.25);
+    background: rgba(220, 38, 38, 0.2);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border-radius: 18px;
     color: #FFFFFF;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 0.78rem;
-    font-weight: 800;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -716,7 +778,7 @@ html, body {
 
 /* --------------------------------------------------------------------------
    INPUT BAR & SEND BUTTON
-   Pure frosted glass, no independent opaque dark color
+   TriOptus capsule design with blur and vibrant send button
    -------------------------------------------------------------------------- */
 .chat-input-bar-container {
     position: absolute;
@@ -733,41 +795,33 @@ html, body {
 .input-console-frame {
     display: flex;
     align-items: center;
-    border-radius: 9999px; /* Pill */
-    padding: 0.42rem 0.5rem 0.42rem clamp(0.95rem, 2.5vw, 1.4rem);
+    border-radius: 50px;
+    padding: 0.45rem 0.5rem 0.45rem clamp(1rem, 2.5vw, 1.4rem);
     width: 100%;
     pointer-events: auto;
     overflow: visible;
     background: var(--input-bg) !important;
-    backdrop-filter: blur(28px) saturate(170%);
-    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     border: 1px solid var(--glass-border) !important;
-    box-shadow:
-        inset 0 1px 1.5px 0 var(--glass-bevel-top),
-        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
-        var(--glass-shadow) !important;
-    transition: border-color 200ms ease, box-shadow 200ms ease;
+    box-shadow: var(--glass-shadow) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .input-console-frame:focus-within {
     border-color: var(--input-focus-border) !important;
-    box-shadow:
-        inset 0 1px 1.5px 0 var(--glass-bevel-top),
-        inset 0 -1.5px 2px 0 var(--glass-bevel-bottom),
-        0 0 0 2px var(--input-focus-border),
-        var(--glass-shadow) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2), var(--glass-shadow) !important;
 }
 
 .input-prompt-label {
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    font-weight: 900;
-    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #3b82f6;
     letter-spacing: 0.08em;
     margin-right: 0.5rem;
     user-select: none;
     flex-shrink: 0;
-    text-shadow: var(--text-shadow);
 }
 
 .chat-input-field {
@@ -778,10 +832,9 @@ html, body {
     outline: none;
     font-family: var(--font-body);
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-primary);
     padding: 0.45rem 0.25rem;
-    text-shadow: var(--text-shadow);
 }
 
 @media (min-width: 768px) {
@@ -794,54 +847,55 @@ html, body {
     color: var(--text-muted);
     opacity: 1;
     font-size: clamp(0.85rem, 1.8vw, 0.94rem);
-    font-weight: 600;
+    font-weight: 400;
 }
 
-/* SEND BUTTON (PILL) */
+/* SEND BUTTON (TRIOPTUS CAPSULE) */
 .btn-send-message {
     min-height: 38px;
-    padding: 0 clamp(0.85rem, 2vw, 1.25rem);
-    border-radius: 9999px; /* Pill */
-    color: var(--text-primary);
-    font-family: var(--font-heading);
-    font-size: 0.78rem;
-    font-weight: 900;
-    letter-spacing: 0.06em;
+    padding: 0 clamp(0.95rem, 2vw, 1.35rem);
+    border-radius: 50px;
+    color: #FFFFFF !important;
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    background: var(--btn-primary-bg) !important;
-    border: 1px solid var(--btn-primary-border) !important;
-    box-shadow:
-        inset 0 1px 1px 0 var(--glass-bevel-top),
-        inset 0 -1px 2px 0 var(--glass-bevel-bottom),
-        var(--glass-shadow) !important;
+    background: linear-gradient(135deg, #2563EB, #10B981) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.45rem;
     touch-action: manipulation;
     flex-shrink: 0;
-    transition: all 180ms ease;
+    transition: all 0.25s ease;
+}
+
+.btn-send-message:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5) !important;
 }
 
 .btn-send-message i {
-    color: var(--text-primary);
+    color: #FFFFFF;
 }
 
 .footer-meta-note {
-    font-family: var(--font-mono);
-    font-size: clamp(0.6rem, 1.5vw, 0.68rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-family: var(--font-body);
+    font-size: clamp(0.62rem, 1.5vw, 0.7rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
     color: var(--text-muted);
     text-align: center;
-    margin-top: 0.45rem;
+    margin-top: 0.5rem;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 0.25rem;
-    text-shadow: var(--text-shadow);
     pointer-events: auto;
 }
 
@@ -850,14 +904,14 @@ html, body {
    ========================================================================== */
 @media (max-width: 540px) {
     .app-header {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
+        padding-left: 0.85rem;
+        padding-right: 0.85rem;
         padding-top: calc(0.55rem + env(safe-area-inset-top, 0px));
         padding-bottom: 0.55rem;
     }
 
     #chat-window {
-        padding-top: calc(72px + env(safe-area-inset-top, 0px));
+        padding-top: calc(76px + env(safe-area-inset-top, 0px));
         padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
     }
 
@@ -908,7 +962,7 @@ html, body {
     }
 
     .brand-title {
-        font-size: 1.1rem;
+        font-size: 1.25rem;
     }
 
     .ai-avatar-box {
@@ -931,7 +985,7 @@ html, body {
     }
 
     #chat-window {
-        padding-top: calc(52px + env(safe-area-inset-top, 0px));
+        padding-top: calc(56px + env(safe-area-inset-top, 0px));
         padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
     }
 
@@ -945,7 +999,7 @@ html, body {
     }
 
     .swiss-hero-title {
-        font-size: 1.15rem;
+        font-size: 1.6rem;
         margin-bottom: 0.25rem;
     }
 
@@ -955,7 +1009,7 @@ html, body {
 
     .swiss-hero-subtitle {
         margin-bottom: 0.65rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
 
     .swiss-chips-grid {
