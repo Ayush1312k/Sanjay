@@ -410,7 +410,7 @@ html, body {
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: calc(104px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(100px + env(safe-area-inset-bottom, 0px));
+    padding: calc(74px + env(safe-area-inset-top, 0px)) clamp(0.75rem, 3vw, 1.5rem) calc(86px + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     gap: clamp(0.85rem, 2vw, 1.35rem);
@@ -418,8 +418,14 @@ html, body {
     background: transparent;
 }
 
+/* When the initial hero/welcome card is visible, disable scrolling and center strictly */
+#chat-window:has(#welcome-card) {
+    overflow: hidden !important;
+    justify-content: center;
+}
+
 /* --------------------------------------------------------------------------
-   WELCOME STATE
+   WELCOME STATE (HERO SECTION - NON-SCROLLING, FITS 100% IN VIEWPORT)
    -------------------------------------------------------------------------- */
 #welcome-card {
     display: flex;
@@ -427,23 +433,24 @@ html, body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: clamp(1.5rem, 3.5vw, 2.8rem) clamp(0.5rem, 2vw, 1rem);
+    padding: 0;
     margin: auto 0;
     width: 100%;
-    max-width: 680px;
+    max-width: 660px;
     align-self: center;
     position: relative;
     z-index: 1;
     background: transparent;
+    flex-shrink: 0;
 }
 
 /* LOGO BADGE */
 .swiss-hero-badge {
-    width: clamp(72px, 14vw, 96px);
-    height: clamp(72px, 14vw, 96px);
-    border-radius: 28px;
-    padding: 6px;
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    width: clamp(48px, 7vh, 64px);
+    height: clamp(48px, 7vh, 64px);
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: clamp(0.4rem, 1.2vh, 0.85rem);
     flex-shrink: 0;
     overflow: hidden;
     background: var(--glass-bg) !important;
@@ -455,21 +462,21 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 22px;
+    border-radius: 15px;
     display: block;
 }
 
 /* TRIOPTUS INSTRUMENT SERIF HEADLINE */
 .swiss-hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+    font-size: clamp(1.65rem, 3.4vw, 2.45rem);
     font-weight: 400;
     color: var(--text-primary);
     line-height: 1.15;
     letter-spacing: 0.01em;
     text-transform: none;
-    margin-bottom: 0.75rem;
-    max-width: 680px;
+    margin-bottom: clamp(0.2rem, 0.6vh, 0.4rem);
+    max-width: 620px;
     word-break: break-word;
 }
 
@@ -477,12 +484,12 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     width: 100%;
-    max-width: 260px;
-    margin: 0.5rem 0 0.85rem;
+    max-width: 220px;
+    margin: clamp(0.15rem, 0.5vh, 0.35rem) 0 clamp(0.25rem, 0.7vh, 0.5rem);
     font-family: var(--font-body);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.25em;
     color: var(--text-secondary);
@@ -498,12 +505,12 @@ html, body {
 
 .swiss-hero-subtitle {
     font-family: var(--font-body);
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-size: clamp(0.84rem, 1.3vw, 0.94rem);
     font-weight: 400;
     color: var(--text-secondary);
-    max-width: 520px;
-    margin-bottom: clamp(1.4rem, 2.8vw, 2rem);
-    line-height: 1.75;
+    max-width: 500px;
+    margin-bottom: clamp(0.75rem, 1.8vh, 1.25rem);
+    line-height: 1.45;
     padding: 0 0.5rem;
 }
 
@@ -511,9 +518,9 @@ html, body {
 .swiss-chips-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: clamp(0.6rem, 1.2vh, 0.85rem);
     width: 100%;
-    max-width: 640px;
+    max-width: 600px;
 }
 
 @media (min-width: 560px) {
@@ -523,15 +530,15 @@ html, body {
 }
 
 .swiss-chip-tile {
-    padding: clamp(1rem, 2.2vw, 1.25rem) clamp(1.1rem, 2.5vw, 1.4rem);
-    min-height: 62px;
-    border-radius: 20px;
+    padding: clamp(0.65rem, 1.2vh, 0.85rem) clamp(0.85rem, 1.5vw, 1.15rem);
+    min-height: 48px;
+    border-radius: 16px;
     color: var(--text-primary);
     text-align: left;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.2rem;
     touch-action: manipulation;
     word-break: break-word;
     background: var(--glass-bg) !important;
@@ -539,11 +546,11 @@ html, body {
     -webkit-backdrop-filter: blur(20px) !important;
     border: 1px solid var(--glass-border) !important;
     box-shadow: var(--glass-shadow) !important;
-    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .swiss-chip-tile:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     background: var(--glass-hover-bg) !important;
     border-color: var(--glass-hover-border) !important;
     box-shadow: var(--glass-hover-shadow) !important;
@@ -551,7 +558,7 @@ html, body {
 
 .swiss-chip-idx {
     font-family: var(--font-body);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 600;
     color: #3b82f6;
     letter-spacing: 0.1em;
@@ -560,9 +567,9 @@ html, body {
 
 .swiss-chip-text {
     font-family: var(--font-body);
-    font-size: clamp(0.88rem, 1.8vw, 0.96rem);
+    font-size: clamp(0.8rem, 1.2vw, 0.88rem);
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.35;
     color: var(--text-primary);
 }
 
@@ -978,20 +985,63 @@ html, body {
     }
 }
 
-@media (max-height: 540px) {
+@media (max-height: 740px) {
     .app-header {
-        padding-top: calc(0.35rem + env(safe-area-inset-top, 0px));
-        padding-bottom: 0.35rem;
+        margin-top: 10px;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
     }
 
     #chat-window {
-        padding-top: calc(56px + env(safe-area-inset-top, 0px));
+        padding-top: calc(64px + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .swiss-hero-badge {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0.35rem;
+    }
+
+    .swiss-hero-title {
+        font-size: 1.55rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .swiss-rule {
+        margin: 0.15rem 0 0.3rem;
+    }
+
+    .swiss-hero-subtitle {
+        margin-bottom: 0.65rem;
+        font-size: 0.82rem;
+    }
+
+    .swiss-chips-grid {
+        gap: 0.5rem;
+    }
+
+    .swiss-chip-tile {
+        padding: 0.55rem 0.85rem;
+        min-height: 44px;
+    }
+}
+
+@media (max-height: 560px) {
+    .app-header {
+        margin-top: 6px;
+        padding-top: calc(0.3rem + env(safe-area-inset-top, 0px));
+        padding-bottom: 0.3rem;
+    }
+
+    #chat-window {
+        padding-top: calc(52px + env(safe-area-inset-top, 0px));
         padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
     }
 
     #welcome-card {
-        padding: 0.65rem 0.5rem;
-        margin: 0.35rem 0 auto;
+        padding: 0.3rem 0.5rem;
+        margin: auto 0;
     }
 
     .swiss-hero-badge {
@@ -999,27 +1049,27 @@ html, body {
     }
 
     .swiss-hero-title {
-        font-size: 1.6rem;
-        margin-bottom: 0.25rem;
+        font-size: 1.35rem;
+        margin-bottom: 0.15rem;
     }
 
     .swiss-rule {
-        margin: 0.25rem 0 0.5rem;
+        display: none;
     }
 
     .swiss-hero-subtitle {
-        margin-bottom: 0.65rem;
-        font-size: 0.85rem;
+        margin-bottom: 0.45rem;
+        font-size: 0.78rem;
     }
 
     .swiss-chips-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 0.45rem;
+        gap: 0.4rem;
     }
 
     .chat-input-bar-container {
-        padding-top: 0.4rem;
-        padding-bottom: calc(0.4rem + env(safe-area-inset-bottom, 0px));
+        padding-top: 0.35rem;
+        padding-bottom: calc(0.35rem + env(safe-area-inset-bottom, 0px));
     }
 
     .footer-meta-note {
